@@ -1,0 +1,102 @@
+@charset "utf-8";
+@import "mixin";
+
+:root[color-theme="white"] {
+    --background: #fff;
+    --color: #000;
+}
+
+:root[color-theme="blue"] {
+    --background: #000;
+    --color: #fff;
+}
+
+#contents {
+    width: 100%;
+    height: 100vh;
+}
+
+.marquee {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 90px;
+    height: 100%;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    p {
+        transform: rotate(180deg);
+        white-space: nowrap;
+        writing-mode: vertical-rl;
+        font-weight: bold;
+        font-size: 43px;
+    }
+}
+
+.reverse_color {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    width: auto;
+    height: auto;
+    display: block;
+    border: none;
+    background: initial;
+    .circleLogo {
+        display: block;
+        fill: #0035dd;
+    }
+}
+
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    pointer-events: none;
+    border: 2px solid #0035dd;
+    border-radius: 50%;
+}
+.cursor span {
+    display: block;
+    width: 19px;
+    height: 19px;
+    pointer-events: none;
+    background: #0035dd;
+    border-radius: 50%;
+}
+.cursor.hover {
+    border: 2px solid #fff;
+}
+.cursor.hover span {
+    background: #fff;
+}
+
+a {
+    position: relative;
+    display: block;
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #000;
+    text-align: center;
+}
+a:hover {
+    color: #fff;
+    background: #0035dd;
+}
+a:hover .video_tootip{display: block;}
+.video_tootip {
+    z-index: 1;
+    position: fixed;
+    display: none;
+    width: 600px;
+    pointer-events: none;
+    user-select: none;
+}
