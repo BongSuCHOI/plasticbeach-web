@@ -1,0 +1,104 @@
+[
+    {
+        "title": {
+            "ko": "플라스틱 비치<br>크리에이티브",
+            "en": "plastic beach<br>creative studio"
+        },
+        "email": {
+            "ko": "이 : contact@plasticbeach.net",
+            "en": "e : contact@plasticbeach.net"
+        },
+        "address": {
+            "ko": "서울특별시 마포구 동교로 7 삭녕빌딩 4층 (주)에이엠아일랜드",
+            "en": "a : 7, donggyo - ro 19 gil, mapo-gu, seoul"
+        },
+        "contact_info": {
+            "ko": "1. 우리에게 몇가지 정보를 알려주세요.",
+            "en": "1. how can we contact you?"
+        },
+        "cus_full_name": {
+            "ko": "이름",
+            "en": "Full name"
+        },
+        "cus_position": {
+            "ko": "직책",
+            "en": "Position"
+        },
+        "cus_organization": {
+            "ko": "기관 혹은 기업명",
+            "en": "Organization"
+        },
+        "cus_email": {
+            "ko": "이메일",
+            "en": "Email"
+        },
+        "cus_phone": {
+            "ko": "전화번호",
+            "en": "Phone"
+        },
+        "cus_url": {
+            "ko": "사이트 주소",
+            "en": "URL"
+        },
+        "budgiet_info": {
+            "ko": "2. 예산과 일정을 어떻게 되나요?",
+            "en": "2. please share your budgiet and timelime"
+        },
+        "budgiet_default": {
+            "ko": "예산",
+            "en": "Please Select..."
+        },
+        "timeline_default": {
+            "ko": "일정",
+            "en": "Please Select..."
+        },
+        "project_info": {
+            "ko": "어떻게 도와드리면 될까요?",
+            "en": "3. how can we help you?"
+        },
+        "project_text": {
+            "ko": "프로젝트에 대해 설명해주세요.<span>1000 chat max</span>",
+            "en": "Describe your project<span>1000 chat max</span>"
+        },
+        "project_file": {
+            "ko": "파일 업로드<span>pdf, zip 3Mb max</span>",
+            "en": "Upload your file<span>pdf, zip 3Mb max</span>"
+        },
+        "file_btn": {
+            "ko": "찾기",
+            "en": "Find"
+        },
+        "policy_chk": {
+            "ko": "개인정보 정책에 동의합니다.",
+            "en": "I accept the terms of the privacy policy and I agree"
+        },
+        "submit_btn": {
+            "ko": "프로젝트 문의하기",
+            "en": "get in touch"
+        },
+        "marquee": {
+            "ko": "우리는 당신이 상상하는 모든 것들을 플라스틱 비치에서 만들어냅니다. ",
+            "en": "gwe creative every fantasy whateever you imagine in plastic beach "
+        }
+    },
+    {
+        "budgiet_option01": {
+            "ko": "1 천만원",
+            "en": "10 million"
+        },
+        "budgiet_option02": {
+            "ko": "3 천만원",
+            "en": "30 million"
+        }
+    },
+    {
+        "timeline_option01": {
+            "ko": "1 주",
+            "en": "1 week"
+        },
+        "timeline_option02": {
+            "ko": "3 주",
+            "en": "3 week"
+        }
+    }
+]
