@@ -1,6 +1,5 @@
 function mouseOverTooltip() {
-    const hoverBox = document.querySelectorAll('.hover');
-    
+    const hoverBox = document.querySelectorAll('.work_list .list');
     hoverBox.forEach(obj => {
         const tooltip = obj.querySelector('.video_tooltip');
         obj.addEventListener('mousemove', (e) => {

@@ -1,3 +1,7 @@
 /**/
+:root[color-theme="white"] { --background: #fff; --color: #0035dd; }
+
+:root[color-theme="blue"] { --background: #0035dd; --color: #fff; }
+
 /* extend */
 /*common*/

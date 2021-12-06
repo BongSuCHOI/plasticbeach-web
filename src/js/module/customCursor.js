@@ -62,11 +62,10 @@ const customCursor = {
 
     // Reverse Color
     reverseColor: function (cursor) {
-        const btnTag = document.querySelectorAll("button");
-        const aTag = document.querySelectorAll("a");
+        const hoverTag = document.querySelectorAll(".hover");
         const arr = [];
 
-        arr.push(...btnTag, ...aTag);
+        arr.push(...hoverTag);
         arr.forEach((obj) => {
             obj.addEventListener("mouseenter", () => {
                 cursor.classList.add("hover");

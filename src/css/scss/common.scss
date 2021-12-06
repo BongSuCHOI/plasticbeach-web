@@ -8,7 +8,7 @@
 	src:url('../../fonts/NotoSansKR-Regular.woff2') format('woff2'),
 		url('../../fonts/NotoSansKR-Regular.woff') format('woff'),
 		url('../../fonts/NotoSansKR-Regular.ttf') format('truetype');
-	unicode-range: U+AC00-D7A3, U+0030-0039;
+	unicode-range: U+AC00-D7A3;
 }
 @font-face{
 	font-family: "Noto Sans KR";
@@ -17,7 +17,7 @@
 	src:url('../../fonts/NotoSansKR-Medium.woff2') format('woff2'),
 		url('../../fonts/NotoSansKR-Medium.woff') format('woff'),
 		url('../../fonts/NotoSansKR-Medium.ttf') format('truetype');
-	unicode-range: U+AC00-D7A3, U+0030-0039;
+	unicode-range: U+AC00-D7A3;
 }
 @font-face{
 	font-family: "Noto Sans KR";
@@ -26,7 +26,7 @@
 	src:url('../../fonts/NotoSansKR-Bold.woff2') format('woff2'),
 		url('../../fonts/NotoSansKR-Bold.woff') format('woff'),
 		url('../../fonts/NotoSansKR-Bold.ttf') format('truetype');
-	unicode-range: U+AC00-D7A3, U+0030-0039;
+	unicode-range: U+AC00-D7A3;
 }
 @font-face{
 	font-family: "Montserrat";
@@ -35,7 +35,7 @@
 	src:url('../../fonts/Montserrat-Regular.woff2') format('woff2'),
 		url('../../fonts/Montserrat-Regular.woff') format('woff'),
 		url('../../fonts/Montserrat-Regular.ttf') format('truetype');
-	unicode-range: U+0041-005A, U+0061-007A;
+	unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
 }
 @font-face{
 	font-family: "Montserrat";
@@ -44,7 +44,16 @@
 	src:url('../../fonts/Montserrat-Medium.woff2') format('woff2'),
 		url('../../fonts/Montserrat-Medium.woff') format('woff'),
 		url('../../fonts/Montserrat-Medium.ttf') format('truetype');
-	unicode-range: U+0041-005A, U+0061-007A;
+	unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+}
+@font-face{
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 700;
+	src:url('../../fonts/Montserrat-Bold.woff2') format('woff2'),
+		url('../../fonts/Montserrat-Bold.woff') format('woff'),
+		url('../../fonts/Montserrat-Bold.ttf') format('truetype');
+	unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
 }
 @font-face{
 	font-family: "Nefarious";
@@ -54,20 +63,23 @@
 		url('../../fonts/Nefarious.woff2') format('woff2'),
 		url('../../fonts/Nefarious.woff') format('woff'),
 		url('../../fonts/Nefarious.ttf') format('truetype');
-	unicode-range: U+0061-007A;
+	unicode-range: U+0061-007A, U+0030-0039;
 }
-.Nefarious{font-family: 'Nefarious', serif;}
+.Nefarious{
+	font-family: 'Nefarious', serif !important;
+	text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color)
+}
 
 /* common */
 *{margin:0; padding:0; box-sizing: border-box; cursor: none;}
-html,body,th,td,input,select,textarea,button{font-family:"Noto Sans KR", "Montserrat", sans-serif; font-weight:400; font-size:45px; color: #000; line-height: 1;}
+html,body,th,td,input,select,textarea,button{font-family:"Noto Sans KR", "Montserrat", sans-serif; font-weight:400; font-size:16px; color: #000; line-height: 1; letter-spacing: -0.5px;}
 fieldset,img{border:0}
 dl,ul,ol,menu,li{list-style:none}
 input,select,textarea,button{vertical-align:middle; outline: none;}
-button{cursor:pointer; border:none; background:none; outline: none;}
+button{border:none; background:none; outline: none;}
 a{color:#000;text-decoration:none}
 address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
-input[type="button"]{appearance:none; cursor:pointer;}
+input[type="button"]{appearance:none;}
 select::-ms-expand{display: none;}
 ::-webkit-scrollbar{display: none;}
 textarea{resize:none;}
@@ -97,51 +109,36 @@ input, textarea, select{border-radius:0; -webkit-appearance:none;}
     touch-action: none;
 }
 
-/* select box custom */
-select{
-	// background: #f0f0f0 url('../img/select_down.png') no-repeat right 6.4vw center;
-	width: 100%;
-	height: 13.33vmin;
-	max-height: 50px;
-	padding: 0 24px;
-	// line-height: 13.33vmin;
-	font-weight: 400;
-	border: none;
-	border-radius: 25px;
-	background-size: 14px;
-}
-select.type01{background-color: #e6e6e6;}
+// /* check box custom */
+// .chk input[type="checkbox"]{
+// 	display:none !important;
+// 	& + label{
+// 		display:block;
+// 		padding-left:28px;
+// 		line-height: 18px;
+// 		background:url('../img/chk_off.png') no-repeat;
+// 		background-size:18px;
+// 		background-position: left center;
+// 		color: #000;
+// 	}
+// 	&:checked + label{
+// 		background:url('../img/chk_on.png') no-repeat;
+// 		background-size:18px;
+// 		background-position: left center;
+// 	}
+// }
 
-/* check box custom */
-.chk input[type="checkbox"]{
-	display:none !important;
-	& + label{
-		display:block;
-		padding-left:28px;
-		line-height: 18px;
-		// background:url('../img/chk_off.png') no-repeat;
-		background-size:18px;
-		background-position: left center;
-		color: #000;
-	}
-	&:checked + label{
-		// background:url('../img/chk_on.png') no-repeat;
-		background-size:18px;
-		background-position: left center;
-	}
-}
-
-/* radio box custom */
-.radio input[type="radio"]{
-	display:none !important;
-	& + label{
-		display:block;
-		width: 100%;
-		// background:url('../img/chk_off.png') no-repeat center left;
-		background-size:16px;
-	}
-	&:checked + label{
-		// background:url('../img/chk_on.png') no-repeat center left;
-		background-size:16px;
-	}
-}
+// /* radio box custom */
+// .radio input[type="radio"]{
+// 	display:none !important;
+// 	& + label{
+// 		display:block;
+// 		width: 100%;
+// 		background:url('../img/chk_off.png') no-repeat center left;
+// 		background-size:16px;
+// 	}
+// 	&:checked + label{
+// 		background:url('../img/chk_on.png') no-repeat center left;
+// 		background-size:16px;
+// 	}
+// }

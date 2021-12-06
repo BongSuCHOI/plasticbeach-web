@@ -9,7 +9,6 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js",
-        assetModuleFilename: "fonts/[name][ext]",
     },
 
     plugins: [
@@ -18,6 +17,8 @@ module.exports = {
             filename: "./index.html",
         }),
     ],
+
+    watch: true,
 
     module: {
         rules: [
@@ -35,36 +36,6 @@ module.exports = {
                 test: /\.s[ac]ss$/i,
                 use: ["style-loader", "css-loader", "sass-loader"],
             },
-            // { mp4 추가해야함
-            //     test: /\.mp4$/,
-            //     use: {
-            //         loader: "url-loader",
-            //         options: {
-            //             name: "video/[name][ext]?[hash]",
-            //             limit: 10000,
-            //         },
-            //     },
-            // },
-            // {
-            //     test: /\.html$/,
-            //     exclude: /node_modules/,
-            //     use: [
-            //         {
-            //             loader: "html-loader",
-            //             options: {
-            //                 sources: {
-            //                     list: [
-            //                         {
-            //                             tag: "source",
-            //                             attribute: "src",
-            //                             type: "src",
-            //                         },
-            //                     ],
-            //                 },
-            //             },
-            //         },
-            //     ],
-            // },
             {
                 test: /\.(jpe?g|png|gif)$/,
                 type: "asset",
@@ -84,6 +55,22 @@ module.exports = {
                 type: "asset",
                 generator: {
                     filename: "video/[name][ext]?[hash]",
+                },
+            },
+            {
+                test: /\.html$/,
+                exclude: /node_modules/,
+                loader: "html-loader",
+                options: {
+                    sources: {
+                        list: [
+                            {
+                                tag: "source",
+                                attribute: "src",
+                                type: "src",
+                            },
+                        ],
+                    },
                 },
             },
         ],
