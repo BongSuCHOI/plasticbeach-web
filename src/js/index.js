@@ -33,55 +33,55 @@ function reverseColorTheme() {
     const state = document.documentElement.getAttribute("color-theme");
     if (state === "white") {
         document.documentElement.setAttribute("color-theme", "blue");
-        convertLang.getJson("ko");
     } else {
         document.documentElement.setAttribute("color-theme", "white");
-        convertLang.getJson("en");
     }
 }
 document.querySelector(".reverse_color").addEventListener("click", reverseColorTheme);
 
 // convert en to ko & ko to en
 const convertLang = {
-    init: function() {
-        convertLang.getTextJson();
-        convertLang.getWorkJson();
-    },
-
-    getTextJson: function () {
+    getJson: function () {
         fetch(textJson)
             .then((response) => response.json())
-            .then((textData) => convertLang.dataBox(textData));
+            .then((textData) => this.convert(textData));
     },
+    // 이런식으로 for 함수화 시켜서 옵저버 if 마다 파라미터 전달해서 실행시키면 더 깔끔해질거같음
+    // 아 이러면 안됨 그냥 함수명() 이렇게 해서 실행시키면 json 데이터가 파라미터로 안들어와서 에러남
+    // asd: function() {
+    //     for(let i=0; i < 10; i++) {
+    //         console.log(i)
+    //     }
+    // },
 
-    getWorkJson: function () {
-        fetch(workJson)
-            .then((response) => response.json())
-            .then((workData) => convertLang.dataBox(workData));
-    },
-
-    dataBox: function(textData, workData) {
-        const text = textData;
-        const work = workData;
-    },
-
-    // 여기서 부터 다시 짜야함 한번에 text랑 video title 전환 및 컬러반전 시키도록 (json 호출은 처음 한번만 하게)
-    convert: function (DATA, lang) {
-        const data = DATA;
-        const textData = data[0];
+    convert: function (data) {
+        const $data = data;
+        const textData = $data[0];
         const arr = Object.entries(textData);
-        let state = lang;
+        const target = document.documentElement;
+
+        let observer = new MutationObserver(function (mutations) {
+            let theme = target.getAttribute("color-theme");
+            if (theme == "white") {
+                // convertLang.asd();
+                for (let i = 0; i < arr.length; i++) {
+                    const target = document.querySelector(`[data-name='${arr[i][0]}']`);
+                    target.innerHTML = arr[i][1].en;
+                }
+            } else {
+                for (let i = 0; i < arr.length; i++) {
+                    const target = document.querySelector(`[data-name='${arr[i][0]}']`);
+                    target.innerHTML = arr[i][1].ko;
+                }
+            }
+            // observer.disconnect();
+        });
+        observer.observe(target, { attributes: true });
 
         for (let i = 0; i < arr.length; i++) {
             const target = document.querySelector(`[data-name='${arr[i][0]}']`);
             target.innerHTML = arr[i][1].en;
-
-            if (state == "en") {
-                target.innerHTML = arr[i][1].en;
-            } else if (state == "ko") {
-                target.innerHTML = arr[i][1].ko;
-            }
         }
     },
 };
-convertLang.init();
+convertLang.getJson();
