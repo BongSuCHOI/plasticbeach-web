@@ -1,13 +1,13 @@
 function Marquee(selector, speed) {
     const parentElem = document.querySelector(selector);
-    const childElem = parentElem.innerHTML;
-    parentElem.insertAdjacentHTML("beforeend", childElem);
-    const connectElem = parentElem.children[0];
-    const marqueeElem = parentElem.children[1];
+    const childElem = parentElem.children[0];
+    const copyText = childElem.innerText;
+    childElem.append(copyText)
     let i = 0;
-    let interval = setInterval(function () {
-        marqueeElem.style.marginBottom = `-${i}px`;
-        if (i > connectElem.clientHeight) {
+    
+    setInterval(function () {
+        childElem.style.marginTop = `${i}px`;
+        if (i > childElem.clientWidth/2) {
             i = 0;
         }
         i = i + speed;

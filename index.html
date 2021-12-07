@@ -11,7 +11,7 @@
     <section id="contents">
         <div class="contact">
             <div class="title">
-                <p class="Nefarious" data-name="title"></p>
+                <p class="Nefarious toggle_font" data-name="title"></p>
                 <div class="info">
                     <p class="email" data-name="email"></p>
                     <p class="address" data-name="address"></p>
@@ -19,7 +19,7 @@
             </div>
             <form>
                 <div class="contact_info">
-                    <p class="Nefarious" data-name="contact_info"></p>
+                    <p class="Nefarious toggle_font" data-name="contact_info"></p>
                     <div class="input_box">
                         <input type="text" placeholder="Full name" data-name="cus_full_name">
                         <input type="text" placeholder="Position" data-name="cus_position">
@@ -30,24 +30,18 @@
                     </div>
                 </div>
                 <div class="budgiet_info">
-                    <p class="Nefarious" data-name="budgiet_info"></p>
+                    <p class="Nefarious toggle_font" data-name="budgiet_info"></p>
                     <div class="input_box">
                         <select class="budgiet">
-                            <option value="" data-name="budgiet_default" selected></option>
-                            <option value="">항목1</option>
-                            <option value="">항목2</option>
-                            <option value="">항목3</option>
+                            <option data-name="budgiet_default" selected></option>
                         </select>
                         <select class="timeline">
-                            <option value="" data-name="timeline_default" selected></option>
-                            <option value="">항목1</option>
-                            <option value="">항목2</option>
-                            <option value="">항목3</option>
+                            <option data-name="timeline_default" selected></option>
                         </select>
                     </div>
                 </div>
                 <div class="project_info">
-                    <p class="Nefarious" data-name="project_info"></p>
+                    <p class="Nefarious toggle_font" data-name="project_info"></p>
                     <div class="input_box">
                         <div class="text_box">
                             <p data-name="project_text"></span></p>
@@ -65,20 +59,13 @@
                         <label for="chk01" data-name="policy_chk"></label>
                     </div>
                 </div>
-                <button class="submit_btn Nefarious" data-name="submit_btn"></button>
+                <button class="submit_btn Nefarious toggle_font" data-name="submit_btn"></button>
             </form>
         </div>
         <div class="marquee">
-            <p class="Nefarious" data-name="marquee"></p>
+            <p class="marquee_text Nefarious toggle_font" data-name="marquee"></p>
         </div>
-        <ul class="work_list">
-            <li class="list hover">
-                <a href="#" class="Nefarious">cravaty - gas pedal</a>
-                <video class="video_tooltip" muted playsinline>
-                    <source src="./src/video/prototype_v01.mp4" type="video/mp4" />
-                </video>
-            </li>
-        </ul>
+        <ul class="work_list"></ul>
     </section>
 
     <button class="reverse_color hover"></button>

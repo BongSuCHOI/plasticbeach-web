@@ -7,11 +7,11 @@
 /*common*/
 .work_list { overflow-y: scroll; width: calc(100% - 654px); height: 100%; }
 
-.work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); }
+.work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); -webkit-transition: color 0.1s ease; transition: color 0.1s ease; }
 
 .work_list .list:last-child { border-bottom: none; }
 
-.work_list .list a { white-space: nowrap; font-size: 94px; color: var(--color); }
+.work_list .list a { white-space: nowrap; font-size: 94px; font-weight: normal; text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color); color: var(--color); }
 
 .work_list .list .video_tooltip { z-index: 1; position: fixed; display: none; width: 600px; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 

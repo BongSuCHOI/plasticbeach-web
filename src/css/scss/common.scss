@@ -66,8 +66,9 @@
 	unicode-range: U+0061-007A, U+0030-0039;
 }
 .Nefarious{
-	font-family: 'Nefarious', serif !important;
-	text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color)
+	font-family: 'Nefarious', serif;
+	text-shadow: -0.1px 0 var(--color), 0 0.1px var(--color), 0.1px 0 var(--color), 0 -0.1px var(--color);
+	font-weight: bold;
 }
 
 /* common */
@@ -108,25 +109,6 @@ input, textarea, select{border-radius:0; -webkit-appearance:none;}
     overflow: hidden !important;
     touch-action: none;
 }
-
-// /* check box custom */
-// .chk input[type="checkbox"]{
-// 	display:none !important;
-// 	& + label{
-// 		display:block;
-// 		padding-left:28px;
-// 		line-height: 18px;
-// 		background:url('../img/chk_off.png') no-repeat;
-// 		background-size:18px;
-// 		background-position: left center;
-// 		color: #000;
-// 	}
-// 	&:checked + label{
-// 		background:url('../img/chk_on.png') no-repeat;
-// 		background-size:18px;
-// 		background-position: left center;
-// 	}
-// }
 
 // /* radio box custom */
 // .radio input[type="radio"]{

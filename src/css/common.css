@@ -14,7 +14,7 @@
 
 @font-face { font-family: "Nefarious"; font-style: normal; font-weight: 400; src: url("../../fonts/Nefarious.otf") format("opentype"), url("../../fonts/Nefarious.woff2") format("woff2"), url("../../fonts/Nefarious.woff") format("woff"), url("../../fonts/Nefarious.ttf") format("truetype"); unicode-range: U+0061-007A, U+0030-0039; }
 
-.Nefarious { font-family: 'Nefarious', serif !important; text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color); }
+.Nefarious { font-family: 'Nefarious', serif; text-shadow: -0.1px 0 var(--color), 0 0.1px var(--color), 0.1px 0 var(--color), 0 -0.1px var(--color); font-weight: bold; }
 
 /* common */
 * { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; cursor: none; }

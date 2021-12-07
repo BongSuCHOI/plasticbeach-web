@@ -11,11 +11,172 @@ import commonCSS from "../css/scss/common.scss";
 import styleCSS from "../css/scss/style.scss";
 import workListCSS from "../css/scss/workList.scss";
 
+// draw DOM & convert lang
+class DrawDomAndConvert {
+    constructor() {
+        this.lang = "en";
+        this.textData;
+        this.workData;
+    }
+
+    init() {
+        this.workGetJson();
+        this.textGetJson();
+    }
+
+    async workGetJson() {
+        const response = fetch(workJson).then((response) => response.json());
+        await response.then((workData) => (this.workData = workData));
+        this.bindWorkList();
+    }
+
+    async textGetJson() {
+        const response = fetch(textJson).then((response) => response.json());
+        await response.then((textData) => (this.textData = textData));
+        this.bindText();
+    }
+
+    bindWorkList() {
+        const data = this.workData;
+        const parent = document.querySelector(".work_list");
+        const cursor = document.querySelector(".cursor");
+
+        for (let i = 0; i < data.length; i++) {
+            const html = document.createElement("li");
+            html.setAttribute("class", `list hover ${data[i].id}`);
+            html.innerHTML = `
+                <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
+                <video class="video_tooltip" muted playsinline>
+                    <source src="video/${data[i].fileName}.mp4" type="video/mp4" />
+                </video>
+            `;
+            parent.appendChild(html);
+        }
+
+        customCursor.reverseColor(cursor);
+        MouseOverTooltip();
+    }
+
+    bindText() {
+        const data = this.textData;
+        const textArr = Object.entries(data[0]);
+        const budgietArr = Object.entries(data[1]);
+        const timelineArr = Object.entries(data[2]);
+
+        for (let i = 0; i < textArr.length; i++) {
+            const target = document.querySelector(`[data-name='${textArr[i][0]}']`);
+            target.innerHTML = textArr[i][1].en;
+
+            if (target.classList.contains("marquee_text")) {
+                target.innerHTML = textArr[i][1].en + textArr[i][1].en;
+            }
+        }
+
+        for (let i = 0; i < budgietArr.length; i++) {
+            const parent = document.querySelector("select.budgiet");
+            const html = document.createElement("option");
+            html.setAttribute("class", budgietArr[i][0]);
+            html.innerHTML = budgietArr[i][1].en;
+            parent.appendChild(html);
+        }
+
+        for (let i = 0; i < timelineArr.length; i++) {
+            const parent = document.querySelector("select.timeline");
+            const html = document.createElement("option");
+            html.setAttribute("class", timelineArr[i][0]);
+            html.innerHTML = timelineArr[i][1].en;
+            parent.appendChild(html);
+        }
+
+        Marquee(".marquee", 0.2);
+    }
+
+    changeWork() {
+        const data = this.workData;
+
+        for (let i = 0; i < data.length; i++) {
+            const target = document.querySelector(`.${data[i].id} a`);
+
+            if (this.lang === "en") {
+                target.innerHTML = data[i].title.en;
+            } else {
+                target.innerHTML = data[i].title.ko;
+            }
+        }
+    }
+
+    changeText() {
+        const data = this.textData;
+        const textArr = Object.entries(data[0]);
+        const budgietArr = Object.entries(data[1]);
+        const timelineArr = Object.entries(data[2]);
+
+        for (let i = 0; i < textArr.length; i++) {
+            const target = document.querySelector(`[data-name='${textArr[i][0]}']`);
+            if (this.lang === "en") {
+                target.innerHTML = textArr[i][1].en;
+
+                if (target.classList.contains("marquee_text")) {
+                    target.innerHTML = textArr[i][1].en + textArr[i][1].en;
+                }
+            } else {
+                target.innerHTML = textArr[i][1].ko;
+
+                if (target.classList.contains("marquee_text")) {
+                    target.innerHTML = textArr[i][1].ko + textArr[i][1].ko;
+                }
+            }
+        }
+
+        for (let i = 0; i < budgietArr.length; i++) {
+            const target = document.querySelector(`.${budgietArr[i][0]}`);
+            if (this.lang === "en") {
+                target.innerHTML = budgietArr[i][1].en;
+            } else {
+                target.innerHTML = budgietArr[i][1].ko;
+            }
+        }
+
+        for (let i = 0; i < timelineArr.length; i++) {
+            const target = document.querySelector(`.${timelineArr[i][0]}`);
+            if (this.lang === "en") {
+                target.innerHTML = timelineArr[i][1].en;
+            } else {
+                target.innerHTML = timelineArr[i][1].ko;
+            }
+        }
+    }
+
+    reverseColorTheme() {
+        const state = document.documentElement.getAttribute("color-theme");
+        if (state === "white") {
+            document.documentElement.setAttribute("color-theme", "blue");
+        } else {
+            document.documentElement.setAttribute("color-theme", "white");
+        }
+    }
+
+    change() {
+        DOM.lang === "en" ? (DOM.lang = "ko") : (DOM.lang = "en");
+        DOM.changeWork();
+        DOM.changeText();
+        DOM.reverseColorTheme();
+
+        const enFont = document.querySelectorAll(".toggle_font");
+        for (let i = 0; i < enFont.length; i++) {
+            enFont[i].classList.contains("Nefarious") ? enFont[i].classList.remove("Nefarious") : enFont[i].classList.add("Nefarious");
+        }
+    }
+}
+let DOM = new DrawDomAndConvert();
+document.querySelector(".reverse_color").addEventListener("click", DOM.change);
+
 // run
-window.addEventListener("DOMContentLoaded", customCursor.create);
-window.addEventListener("load", Marquee(".marquee", 0.2));
+window.addEventListener("DOMContentLoaded", () => {
+    DOM.init();
+    customCursor.create();
+});
 circleLogoAnimation.bindSGV();
-MouseOverTooltip();
 
 // custom input[type="file"](file-name bind)
 const bindFileInput = (function () {
@@ -27,61 +188,3 @@ const bindFileInput = (function () {
         bindTarget.value = value;
     });
 })();
-
-// reverse color theme
-function reverseColorTheme() {
-    const state = document.documentElement.getAttribute("color-theme");
-    if (state === "white") {
-        document.documentElement.setAttribute("color-theme", "blue");
-    } else {
-        document.documentElement.setAttribute("color-theme", "white");
-    }
-}
-document.querySelector(".reverse_color").addEventListener("click", reverseColorTheme);
-
-// convert en to ko & ko to en
-const convertLang = {
-    getJson: function () {
-        fetch(textJson)
-            .then((response) => response.json())
-            .then((textData) => this.convert(textData));
-    },
-    // 이런식으로 for 함수화 시켜서 옵저버 if 마다 파라미터 전달해서 실행시키면 더 깔끔해질거같음
-    // 아 이러면 안됨 그냥 함수명() 이렇게 해서 실행시키면 json 데이터가 파라미터로 안들어와서 에러남
-    // asd: function() {
-    //     for(let i=0; i < 10; i++) {
-    //         console.log(i)
-    //     }
-    // },
-
-    convert: function (data) {
-        const $data = data;
-        const textData = $data[0];
-        const arr = Object.entries(textData);
-        const target = document.documentElement;
-
-        let observer = new MutationObserver(function (mutations) {
-            let theme = target.getAttribute("color-theme");
-            if (theme == "white") {
-                // convertLang.asd();
-                for (let i = 0; i < arr.length; i++) {
-                    const target = document.querySelector(`[data-name='${arr[i][0]}']`);
-                    target.innerHTML = arr[i][1].en;
-                }
-            } else {
-                for (let i = 0; i < arr.length; i++) {
-                    const target = document.querySelector(`[data-name='${arr[i][0]}']`);
-                    target.innerHTML = arr[i][1].ko;
-                }
-            }
-            // observer.disconnect();
-        });
-        observer.observe(target, { attributes: true });
-
-        for (let i = 0; i < arr.length; i++) {
-            const target = document.querySelector(`[data-name='${arr[i][0]}']`);
-            target.innerHTML = arr[i][1].en;
-        }
-    },
-};
-convertLang.getJson();

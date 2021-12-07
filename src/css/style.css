@@ -81,11 +81,13 @@ body { background-color: var(--background); }
 
 .contact form .project_info .chk input[type="checkbox"]:checked + label { background: url("../../img/chk_on.png") no-repeat; background-size: 12px; background-position: left center; }
 
-.contact form .submit_btn { width: 100%; height: 80px; margin-top: 50px; font-size: 46px; color: var(--color); border: 2px solid var(--color); }
+.contact form .submit_btn { width: 100%; height: 80px; margin-top: 50px; font-size: 46px; color: var(--color); border: 2px solid var(--color); -webkit-transition: color 0.1s ease; transition: color 0.1s ease; }
 
-.marquee { overflow: hidden; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; width: 90px; height: 100%; color: var(--color); border-left: 2px solid var(--color); border-right: 2px solid var(--color); }
+.contact form .submit_btn:hover { color: var(--background); border: 2px solid var(--background); background: var(--color); }
 
-.marquee p { -webkit-transform: rotate(180deg); transform: rotate(180deg); white-space: nowrap; -webkit-writing-mode: vertical-rl; -ms-writing-mode: tb-rl; writing-mode: vertical-rl; font-weight: bold; font-size: 43px; }
+.marquee { overflow: hidden; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; width: 90px; height: 100%; color: var(--color); border-left: 2px solid var(--color); border-right: 2px solid var(--color); }
+
+.marquee p { -webkit-transform: rotate(270deg); transform: rotate(270deg); white-space: nowrap; font-size: 43px; }
 
 .reverse_color { position: fixed; right: 40px; bottom: 40px; width: auto; height: auto; display: block; border: none; background: initial; }
 

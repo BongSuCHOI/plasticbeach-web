@@ -31,7 +31,7 @@ const customCursor = {
             yPercent: -50,
         });
 
-        customCursor.reverseColor(cursor);
+        // customCursor.reverseColor(cursor);
         customCursor.run({ pos, mouse, speed, xSet, ySet });
     },
 

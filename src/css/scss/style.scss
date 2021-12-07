@@ -208,7 +208,7 @@ body {
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-direction: column;
     width: 90px;
     height: 100%;
@@ -216,10 +216,8 @@ body {
     border-left: 2px solid var(--color);
     border-right: 2px solid var(--color);
     p {
-        transform: rotate(180deg);
+        transform: rotate(270deg);
         white-space: nowrap;
-        writing-mode: vertical-rl;
-        font-weight: bold;
         font-size: 43px;
     }
 }
