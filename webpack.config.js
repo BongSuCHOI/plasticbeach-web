@@ -7,7 +7,7 @@ module.exports = {
     entry: "./src/js/index.js",
 
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "docs"),
         filename: "[name].js",
     },
 
