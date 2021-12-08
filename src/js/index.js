@@ -9,7 +9,8 @@ import workJson from "./data/work.json";
 // css
 import commonCSS from "../css/scss/common.scss";
 import styleCSS from "../css/scss/style.scss";
-import workListCSS from "../css/scss/workList.scss";
+import contactCSS from "../css/scss/contact.scss";
+import workCSS from "../css/scss/work.scss";
 
 // 동적 리소스 import
 function importAll(r) {
@@ -48,14 +49,16 @@ class DrawDomAndConvert {
         const data = this.workData;
         const parent = document.querySelector(".work_list");
         const cursor = document.querySelector(".cursor");
+        const videoSrc = Object.values(videos);
 
         for (let i = 0; i < data.length; i++) {
             const html = document.createElement("li");
             html.setAttribute("class", `list hover ${data[i].id}`);
+            html.setAttribute("category", `${data[i].category}`);
             html.innerHTML = `
                 <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
                 <video class="video_tooltip" muted playsinline>
-                    <source src="${videos['prototype_v01.mp4']}" type="video/mp4" />
+                <source src="${videoSrc[i]}" type="video/mp4" />
                 </video>
             `;
             parent.appendChild(html);
@@ -70,6 +73,7 @@ class DrawDomAndConvert {
         const textArr = Object.entries(data[0]);
         const budgietArr = Object.entries(data[1]);
         const timelineArr = Object.entries(data[2]);
+        const categoryArr = Object.entries(data[3]);
 
         for (let i = 0; i < textArr.length; i++) {
             const target = document.querySelector(`[data-name='${textArr[i][0]}']`);
@@ -96,6 +100,11 @@ class DrawDomAndConvert {
             parent.appendChild(html);
         }
 
+        for (let i = 0; i < categoryArr.length; i++) {
+            const target = document.querySelector(`[data-name='${categoryArr[i][0]}']`);
+            target.innerHTML = categoryArr[i][1].en;
+        }
+
         Marquee(".marquee", 0.2);
     }
 
@@ -118,6 +127,7 @@ class DrawDomAndConvert {
         const textArr = Object.entries(data[0]);
         const budgietArr = Object.entries(data[1]);
         const timelineArr = Object.entries(data[2]);
+        const categoryArr = Object.entries(data[3]);
 
         for (let i = 0; i < textArr.length; i++) {
             const target = document.querySelector(`[data-name='${textArr[i][0]}']`);
@@ -153,6 +163,15 @@ class DrawDomAndConvert {
                 target.innerHTML = timelineArr[i][1].ko;
             }
         }
+
+        for (let i = 0; i < categoryArr.length; i++) {
+            const target = document.querySelector(`[data-name='${categoryArr[i][0]}']`);
+            if (this.lang === "en") {
+                target.innerHTML = categoryArr[i][1].en;
+            } else {
+                target.innerHTML = categoryArr[i][1].ko;
+            }
+        }
     }
 
     reverseColorTheme() {
@@ -173,6 +192,20 @@ class DrawDomAndConvert {
         const enFont = document.querySelectorAll(".toggle_font");
         for (let i = 0; i < enFont.length; i++) {
             enFont[i].classList.contains("Nefarious") ? enFont[i].classList.remove("Nefarious") : enFont[i].classList.add("Nefarious");
+        }
+    }
+
+    workListCategory() {
+        const list = document.querySelectorAll('.work_list .list');
+        for (let i = 0; i < list.length; i++) {
+            let listCategory = list[i].getAttribute('category');
+            if (this.id == 'all') {
+                list[i].style.display = 'flex'
+            } else if (listCategory == this.id) {
+                list[i].style.display = 'flex'
+            } else {
+                list[i].style.display = 'none'
+            }
         }
     }
 }
@@ -196,3 +229,7 @@ const bindFileInput = (function () {
         bindTarget.value = value;
     });
 })();
+
+// workListCategory
+const radios = document.querySelectorAll('[type=radio]');
+radios.forEach(elem => elem.addEventListener('click', DOM.workListCategory));

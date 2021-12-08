@@ -100,5 +100,19 @@
             "ko": "3 주",
             "en": "3 week"
         }
+    },
+    {
+        "category_all": {
+            "ko": "전체",
+            "en": "ALL"
+        },
+        "category_mv": {
+            "ko": "뮤직비디오",
+            "en": "MV"
+        },
+        "category_ad": {
+            "ko": "광고",
+            "en": "AD"
+        }
     }
 ]

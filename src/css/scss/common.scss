@@ -109,18 +109,3 @@ input, textarea, select{border-radius:0; -webkit-appearance:none;}
     overflow: hidden !important;
     touch-action: none;
 }
-
-// /* radio box custom */
-// .radio input[type="radio"]{
-// 	display:none !important;
-// 	& + label{
-// 		display:block;
-// 		width: 100%;
-// 		background:url('../img/chk_off.png') no-repeat center left;
-// 		background-size:16px;
-// 	}
-// 	&:checked + label{
-// 		background:url('../img/chk_on.png') no-repeat center left;
-// 		background-size:16px;
-// 	}
-// }

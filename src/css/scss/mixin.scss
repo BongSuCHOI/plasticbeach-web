@@ -4,11 +4,20 @@
 :root[color-theme="white"] {
     --background: #fff;
     --color: #0035dd;
+	--select-ico: url("../../img/select_box.png");
+	--check-off-ico: url("../../img/chk_off.png");
+	--check-on-ico: url("../../img/chk_on.png");
+	--radio-off-ico: url("../../img/radio_off.png");
+	--radio-on-ico: url("../../img/radio_on.png");
 }
-
 :root[color-theme="blue"] {
     --background: #0035dd;
     --color: #fff;
+	--selectIco: url("../../img/select_box_w.png");
+	--check-off-ico: url("../../img/chk_off_w.png");
+	--check-on-ico: url("../../img/chk_on_w.png");
+	--radio-off-ico: url("../../img/radio_off_w.png");
+	--radio-on-ico: url("../../img/radio_on_w.png");
 }
 $white: #fff;
 $black: #000;

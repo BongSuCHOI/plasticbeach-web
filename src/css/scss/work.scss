@@ -1,0 +1,74 @@
+@charset "utf-8";
+@import "mixin";
+
+// work_box
+.work_box{
+    position: relative;
+    width: calc(100% - 654px);
+    height: 100%;
+    .category{
+        @include flex_align_center;
+        z-index: 2;
+        position: absolute;
+        top: 18px;
+        right: 68px;
+        .radio{
+            margin-right: 90px;
+            &:last-of-type{margin-right: 0;}
+            input[type="radio"]{
+                display: none !important;
+                & + label{
+                    display: block;
+                    width: 100%;
+                    padding-bottom: 7px;
+                    padding-left: 45px;
+                    white-space: nowrap;
+                    font-weight: 700;
+                    font-size: 39px;
+                    color: var(--color);
+                    background: var(--radio-off-ico) no-repeat center left;
+                    background-size: 30px;
+                }
+                &:checked + label{
+                    background: var(--radio-on-ico) no-repeat center left;
+                    background-size: 30px;
+                }
+            }
+        }
+    }
+    .work_list{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        width: 100%;
+        height: 100%;
+        .list {
+            @include flex_align_center;
+            position: relative;
+            width: 100%;
+            height: 160px;
+            padding: 0 25px;
+            border-bottom: 2px solid var(--color);
+            transition: color 0.1s ease;
+            a{
+                white-space: nowrap;
+                font-size: 94px;
+                font-weight: normal;
+                text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
+                color: var(--color);
+            }
+            .video_tooltip {
+                z-index: 1;
+                position: fixed;
+                display: none;
+                width: 600px;
+                pointer-events: none;
+                user-select: none;
+            }
+            &:hover {
+                background: var(--color);
+                a{color: var(--background)}
+                .video_tooltip{display: block;}
+            }
+        }
+    }
+}

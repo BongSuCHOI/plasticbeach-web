@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <div class="chk">
-                        <input type="checkbox" name="chk" id="chk01" />
-                        <label for="chk01" data-name="policy_chk"></label>
+                        <input type="checkbox" name="policy" id="policy" />
+                        <label for="policy" data-name="policy_chk"></label>
                     </div>
                 </div>
                 <button class="submit_btn Nefarious toggle_font" data-name="submit_btn"></button>
@@ -65,7 +65,23 @@
         <div class="marquee">
             <p class="marquee_text Nefarious toggle_font" data-name="marquee"></p>
         </div>
-        <ul class="work_list"></ul>
+        <div class="work_box">
+            <div class="category">
+                <div class="radio">
+                    <input type="radio" name="category" id="all" checked/>
+                    <label for="all" data-name="category_all"></label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="category" id="mv" />
+                    <label for="mv" data-name="category_mv"></label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="category" id="ad" />
+                    <label for="ad" data-name="category_ad"></label>
+                </div>
+            </div>
+            <ul class="work_list"></ul>
+        </div>
     </section>
 
     <button class="reverse_color hover"></button>
