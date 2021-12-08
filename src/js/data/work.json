@@ -1,74 +1,65 @@
 [
     {
-        "id": "name01",
+        "id": "prototype_v01",
         "title": {
             "ko": "01테스트입니다 - 01테스트 01테스트 01테스트",
             "en": "cravaty - gas pedal"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name02",
+        "id": "prototype_v01",
         "title": {
             "ko": "02테스트입니다 - 02테스트 02테스트 02테스트",
             "en": "02test - 02test 02test 02test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name03",
+        "id": "prototype_v01",
         "title": {
             "ko": "03테스트입니다 - 03테스트 03테스트 03테스트",
             "en": "03test - 03test 03test 03test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name04",
+        "id": "prototype_v01",
         "title": {
             "ko": "04테스트입니다 - 04테스트 04테스트 04테스트",
             "en": "04test - 04test 04test 04test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name05",
+        "id": "prototype_v01",
         "title": {
             "ko": "05테스트입니다 - 05테스트 05테스트 05테스트",
             "en": "05test - 05test 05test 05test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name06",
+        "id": "prototype_v01",
         "title": {
             "ko": "06테스트입니다 - 06테스트 06테스트 06테스트",
             "en": "06test - 06test 06test 06test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name07",
+        "id": "prototype_v01",
         "title": {
             "ko": "07테스트입니다 - 07테스트 07테스트 07테스트",
             "en": "07test - 07test 07test 07test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name08",
+        "id": "prototype_v01",
         "title": {
             "ko": "08테스트입니다 - 08테스트 08테스트 08테스트",
             "en": "08test - 08test 08test 08test"
-        },
-        "fileName": "prototype_v01"
+        }
     },
     {
-        "id": "name09",
+        "id": "prototype_v01",
         "title": {
             "ko": "09테스트입니다 - 09테스트 09테스트 09테스트",
             "en": "09test - 09test 09test 09test"
-        },
-        "fileName": "prototype_v01"
+        }
     }
 ]

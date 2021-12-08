@@ -11,6 +11,14 @@ import commonCSS from "../css/scss/common.scss";
 import styleCSS from "../css/scss/style.scss";
 import workListCSS from "../css/scss/workList.scss";
 
+// 동적 리소스 import
+function importAll(r) {
+    let videos = {};
+    r.keys().map(item => videos[item.replace("./", "")] = r(item));
+    return videos;
+}
+const videos = importAll(require.context("../video", false, /\.mp4$/));
+
 // draw DOM & convert lang
 class DrawDomAndConvert {
     constructor() {
@@ -47,7 +55,7 @@ class DrawDomAndConvert {
             html.innerHTML = `
                 <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
                 <video class="video_tooltip" muted playsinline>
-                    <source src="video/${data[i].fileName}.mp4" type="video/mp4" />
+                    <source src="${videos['prototype_v01.mp4']}" type="video/mp4" />
                 </video>
             `;
             parent.appendChild(html);
