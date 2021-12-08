@@ -75,15 +75,24 @@ class DrawDomAndConvert {
         const timelineArr = Object.entries(data[2]);
         const categoryArr = Object.entries(data[3]);
 
+        // 일반 content text
         for (let i = 0; i < textArr.length; i++) {
             const target = document.querySelector(`[data-name='${textArr[i][0]}']`);
             target.innerHTML = textArr[i][1].en;
 
+            // marquee text
             if (target.classList.contains("marquee_text")) {
                 target.innerHTML = textArr[i][1].en + textArr[i][1].en;
             }
+
+            // contact input placeholder
+            if (target.hasAttribute('placeholder')) {
+                target.innerHTML = '';
+                target.setAttribute('placeholder', textArr[i][1].en)
+            }
         }
 
+        // 예산 select box option text
         for (let i = 0; i < budgietArr.length; i++) {
             const parent = document.querySelector("select.budgiet");
             const html = document.createElement("option");
@@ -92,6 +101,7 @@ class DrawDomAndConvert {
             parent.appendChild(html);
         }
 
+        // 일정 select box text
         for (let i = 0; i < timelineArr.length; i++) {
             const parent = document.querySelector("select.timeline");
             const html = document.createElement("option");
@@ -100,6 +110,7 @@ class DrawDomAndConvert {
             parent.appendChild(html);
         }
 
+        // category select radio btn text
         for (let i = 0; i < categoryArr.length; i++) {
             const target = document.querySelector(`[data-name='${categoryArr[i][0]}']`);
             target.innerHTML = categoryArr[i][1].en;
@@ -131,21 +142,36 @@ class DrawDomAndConvert {
 
         for (let i = 0; i < textArr.length; i++) {
             const target = document.querySelector(`[data-name='${textArr[i][0]}']`);
+
+            // 일반 content text
             if (this.lang === "en") {
                 target.innerHTML = textArr[i][1].en;
 
+                // marquee text
                 if (target.classList.contains("marquee_text")) {
                     target.innerHTML = textArr[i][1].en + textArr[i][1].en;
+                }
+
+                // contact input placeholder
+                if (target.hasAttribute('placeholder')) {
+                    target.setAttribute('placeholder', textArr[i][1].en)
                 }
             } else {
                 target.innerHTML = textArr[i][1].ko;
 
+                // marquee text
                 if (target.classList.contains("marquee_text")) {
                     target.innerHTML = textArr[i][1].ko + textArr[i][1].ko;
+                }
+
+                // contact input placeholder
+                if (target.hasAttribute('placeholder')) {
+                    target.setAttribute('placeholder', textArr[i][1].ko)
                 }
             }
         }
 
+        // 예산 select box option text
         for (let i = 0; i < budgietArr.length; i++) {
             const target = document.querySelector(`.${budgietArr[i][0]}`);
             if (this.lang === "en") {
@@ -155,6 +181,7 @@ class DrawDomAndConvert {
             }
         }
 
+        // 일정 select box text
         for (let i = 0; i < timelineArr.length; i++) {
             const target = document.querySelector(`.${timelineArr[i][0]}`);
             if (this.lang === "en") {
@@ -164,6 +191,7 @@ class DrawDomAndConvert {
             }
         }
 
+        // category select radio btn text
         for (let i = 0; i < categoryArr.length; i++) {
             const target = document.querySelector(`[data-name='${categoryArr[i][0]}']`);
             if (this.lang === "en") {
