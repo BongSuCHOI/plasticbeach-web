@@ -12,14 +12,6 @@ import styleCSS from "../css/scss/style.scss";
 import contactCSS from "../css/scss/contact.scss";
 import workCSS from "../css/scss/work.scss";
 
-// 동적 리소스 import
-function importAll(r) {
-    let videos = {};
-    r.keys().map(item => videos[item.replace("./", "")] = r(item));
-    return videos;
-}
-const videos = importAll(require.context("../video", false, /\.mp4$/));
-
 // draw DOM & convert lang
 class DrawDomAndConvert {
     constructor() {
@@ -49,7 +41,6 @@ class DrawDomAndConvert {
         const data = this.workData;
         const parent = document.querySelector(".work_list");
         const cursor = document.querySelector(".cursor");
-        const videoSrc = Object.values(videos);
 
         for (let i = 0; i < data.length; i++) {
             const html = document.createElement("li");
@@ -57,10 +48,14 @@ class DrawDomAndConvert {
             html.setAttribute("category", `${data[i].category}`);
             html.innerHTML = `
                 <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
-                <video class="video_tooltip" muted playsinline>
-                    <source src="${videoSrc[i]}" type="video/mp4" />
-                </video>
-            `;
+                <<iframe
+                    class="video_tooltip"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/${data[i].id}?&mute=1&enablejsapi=1&playsinline=1&color=white"
+                    frameborder="0">
+                </iframe>
+                `;
             parent.appendChild(html);
         }
 

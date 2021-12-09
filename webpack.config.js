@@ -58,29 +58,6 @@ module.exports = {
                     filename: "fonts/[name][ext]?[hash]",
                 },
             },
-            {
-                test: /\.(mp4)$/,
-                type: "asset",
-                generator: {
-                    filename: "video/[name][ext]?[hash]",
-                },
-            },
-            {
-                test: /\.html$/,
-                exclude: /node_modules/,
-                loader: "html-loader",
-                options: {
-                    sources: {
-                        list: [
-                            {
-                                tag: "source",
-                                attribute: "src",
-                                type: "src",
-                            },
-                        ],
-                    },
-                },
-            },
         ],
     },
 };

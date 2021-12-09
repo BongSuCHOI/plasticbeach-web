@@ -12,8 +12,12 @@ function mouseOverTooltip() {
             if (tooltip.offsetTop < 0) {tooltip.style.top = mouseY + 'px'}
         });
 
-        obj.addEventListener('mouseenter', () => { tooltip.play() });
-        obj.addEventListener('mouseleave', () => { tooltip.pause() });
+        obj.addEventListener('mouseenter', () => {
+            tooltip.contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*')
+        });
+        obj.addEventListener('mouseleave', () => {
+            tooltip.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*')
+        });
     });
 }
 
