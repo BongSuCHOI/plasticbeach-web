@@ -58,7 +58,7 @@ class DrawDomAndConvert {
             html.innerHTML = `
                 <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
                 <video class="video_tooltip" muted playsinline>
-                <source src="${videoSrc[i]}" type="video/mp4" />
+                    <source src="${videoSrc[i]}" type="video/mp4" />
                 </video>
             `;
             parent.appendChild(html);
