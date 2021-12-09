@@ -1,6 +1,7 @@
 [
     {
-        "id": "4TWR90KJl84",
+        "name": "aespa01",
+        "url": "4TWR90KJl84",
         "category" : "mv",
         "title": {
             "ko": "뮤직비디오 - 01테스트 01테스트 01테스트",
@@ -8,7 +9,8 @@
         }
     },
     {
-        "id": "1CTced9CMMk",
+        "name": "bigbang",
+        "url": "1CTced9CMMk",
         "category" : "mv",
         "title": {
             "ko": "뮤직비디오 - 02테스트 02테스트 02테스트",
@@ -16,7 +18,8 @@
         }
     },
     {
-        "id": "tyrVtwE8Gv0",
+        "name": "nctu",
+        "url": "tyrVtwE8Gv0",
         "category" : "ad",
         "title": {
             "ko": "광고 - 03테스트 03테스트 03테스트",
@@ -24,7 +27,8 @@
         }
     },
     {
-        "id": "_ysomCGaZLw",
+        "name": "itzy01",
+        "url": "_ysomCGaZLw",
         "category" : "ad",
         "title": {
             "ko": "광고 - 04테스트 04테스트 04테스트",
@@ -32,7 +36,8 @@
         }
     },
     {
-        "id": "WZwr2a_lFWY",
+        "name": "izone",
+        "url": "WZwr2a_lFWY",
         "category" : "mv",
         "title": {
             "ko": "뮤직비디오 - 05테스트 05테스트 05테스트",
@@ -40,7 +45,8 @@
         }
     },
     {
-        "id": "Amq-qlqbjYA",
+        "name": "blackpink",
+        "url": "Amq-qlqbjYA",
         "category" : "mv",
         "title": {
             "ko": "뮤직비디오 - 06테스트 06테스트 06테스트",
@@ -48,7 +54,8 @@
         }
     },
     {
-        "id": "pNfTK39k55U",
+        "name": "itzt02",
+        "url": "pNfTK39k55U",
         "category" : "ad",
         "title": {
             "ko": "광고 - 07테스트 07테스트 07테스트",
@@ -56,7 +63,8 @@
         }
     },
     {
-        "id": "ZeerrnuLi5E",
+        "name": "aespa02",
+        "url": "ZeerrnuLi5E",
         "category" : "ad",
         "title": {
             "ko": "광고 - 08테스트 08테스트 08테스트",
@@ -64,7 +72,8 @@
         }
     },
     {
-        "id": "EVaV7AwqBWg",
+        "name": "wannaone",
+        "url": "EVaV7AwqBWg",
         "category" : "mv",
         "title": {
             "ko": "뮤직비디오 - 09테스트 09테스트 09테스트",

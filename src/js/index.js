@@ -44,16 +44,17 @@ class DrawDomAndConvert {
 
         for (let i = 0; i < data.length; i++) {
             const html = document.createElement("li");
-            html.setAttribute("class", `list hover ${data[i].id}`);
+            html.setAttribute("class", `list hover ${data[i].name}`);
             html.setAttribute("category", `${data[i].category}`);
             html.innerHTML = `
                 <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
-                <<iframe
+                <iframe
                     class="video_tooltip"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/${data[i].id}?&mute=1&enablejsapi=1&playsinline=1&color=white"
-                    frameborder="0">
+                    src="https://www.youtube.com/embed/${data[i].url}?&mute=1&enablejsapi=1&playsinline=1&color=white"
+                    frameborder="0"allowfullscreen
+                    >
                 </iframe>
                 `;
             parent.appendChild(html);
@@ -118,7 +119,7 @@ class DrawDomAndConvert {
         const data = this.workData;
 
         for (let i = 0; i < data.length; i++) {
-            const target = document.querySelector(`.${data[i].id} a`);
+            const target = document.querySelector(`.${data[i].name} a`);
 
             if (this.lang === "en") {
                 target.innerHTML = data[i].title.en;
