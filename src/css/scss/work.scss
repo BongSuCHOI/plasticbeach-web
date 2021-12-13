@@ -4,7 +4,7 @@
 // work_box
 .work_box{
     position: relative;
-    // width: calc(100% - 654px);
+    width: calc(100% - 654px);
     height: 100%;
     .category{
         @include flex_align_center;
