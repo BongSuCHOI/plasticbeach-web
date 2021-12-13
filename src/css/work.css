@@ -5,7 +5,7 @@
 
 /* extend */
 /*common*/
-.work_box { position: relative; width: calc(100% - 654px); height: 100%; }
+.work_box { position: relative; height: 100%; }
 
 .work_box .category { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; z-index: 2; position: absolute; top: 18px; right: 68px; }
 

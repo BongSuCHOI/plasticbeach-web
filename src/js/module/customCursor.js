@@ -1,8 +1,10 @@
 import { gsap } from "gsap";
+import platformCheck from './PlatformCheck.js';
 
 const customCursor = {
     // Created Cursor Element
     create: function () {
+        if (platformCheck()) { return }
         const createElem = document.createElement("div");
         const createPointer = document.createElement("span");
         createElem.setAttribute("class", "cursor");
