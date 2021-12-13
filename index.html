@@ -17,25 +17,26 @@
                     <p class="address" data-name="address"></p>
                 </div>
             </div>
-            <form>
+            <form id="contact-form">
                 <div class="contact_info">
                     <p class="Nefarious toggle_font" data-name="contact_info"></p>
                     <div class="input_box">
-                        <input type="text" placeholder="" data-name="cus_full_name">
-                        <input type="text" placeholder="" data-name="cus_position">
-                        <input type="text" placeholder="" data-name="cus_organization">
-                        <input type="email" placeholder="" data-name="cus_email">
-                        <input type="tel" placeholder="" data-name="cus_phone">
-                        <input type="url" placeholder="" data-name="cus_url">
+                        <input type="hidden" name="contact_number">
+                        <input type="text" name="full_name" placeholder="" data-name="cus_full_name">
+                        <input type="text" name="position" placeholder="" data-name="cus_position">
+                        <input type="text" name="organization" placeholder="" data-name="cus_organization">
+                        <input type="email" name="email" placeholder="" data-name="cus_email">
+                        <input type="tel" name="phone" placeholder="" data-name="cus_phone">
+                        <input type="url" name="url" placeholder="" data-name="cus_url">
                     </div>
                 </div>
                 <div class="budgiet_info">
                     <p class="Nefarious toggle_font" data-name="budgiet_info"></p>
                     <div class="input_box">
-                        <select class="budgiet">
+                        <select class="budgiet" name="budgiet">
                             <option data-name="budgiet_default" selected></option>
                         </select>
-                        <select class="timeline">
+                        <select class="timeline" name="timeline">
                             <option data-name="timeline_default" selected></option>
                         </select>
                     </div>
@@ -45,13 +46,13 @@
                     <div class="input_box">
                         <div class="text_box">
                             <p data-name="project_text"></span></p>
-                            <textarea></textarea>
+                            <textarea name="describe"></textarea>
                         </div>
                         <div class="file_box">
                             <p data-name="project_file"></p>
                             <input class="file_name" value="">
                             <label for="file" data-name="file_btn"></label>
-                            <input type="file" id="file">
+                            <input type="file" id="file" name="file">
                         </div>
                     </div>
                     <div class="chk">
@@ -59,7 +60,7 @@
                         <label for="policy" data-name="policy_chk"></label>
                     </div>
                 </div>
-                <button class="submit_btn Nefarious toggle_font" data-name="submit_btn"></button>
+                <button class="submit_btn Nefarious toggle_font" type="submit" data-name="submit_btn"></button>
             </form>
         </div>
         <div class="marquee">
