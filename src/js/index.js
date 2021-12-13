@@ -1,9 +1,9 @@
 // module import
-import customCursor from "./module/customCursor.js";
+import customCursor from "./module/CustomCursor.js";
 import circleLogoAnimation from "./module/CircleLogo.js";
 import Marquee from "./module/Marquee.js";
 import MouseOverTooltip from "./module/MouseOverTooltip.js";
-import Emailjs from "./module/email.js";
+import Emailjs from "./module/Email.js";
 import textJson from "./data/text.json";
 import workJson from "./data/work.json";
 
