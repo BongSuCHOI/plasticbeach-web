@@ -1,3 +1,22 @@
+var tag = document.createElement("script");
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName("script")[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+window.onYouTubeIframeAPIReady = function() {
+    var player;
+    player = new YT.Player('player', {
+        videoId: 'M7lc1UVf-VE',
+        playerVars: { 'autoplay': 1, 'controls': 0 },
+        events: {
+            'onReady': onPlayerReady,
+        }
+    });
+}
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
 // module import
 import customCursor from "./module/CustomCursor.js";
 import circleLogoAnimation from "./module/CircleLogo.js";
@@ -41,25 +60,26 @@ class DomTextBind {
         const cursor = document.querySelector(".cursor");
 
         for (let i = 0; i < data.length; i++) {
-            const html = document.createElement("li");
-            html.setAttribute("class", `list hover ${data[i].name}`);
-            html.setAttribute("category", `${data[i].category}`);
-            html.innerHTML = `
+            const dt = document.createElement("dt");
+            dt.setAttribute("class", `list hover ${data[i].name}`);
+            dt.setAttribute("category", `${data[i].category}`);
+            dt.innerHTML = `
                 <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
-                <iframe
-                    class="video_tooltip"
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/${data[i].url}?&mute=1&enablejsapi=1&playsinline=1&color=white&controls=0"
-                    frameborder="0"
-                    allowfullscreen>
-                </iframe>
-            `;
-            parent.appendChild(html);
+                <div id="video_tooltip"></div>
+                `;
+                // <iframe
+                //     class="video_tooltip"
+                //     width="560"
+                //     height="315"
+                //     src="https://www.youtube.com/embed/${data[i].url}?&mute=1&enablejsapi=1&playsinline=1&color=white&controls=0"
+                //     frameborder="0"
+                //     allowfullscreen>
+                // </iframe>
+            parent.appendChild(dt);
         }
 
         customCursor.reverseColor(cursor);
-        MouseOverTooltip();
+        // MouseOverTooltip();
     }
 
     bindText() {
