@@ -3,9 +3,8 @@ import { gsap } from "gsap";
 const circleLogoAnimation = {
     bindSGV: function () {
         const parentBtn = document.querySelector(".reverse_color");
-        if (!parentBtn) {
-            return;
-        }
+        if (!parentBtn) { return };
+
         const circleLogo = `
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,9 +121,7 @@ const circleLogoAnimation = {
 
     playAnimation: function (parent) {
         const target = parent.querySelector(".reverse_color .circleLogo");
-        if (!target) {
-            return;
-        }
+        if (!target) { return }
 
         gsap.defaults({
             repeat: -1,
@@ -145,5 +142,7 @@ const circleLogoAnimation = {
         target.addEventListener("mouseleave", () => hover.pause());
     },
 };
+
+circleLogoAnimation.bindSGV()
 
 export default circleLogoAnimation;

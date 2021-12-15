@@ -1,36 +1,17 @@
-var tag = document.createElement("script");
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName("script")[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-window.onYouTubeIframeAPIReady = function() {
-    var player;
-    player = new YT.Player('player', {
-        videoId: 'M7lc1UVf-VE',
-        playerVars: { 'autoplay': 1, 'controls': 0 },
-        events: {
-            'onReady': onPlayerReady,
-        }
-    });
-}
-function onPlayerReady(event) {
-    event.target.playVideo();
-}
-
 // module import
 import customCursor from "./module/CustomCursor.js";
-import circleLogoAnimation from "./module/CircleLogo.js";
 import Marquee from "./module/Marquee.js";
 import MouseOverTooltip from "./module/MouseOverTooltip.js";
+import circleLogoAnimation from "./module/CircleLogo.js";
+import Accordion from "./module/Accordion.js";
 import Emailjs from "./module/Email.js";
+
+// data
 import textJson from "./data/text.json";
 import workJson from "./data/work.json";
 
 // css import
-import commonCSS from "../css/scss/common.scss";
 import styleCSS from "../css/scss/style.scss";
-import contactCSS from "../css/scss/contact.scss";
-import workCSS from "../css/scss/work.scss";
 
 // DOM text bind
 class DomTextBind {
@@ -50,6 +31,8 @@ class DomTextBind {
         this.bindWorkList();
         this.bindText();
 
+        customCursor.create();
+
         // children class
         convert.parentData(this.workData, this.textData)
     }
@@ -57,29 +40,26 @@ class DomTextBind {
     bindWorkList() {
         const data = this.workData;
         const parent = document.querySelector(".work_list");
-        const cursor = document.querySelector(".cursor");
+        let embedData = [];
 
         for (let i = 0; i < data.length; i++) {
             const dt = document.createElement("dt");
+            const dd = document.createElement("dd");
+
             dt.setAttribute("class", `list hover ${data[i].name}`);
             dt.setAttribute("category", `${data[i].category}`);
-            dt.innerHTML = `
-                <a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>
-                <div id="video_tooltip"></div>
-                `;
-                // <iframe
-                //     class="video_tooltip"
-                //     width="560"
-                //     height="315"
-                //     src="https://www.youtube.com/embed/${data[i].url}?&mute=1&enablejsapi=1&playsinline=1&color=white&controls=0"
-                //     frameborder="0"
-                //     allowfullscreen>
-                // </iframe>
-            parent.appendChild(dt);
-        }
+            dt.innerHTML = `<a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>`;
 
-        customCursor.reverseColor(cursor);
-        // MouseOverTooltip();
+            dd.setAttribute("class", `detail ${data[i].name}`);
+            dd.setAttribute("category", `${data[i].category}`);
+            
+            parent.appendChild(dt);
+            parent.appendChild(dd);
+
+            embedData.push(data[i].url);
+        }
+        
+        MouseOverTooltip(embedData);
     }
 
     bindText() {
@@ -126,6 +106,7 @@ class DomTextBind {
         bindFuc(budgietArr, 'budgiet');
         bindFuc(timelineArr, 'timeline');
         bindFuc(categoryArr, 'category');
+
         Marquee(".marquee", 0.2);
     }
 
@@ -268,11 +249,7 @@ let domTextBind = new DomTextBind();
 let convert = new Convert();
 
 // run
-window.addEventListener("DOMContentLoaded", () => {
-    domTextBind.getJson();
-    customCursor.create();
-    circleLogoAnimation.bindSGV();
-});
+domTextBind.getJson();
 
 // reverse color
 document.querySelector(".reverse_color").addEventListener("click", convert.change);
@@ -291,6 +268,3 @@ radios.forEach(elem => elem.addEventListener('click', domTextBind.workCategory))
         bindTarget.value = value;
     });
 })();
-
-// email js run
-Emailjs();

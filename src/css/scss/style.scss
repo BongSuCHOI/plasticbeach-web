@@ -1,5 +1,8 @@
 @charset "utf-8";
+@import "common";
 @import "mixin";
+@import "work";
+@import "contact";
 
 body {background-color: var(--background);}
 #contents {

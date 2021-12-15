@@ -55,6 +55,13 @@
                 text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
                 color: var(--color);
             }
+            &:hover {
+                background: var(--color);
+                a{color: var(--background)}
+                .detail .video_tooltip{display: block;}
+            }
+        }
+        .detail{
             .video_tooltip {
                 z-index: 1;
                 position: fixed;
@@ -63,11 +70,58 @@
                 pointer-events: none;
                 user-select: none;
             }
-            &:hover {
-                background: var(--color);
-                a{color: var(--background)}
-                .video_tooltip{display: block;}
-            }
         }
     }
+    // accordion
+    // .accordion{ // dl
+    //     width: 100%;
+    //     margin: 20px 0 270px;
+    //     dt{ // .list
+    //         @extend %con_w_padding34;
+    //         @include flex_align_center;
+    //         justify-content: space-between;
+    //         width: 100%;
+    //         min-height: 60px;
+    //         padding-top: 10px;
+    //         padding-bottom: 10px;
+    //         p{
+    //             width: 80%;
+    //             margin-left: 22px;
+    //             line-height: 1.3;
+    //             // font-weight: 400;
+    //             font-size: 15px;
+    //             word-break: break-word;
+    //             &::before{
+    //                 content: "Q";
+    //                 font-family: 'Roboto', sans-serif;
+    //                 margin-left: -22px;
+    //                 padding-right: 10px;
+    //                 font-weight: 700;
+    //                 font-size: 17px;
+    //                 color: $point;
+    //             }
+    //         }
+    //         button{
+    //             margin-top: 5px;
+    //             height: 6px;
+    //             img{
+    //                 display: block;
+    //                 height: 100%;
+    //             }
+    //         }
+    //         &.open button img{transform: rotate(180deg);}
+    //     }
+    //     dd{ // .detail
+    //         overflow: hidden;
+    //         max-height: 0;
+    //         transition: all 0.3s ease-in-out;
+    //         box-shadow:inset 0 0 8px 9px rgba($color: $black, $alpha: 0.05);
+    //         background: #f5f0fb;
+    //         p{
+    //             padding: 24px 56px;
+    //             line-height: 1.5;
+    //             font-size: 14px;
+    //         }
+    //     }
+    // }
 }

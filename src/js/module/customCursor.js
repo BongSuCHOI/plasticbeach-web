@@ -34,8 +34,8 @@ const customCursor = {
             yPercent: -50,
         });
 
-        // customCursor.reverseColor(cursor);
         customCursor.run({ pos, mouse, speed, xSet, ySet });
+        customCursor.reverseColor(cursor);
     },
 
     // Update Coordinate
@@ -67,7 +67,7 @@ const customCursor = {
     reverseColor: function (cursor) {
         const hoverTag = document.querySelectorAll(".hover");
         const arr = [];
-
+        
         arr.push(...hoverTag);
         arr.forEach((obj) => {
             obj.addEventListener("mouseenter", () => {

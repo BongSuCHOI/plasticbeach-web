@@ -25,10 +25,10 @@
 
 .work_box .work_list .list a { white-space: nowrap; font-size: 94px; font-weight: normal; text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color); color: var(--color); }
 
-.work_box .work_list .list .video_tooltip { z-index: 1; position: fixed; display: none; width: 600px; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-
 .work_box .work_list .list:hover { background: var(--color); }
 
 .work_box .work_list .list:hover a { color: var(--background); }
 
-.work_box .work_list .list:hover .video_tooltip { display: block; }
+.work_box .work_list .list:hover .detail .video_tooltip { display: block; }
+
+.work_box .work_list .detail .video_tooltip { z-index: 1; position: fixed; display: none; width: 600px; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }

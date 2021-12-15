@@ -11,10 +11,13 @@ function EmailJs() {
         'user_VqHFKDuJ0yd1xOoOukLDG')
             .then(function() {
                 console.log('SUCCESS!');
+                window.location.reload();
             }, function(error) {
                 console.log('FAILED...', error);
+                alert('문의메일 전송에 실패하였습니다. 다시 시도해 주세요.')
             });
     });
 }
+EmailJs()
 
 export default EmailJs;
