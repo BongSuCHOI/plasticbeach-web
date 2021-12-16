@@ -10,7 +10,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, "docs"),
-        filename: "asset/js/[name].js",
+        filename: "asset/js/[contenthash].js",
     },
 
     plugins: [
@@ -19,7 +19,7 @@ module.exports = {
             filename: "./index.html",
         }),
         new MiniCssExtractPlugin({
-            filename: "asset/css/[name].css",
+            filename: "asset/css/[contenthash].css",
         }),
         new CleanWebpackPlugin(),
     ],
@@ -33,9 +33,15 @@ module.exports = {
         ],
         splitChunks: {
             name: "vendor",
-            filename: 'asset/js/vendor.js',
+            filename: 'asset/js/[contenthash].js',
             chunks: "all",
         },
+    },
+
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     },
 
     module: {
@@ -59,7 +65,7 @@ module.exports = {
                 test: /\.(jpe?g|png|gif)$/,
                 type: "asset",
                 generator: {
-                    filename: "asset/img/[name][ext]?[hash]",
+                    filename: "asset/img/[contenthash].[ext]",
                 },
             },
             {
@@ -70,7 +76,7 @@ module.exports = {
                 test: /\.(woff|woff2|ttf|otf)$/i,
                 type: "asset",
                 generator: {
-                    filename: "asset/font/[name][ext]?[hash]",
+                    filename: "asset/font/[contenthash].[ext]",
                 },
             },
         ],

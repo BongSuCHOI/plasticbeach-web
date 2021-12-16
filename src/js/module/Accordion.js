@@ -1,38 +1,67 @@
-function accordion() {
-    const accordionElem = document.getElementsByClassName('accro_btn'); // dt(.list)
+const accordion = {
+    importImgs: function(r) {
+        let images = {};
+        r.keys().map(item => images[item.replace('./', '')] = r(item) );
+        return images;
+    },
 
-    let action = function() {
-        for (var i=0; i < accordionElem.length ; i++) {
-            accordionElem[i].addEventListener('click', change);
-        }
+    props: function(data) {
+        const imgs = accordion.importImgs(require.context('../../images/img', false, /\.(jpe?g|png|gif)$/));
+        const imgsUrl = Object.values(imgs);
+        accordion.open(data, imgsUrl)
+    },
+
+    open: function(data, imgsUrl) {
+        const targets = document.querySelectorAll('.list');
+
+        targets.forEach((elem, i) => {
+            const detail = elem.nextElementSibling;
+            const html = `
+                <div class="carousel">
+                    <img src="${imgsUrl[i]}" alt="${data[i].name}" />
+                </div>
+                <div class="info_text">
+                    <p>VFX. ${data[i].vfx}</p>
+                    <p>VFX Supervisor. ${data[i].sv}</p>
+                    <p>VFX Assistant Supervisor. ${data[i].asv}</p>
+                    <p>VFX Project Manager. ${data[i].pm}</p>
+                    <p>VFX Producer. ${data[i].pd}</p>
+                    <p>3D Artist. ${data[i].art3d}</p>
+                    <p>2D Artist. ${data[i].art2d}</p>
+                    <p>FX Artist. ${data[i].fx}</p>
+                </div>
+            `;
+
+            elem.addEventListener('click', () => {
+                const tooltip = elem.querySelector('.video_tooltip');
+                detail.innerHTML = html;
+
+                setTimeout(() => {
+                    if (detail.classList.contains("open")) {
+                        detail.style.height = null;
+                        detail.classList.remove("open");
+                        elem.classList.remove("open");
+                        return
+                    }
+    
+                    accordion.clear();
+                    detail.classList.add("open");
+                    elem.classList.add("open");
+                    detail.style.height = detail.scrollHeight + "px";
+                    tooltip.style.display = "none";
+                }, 10);
+            });
+        });
+    },
+
+    clear: function() {
+        const details = document.querySelectorAll(".detail");
+        details.forEach(elem => {
+            elem.style.height = null;
+            elem.classList.remove("open");
+            elem.previousElementSibling.classList.remove("open");
+        });
     }
-
-    let clear = function() {
-        for (var i=0; i < accordionElem.length ; i++) {
-            const accordionCon = accordionElem[i].nextElementSibling;
-            
-            accordionElem[i].classList.remove('open');
-            accordionCon.style.maxHeight = null;
-        }
-    }
-
-    let change = function(e) {
-        const clickDt = e.currentTarget;
-        const accordionCon = clickDt.nextElementSibling;
-        
-        if (clickDt.classList.contains('open')) {
-            clickDt.classList.remove('open');
-            accordionCon.style.maxHeight = null;
-            return
-        }
-
-        clear();
-        clickDt.classList.add('open');
-        accordionCon.style.maxHeight = accordionCon.scrollHeight + "px";
-    }
-
-    action();
 }
-accordion()
 
 export default accordion;

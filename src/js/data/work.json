@@ -6,6 +6,17 @@
         "title": {
             "ko": "뮤직비디오 - 01테스트 01테스트 01테스트",
             "en": "music video - gas pedal"
+        },
+        "detail": {
+            "imgName": "sample_detail01.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -15,7 +26,19 @@
         "title": {
             "ko": "뮤직비디오 - 02테스트 02테스트 02테스트",
             "en": "music video - 02test 02test 02test"
+        },
+        "detail": {
+            "imgName": "sample_detail02.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
+        
     },
     {
         "name": "nctu",
@@ -24,6 +47,17 @@
         "title": {
             "ko": "광고 - 03테스트 03테스트 03테스트",
             "en": "ad - 03test 03test 03test"
+        },
+        "detail": {
+            "imgName": "sample_detail03.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -33,6 +67,17 @@
         "title": {
             "ko": "광고 - 04테스트 04테스트 04테스트",
             "en": "ad - 04test 04test 04test"
+        },
+        "detail": {
+            "imgName": "sample_detail04.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -42,6 +87,17 @@
         "title": {
             "ko": "뮤직비디오 - 05테스트 05테스트 05테스트",
             "en": "music video - 05test 05test 05test"
+        },
+        "detail": {
+            "imgName": "sample_detail05.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -51,6 +107,17 @@
         "title": {
             "ko": "뮤직비디오 - 06테스트 06테스트 06테스트",
             "en": "music video - 06test 06test 06test"
+        },
+        "detail": {
+            "imgName": "sample_detail06.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -60,6 +127,17 @@
         "title": {
             "ko": "광고 - 07테스트 07테스트 07테스트",
             "en": "ad - 07test 07test 07test"
+        },
+        "detail": {
+            "imgName": "sample_detail07.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -69,6 +147,17 @@
         "title": {
             "ko": "광고 - 08테스트 08테스트 08테스트",
             "en": "ad - 08test 08test 08test"
+        },
+        "detail": {
+            "imgName": "sample_detail08.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     },
     {
@@ -78,6 +167,17 @@
         "title": {
             "ko": "뮤직비디오 - 09테스트 09테스트 09테스트",
             "en": "music video - 09test 09test 09test"
+        },
+        "detail": {
+            "imgName": "sample_detail09.jpg",
+            "vfx": "PLASTIC BEACH",
+            "sv": "OHZEON",
+            "asv": "JOJEEM",
+            "pm": "SONG CHANYOUNG / JEONG JIEUN",
+            "pd": "JANG KYUTAE / AHN SOHYUN",
+            "art3d": "LEE KWANGWON / KIM DOYEON / LEE JEONGHWA / JEON JIWON / KIM HYEJI",
+            "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
+            "fx": "WE JUNGIN"
         }
     }
 ]

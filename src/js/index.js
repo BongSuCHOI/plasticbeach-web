@@ -2,8 +2,8 @@
 import customCursor from "./module/CustomCursor.js";
 import Marquee from "./module/Marquee.js";
 import MouseOverTooltip from "./module/MouseOverTooltip.js";
-import circleLogoAnimation from "./module/CircleLogo.js";
 import Accordion from "./module/Accordion.js";
+import circleLogoAnimation from "./module/CircleLogo.js";
 import Emailjs from "./module/Email.js";
 
 // data
@@ -40,26 +40,35 @@ class DomTextBind {
     bindWorkList() {
         const data = this.workData;
         const parent = document.querySelector(".work_list");
-        let embedData = [];
-
-        for (let i = 0; i < data.length; i++) {
+        let embedURL = [];
+        let detailData = [];
+        
+        data.forEach((obj, i) => {
             const dt = document.createElement("dt");
             const dd = document.createElement("dd");
 
-            dt.setAttribute("class", `list hover ${data[i].name}`);
-            dt.setAttribute("category", `${data[i].category}`);
-            dt.innerHTML = `<a href="#" class="Nefarious toggle_font">${data[i].title.en}</a>`;
+            // list
+            dt.setAttribute("class", "list hover");
+            dt.setAttribute("name", obj.name);
+            dt.setAttribute("category", obj.category);
+            dt.innerHTML = `<a href="#" class="Nefarious toggle_font">${obj.title.en}</a>`;
 
-            dd.setAttribute("class", `detail ${data[i].name}`);
-            dd.setAttribute("category", `${data[i].category}`);
+            // detail(accordion menu)
+            dd.setAttribute("class", "detail");
+            dd.setAttribute("name", obj.name);
+            dd.setAttribute("category", obj.category);
             
+            // append
             parent.appendChild(dt);
             parent.appendChild(dd);
 
-            embedData.push(data[i].url);
-        }
-        
-        MouseOverTooltip(embedData);
+            // data push to variable
+            embedURL.push(obj.url);
+            detailData.push(obj.detail);
+        })
+
+        Accordion.props(detailData);
+        MouseOverTooltip(embedURL);
     }
 
     bindText() {
@@ -72,33 +81,37 @@ class DomTextBind {
         function bindFuc(variable, name) {
             // 일반 content text 및 category select radio btn text
             if (name == 'content' || name == 'category') {
-                for (let i = 0; i < variable.length; i++) {
-                    const target = document.querySelector(`[data-name='${variable[i][0]}']`);
-                    target.innerHTML = variable[i][1].en;
+                variable.forEach(obj => {
+                    const key = obj[0];
+                    const val = obj[1];
+                    const target = document.querySelector(`[data-name='${key}']`);
+                    target.innerHTML = val.en;
 
                     // 일반 content text
                     if (name == 'content') {
                         // marquee text
                         if (target.classList.contains("marquee_text")) {
-                            target.innerHTML = variable[i][1].en + variable[i][1].en;
+                            target.innerHTML = val.en + val.en;
                         }
                         // contact input placeholder
                         if (target.hasAttribute('placeholder')) {
                             target.innerHTML = '';
-                            target.setAttribute('placeholder', variable[i][1].en)
+                            target.setAttribute('placeholder', val.en)
                         }
                     }
-                }
+                })
             }
             // 예산/일정 select box option text
             else if (name == 'budgiet' || name == 'timeline') {
-                for (let i = 0; i < variable.length; i++) {
+                variable.forEach(obj => {
+                    const key = obj[0];
+                    const val = obj[1];
                     const parent = document.querySelector(`select.${name}`);
                     const html = document.createElement("option");
-                    html.setAttribute("class", variable[i][0]);
-                    html.innerHTML = variable[i][1].en;
+                    html.setAttribute("class", key);
+                    html.innerHTML = val.en;
                     parent.appendChild(html);
-                }
+                })
             }
         }
         
@@ -113,16 +126,16 @@ class DomTextBind {
     workCategory() {
         const list = document.querySelectorAll('.work_list .list');
 
-        for (let i = 0; i < list.length; i++) {
-            let listCategory = list[i].getAttribute('category');
+        list.forEach(elem => {
+            const listCategory = elem.getAttribute('category');
             if (this.id == 'all') {
-                list[i].style.display = 'flex'
+                elem.style.display = 'flex'
             } else if (listCategory == this.id) {
-                list[i].style.display = 'flex'
+                elem.style.display = 'flex'
             } else {
-                list[i].style.display = 'none'
+                elem.style.display = 'none'
             }
-        }
+        })
     }
 }
 
@@ -142,15 +155,16 @@ class Convert extends DomTextBind {
     changeWork() {
         const data = this.workData;
 
-        for (let i = 0; i < data.length; i++) {
-            const target = document.querySelector(`.${data[i].name} a`);
+        data.forEach((obj, i) => {
+            const lists = document.querySelectorAll(".list");
+            const target = lists[i].querySelector("a");
 
             if (this.lang === "en") {
-                target.innerHTML = data[i].title.en;
+                target.innerHTML = obj.title.en;
             } else {
-                target.innerHTML = data[i].title.ko;
+                target.innerHTML = obj.title.ko;
             }
-        }
+        })
     }
 
     changeText() {
@@ -164,49 +178,53 @@ class Convert extends DomTextBind {
         function changeFuc(variable, name) {
             // 일반 content text 및 category select radio btn text
             if (name == 'content' || name == 'category') {
-                for (let i = 0; i < variable.length; i++) {
-                    const target = document.querySelector(`[data-name='${variable[i][0]}']`);
+                variable.forEach(obj => {
+                    const key = obj[0];
+                    const val = obj[1];
+                    const target = document.querySelector(`[data-name='${key}']`);
                     
                     if (lang === "en") {
-                        target.innerHTML = variable[i][1].en;
+                        target.innerHTML = val.en;
                         // 일반 content text
                         if(name == 'content') {
                             // marquee text
                             if (target.classList.contains("marquee_text")) {
-                                target.innerHTML = textArr[i][1].en + textArr[i][1].en;
+                                target.innerHTML = val.en + val.en;
                             }
                             // contact input placeholder
                             if (target.hasAttribute('placeholder')) {
-                                target.setAttribute('placeholder', textArr[i][1].en)
+                                target.setAttribute('placeholder', val.en)
                             }
                         }
                     } else {
-                        target.innerHTML = variable[i][1].ko;
+                        target.innerHTML = val.ko;
                         // 일반 content text
                         if(name == 'content') {
                             // marquee text
                             if (target.classList.contains("marquee_text")) {
-                                target.innerHTML = textArr[i][1].ko + textArr[i][1].ko;
+                                target.innerHTML = val.ko + val.ko;
                             }
                             // contact input placeholder
                             if (target.hasAttribute('placeholder')) {
-                                target.setAttribute('placeholder', textArr[i][1].ko)
+                                target.setAttribute('placeholder', val.ko)
                             }
                         }
                     }
-                }
+                })
             }
             // 예산/일정 select box option text
             else if (name == 'budgiet' || name == 'timeline') {
-                for (let i = 0; i < variable.length; i++) {
-                    const target = document.querySelector(`.${variable[i][0]}`);
+                variable.forEach(obj => {
+                    const key = obj[0];
+                    const val = obj[1];
+                    const target = document.querySelector(`.${key}`);
                     
                     if (lang === "en") {
-                        target.innerHTML = variable[i][1].en;
+                        target.innerHTML = val.en;
                     } else {
-                        target.innerHTML = variable[i][1].ko;
+                        target.innerHTML = val.ko;
                     }
-                }
+                })
             }
         }
 
@@ -234,13 +252,13 @@ class Convert extends DomTextBind {
         convert.changeText();
         convert.reverseColorTheme();
 
-        for (let i = 0; i < enFont.length; i++) {
-            if (enFont[i].classList.contains("Nefarious")) {
-                enFont[i].classList.remove("Nefarious")
+        enFont.forEach(elem => {
+            if (elem.classList.contains("Nefarious")) {
+                elem.classList.remove("Nefarious")
             } else {
-                enFont[i].classList.add("Nefarious")
+                elem.classList.add("Nefarious")
             }
-        }
+        })
     }
 }
 

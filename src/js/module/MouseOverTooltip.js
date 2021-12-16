@@ -16,8 +16,8 @@ function mouseOverTooltip(embedData) {
         iframe.height = "315";
         
         obj.addEventListener("mouseenter", function() {
-            this.nextElementSibling.appendChild(iframe);
-            tooltip = this.nextElementSibling.querySelector(".video_tooltip");
+            this.appendChild(iframe);
+            tooltip = this.querySelector(".video_tooltip");
             tooltip.style.display = 'block';
         });
         
