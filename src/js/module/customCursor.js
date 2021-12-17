@@ -65,16 +65,16 @@ const customCursor = {
 
     // Reverse Color
     reverseColor: function (cursor) {
-        const hoverTag = document.querySelectorAll(".hover");
+        const hoverTag = document.querySelectorAll(".reverse");
         const arr = [];
         
         arr.push(...hoverTag);
         arr.forEach((obj) => {
             obj.addEventListener("mouseenter", () => {
-                cursor.classList.add("hover");
+                cursor.classList.add("reverse");
             });
             obj.addEventListener("mouseleave", () => {
-                cursor.classList.remove("hover");
+                cursor.classList.remove("reverse");
             });
         });
     },

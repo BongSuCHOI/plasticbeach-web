@@ -48,7 +48,7 @@ class DomTextBind {
             const dd = document.createElement("dd");
 
             // list
-            dt.setAttribute("class", "list hover");
+            dt.setAttribute("class", "list reverse");
             dt.setAttribute("name", obj.name);
             dt.setAttribute("category", obj.category);
             dt.innerHTML = `<a href="#" class="Nefarious toggle_font">${obj.title.en}</a>`;

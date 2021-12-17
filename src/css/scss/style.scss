@@ -36,7 +36,7 @@ body {background-color: var(--background);}
         border-radius: 50%;
     }
 }
-.cursor.hover {
+.cursor.reverse {
     border: 2px solid var(--background);
     span {background: var(--background);}
 }
