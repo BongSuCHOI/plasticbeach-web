@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 import platformCheck from './PlatformCheck.js';
 
 function mouseOverTooltip(embedData) {
@@ -14,11 +15,15 @@ function mouseOverTooltip(embedData) {
         iframe.src = `https://www.youtube.com/embed/${embedData[i]}?rel=0&mute=1&autoplay=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
         iframe.width = "560";
         iframe.height = "315";
-        
+
         obj.addEventListener("mouseenter", function() {
             this.appendChild(iframe);
             tooltip = this.querySelector(".video_tooltip");
-            tooltip.style.display = 'block';
+            gsap.to(tooltip, {
+                opacity: 1,
+                display: "block",
+                duration: 0.3,
+            })
         });
         
         obj.addEventListener("mousemove", (e) => {
@@ -33,8 +38,12 @@ function mouseOverTooltip(embedData) {
             }
         });
 
-        obj.addEventListener("mouseleave", () => {
-            tooltip.style.display = 'none';
+        obj.addEventListener("mouseleave", function() {
+            gsap.to(tooltip, {
+                opacity: 0,
+                display: "none",
+                duration: 0.3,
+            })
             tooltip = null;
         });
     });

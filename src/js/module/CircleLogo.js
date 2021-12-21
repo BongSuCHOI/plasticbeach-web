@@ -123,23 +123,23 @@ const circleLogoAnimation = {
         const target = parent.querySelector(".reverse_color .circleLogo");
         if (!target) { return }
 
-        gsap.defaults({
+        gsap.from(target, {
             repeat: -1,
             ease: "none",
-        });
-        gsap.from(target, {
             duration: 10,
             rotate: -360,
         });
 
         // Hover Animation Speed
         const hover = gsap.to(target, {
+            repeat: -1,
+            ease: "none",
             duration: 0.8,
             rotate: 360,
             paused: true,
         });
         target.addEventListener("mouseenter", () => hover.play());
-        target.addEventListener("mouseleave", () => hover.pause());
+        target.addEventListener("mouseleave", () =>hover.pause());
     },
 };
 

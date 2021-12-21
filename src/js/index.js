@@ -1,10 +1,11 @@
 // module import
-import customCursor from "./module/CustomCursor.js";
+import CustomCursor from "./module/CustomCursor.js";
 import Marquee from "./module/Marquee.js";
 import MouseOverTooltip from "./module/MouseOverTooltip.js";
 import Accordion from "./module/Accordion.js";
-import circleLogoAnimation from "./module/CircleLogo.js";
+import CircleLogoAnimation from "./module/CircleLogo.js";
 import Emailjs from "./module/Email.js";
+import WorkCategory from "./module/WorkCategory.js";
 
 // data
 import textJson from "./data/text.json";
@@ -31,7 +32,7 @@ class DomTextBind {
         this.bindWorkList();
         this.bindText();
 
-        customCursor.create();
+        CustomCursor.create();
 
         // children class
         convert.parentData(this.workData, this.textData)
@@ -121,21 +122,6 @@ class DomTextBind {
         bindFuc(categoryArr, 'category');
 
         Marquee(".marquee", 0.2);
-    }
-
-    workCategory() {
-        const list = document.querySelectorAll('.work_list .list');
-
-        list.forEach(elem => {
-            const listCategory = elem.getAttribute('category');
-            if (this.id == 'all') {
-                elem.style.display = 'flex'
-            } else if (listCategory == this.id) {
-                elem.style.display = 'flex'
-            } else {
-                elem.style.display = 'none'
-            }
-        })
     }
 }
 
@@ -274,7 +260,7 @@ document.querySelector(".reverse_color").addEventListener("click", convert.chang
 
 // workListCategory
 const radios = document.querySelectorAll('[type=radio]');
-radios.forEach(elem => elem.addEventListener('click', domTextBind.workCategory));
+radios.forEach(elem => elem.addEventListener('click', WorkCategory));
 
 // custom input[type="file"](file-name bind)
 (function bindFileInput() {

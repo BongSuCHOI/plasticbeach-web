@@ -4,7 +4,10 @@
 @import "work";
 @import "contact";
 
-body {background-color: var(--background);}
+body {
+    transition: background 0.1s linear;
+    background-color: var(--background);
+}
 #contents {
     display: flex;
     justify-content: space-between;
@@ -70,6 +73,8 @@ body {background-color: var(--background);}
     display: block;
     border: none;
     background: initial;
+    transition: transform 0.15s;
+    &:hover{transform:scale(1.15);}
     .circleLogo {
         display: block;
         fill: var(--color);

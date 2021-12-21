@@ -91,23 +91,19 @@ input, textarea, select { border-radius: 0; -webkit-appearance: none; }
 
 .work_box .work_list { overflow-x: hidden; overflow-y: scroll; width: 100%; height: 100%; }
 
-.work_box .work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); }
-
-.work_box .work_list .list::after { content: ""; width: 0%; height: 100%; background: var(--color); position: absolute; left: 0; top: 0; pointer-events: none; }
+.work_box .work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; overflow: hidden; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); background: var(--background); -webkit-transition: all 0.1s linear; transition: all 0.1s linear; }
 
 .work_box .work_list .list a { white-space: nowrap; font-size: 94px; font-weight: normal; text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color); color: var(--color); }
-
-.work_box .work_list .list .video_tooltip { z-index: 1; position: fixed; display: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-
-.work_box .work_list .list.open { background: var(--color); }
-
-.work_box .work_list .list.open a { color: var(--background); }
 
 .work_box .work_list .list:hover { background: var(--color); }
 
 .work_box .work_list .list:hover a { color: var(--background); }
 
-.work_box .work_list .list:hover .video_tooltip { display: block; }
+.work_box .work_list .list .video_tooltip { z-index: 1; opacity: 0; position: fixed; display: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+
+.work_box .work_list .list.open { background: var(--color); }
+
+.work_box .work_list .list.open a { color: var(--background); }
 
 .work_box .work_list .detail { overflow: hidden; width: 100%; height: 0px; -webkit-transition: height 0.2s ease-in-out; transition: height 0.2s ease-in-out; }
 
@@ -192,11 +188,11 @@ input, textarea, select { border-radius: 0; -webkit-appearance: none; }
 
 .contact form .project_info .chk input[type="checkbox"]:checked + label { background: var(--check-on-ico) no-repeat; background-size: 12px; background-position: left center; }
 
-.contact form .submit_btn { width: 100%; height: 80px; margin: 50px 0; font-size: 46px; color: var(--color); border: 2px solid var(--color); }
+.contact form .submit_btn { width: 100%; height: 80px; margin: 50px 0; font-size: 46px; color: var(--color); border: 2px solid var(--color); -webkit-transition: all 0.1s linear; transition: all 0.1s linear; }
 
 .contact form .submit_btn:hover { color: var(--background); border: 2px solid var(--background); background: var(--color); }
 
-body { background-color: var(--background); }
+body { -webkit-transition: background 0.1s linear; transition: background 0.1s linear; background-color: var(--background); }
 
 #contents { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; width: 100%; height: 100vh; }
 
@@ -214,6 +210,8 @@ body { background-color: var(--background); }
 
 .marquee p { -webkit-transform: rotate(270deg); transform: rotate(270deg); white-space: nowrap; font-size: 43px; }
 
-.reverse_color { position: fixed; right: 40px; bottom: 40px; width: auto; height: auto; display: block; border: none; background: initial; }
+.reverse_color { position: fixed; right: 40px; bottom: 40px; width: auto; height: auto; display: block; border: none; background: initial; -webkit-transition: -webkit-transform 0.15s; transition: -webkit-transform 0.15s; transition: transform 0.15s; transition: transform 0.15s, -webkit-transform 0.15s; }
+
+.reverse_color:hover { -webkit-transform: scale(1.15); transform: scale(1.15); }
 
 .reverse_color .circleLogo { display: block; fill: var(--color); }

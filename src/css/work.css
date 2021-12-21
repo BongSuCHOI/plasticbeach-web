@@ -21,7 +21,7 @@
 
 .work_box .work_list { overflow-x: hidden; overflow-y: scroll; width: 100%; height: 100%; }
 
-.work_box .work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); background: var(--background); }
+.work_box .work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; overflow: hidden; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); background: var(--background); -webkit-transition: all 0.1s linear; transition: all 0.1s linear; }
 
 .work_box .work_list .list a { white-space: nowrap; font-size: 94px; font-weight: normal; text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color); color: var(--color); }
 
@@ -29,7 +29,7 @@
 
 .work_box .work_list .list:hover a { color: var(--background); }
 
-.work_box .work_list .list .video_tooltip { z-index: 1; position: fixed; display: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+.work_box .work_list .list .video_tooltip { z-index: 1; opacity: 0; position: fixed; display: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 
 .work_box .work_list .list.open { background: var(--color); }
 
