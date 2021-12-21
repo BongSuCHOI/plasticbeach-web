@@ -99,8 +99,6 @@ input, textarea, select { border-radius: 0; -webkit-appearance: none; }
 
 .work_box .work_list .list:hover a { color: var(--background); }
 
-.work_box .work_list .list .video_tooltip { z-index: 1; opacity: 0; position: fixed; display: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-
 .work_box .work_list .list.open { background: var(--color); }
 
 .work_box .work_list .list.open a { color: var(--background); }
@@ -215,3 +213,5 @@ body { -webkit-transition: background 0.1s linear; transition: background 0.1s l
 .reverse_color:hover { -webkit-transform: scale(1.15); transform: scale(1.15); }
 
 .reverse_color .circleLogo { display: block; fill: var(--color); }
+
+.tooltip_box { z-index: 1; opacity: 0; position: fixed; display: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background: #000; }

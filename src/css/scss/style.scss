@@ -80,3 +80,14 @@ body {
         fill: var(--color);
     }
 }
+
+// video tooltip
+.tooltip_box{
+    z-index: 1;
+    opacity: 0;
+    position: fixed;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+    background: $black;
+}
