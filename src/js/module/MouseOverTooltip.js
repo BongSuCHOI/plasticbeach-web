@@ -37,7 +37,7 @@ function mouseOverTooltip(embedData) {
             }
         });
 
-        obj.parentElement.addEventListener("mouseleave", function() {
+        obj.addEventListener("mouseleave", function() {
             gsap.to(tooltipBox, {
                 opacity: 0,
                 display: "none",

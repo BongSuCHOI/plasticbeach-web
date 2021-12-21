@@ -33,7 +33,7 @@ const accordion = {
             `;
 
             elem.addEventListener('click', () => {
-                const tooltip = elem.querySelector('.video_tooltip');
+                const tooltip = document.querySelector('.tooltip_box');
                 detail.innerHTML = html;
 
                 setTimeout(() => {

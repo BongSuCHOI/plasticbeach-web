@@ -52,7 +52,6 @@
             padding: 0 25px;
             border-bottom: 2px solid var(--color);
             background: var(--background);
-            transition: all 0.1s linear;
             a {
                 white-space: nowrap;
                 font-size: 94px;
@@ -61,9 +60,11 @@
                 color: var(--color);
             }
             &:hover {
-                background: var(--color);
+                // background: var(--color);
                 a {
-                    color: var(--background);
+                    // color: var(--background);
+                    transition: opacity 0.1s linear;
+                    opacity: 0.3;
                 }
             }
             &.open {
