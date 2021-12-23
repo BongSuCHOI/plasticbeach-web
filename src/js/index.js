@@ -44,15 +44,22 @@ class DomTextBind {
         let embedURL = [];
         let detailData = [];
         
-        data.forEach((obj, i) => {
+        data.forEach(obj => {
             const dt = document.createElement("dt");
             const dd = document.createElement("dd");
 
             // list
-            dt.setAttribute("class", "list reverse");
+            dt.setAttribute("class", "list");
             dt.setAttribute("name", obj.name);
             dt.setAttribute("category", obj.category);
-            dt.innerHTML = `<a href="#" class="Nefarious toggle_font">${obj.title.en}</a>`;
+            dt.innerHTML = `
+                <span
+                    href="#"
+                    class="Nefarious toggle_font"
+                    data-content="${obj.title.en}"
+                >
+                    ${obj.title.en}
+                </span>`;
 
             // detail(accordion menu)
             dd.setAttribute("class", "detail");
@@ -143,12 +150,14 @@ class Convert extends DomTextBind {
 
         data.forEach((obj, i) => {
             const lists = document.querySelectorAll(".list");
-            const target = lists[i].querySelector("a");
+            const target = lists[i].querySelector("span");
 
             if (this.lang === "en") {
                 target.innerHTML = obj.title.en;
+                target.setAttribute("data-content", obj.title.en);
             } else {
                 target.innerHTML = obj.title.ko;
+                target.setAttribute("data-content", obj.title.ko);
             }
         })
     }

@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 
 const circleLogoAnimation = {
-    bindSGV: function () {
+    bindSGV: () => {
         const parentBtn = document.querySelector(".reverse_color");
         if (!parentBtn) { return };
 
@@ -119,22 +119,22 @@ const circleLogoAnimation = {
         circleLogoAnimation.playAnimation(parentBtn);
     },
 
-    playAnimation: function (parent) {
+    playAnimation: (parent) => {
         const target = parent.querySelector(".reverse_color .circleLogo");
         if (!target) { return }
 
         gsap.from(target, {
+            duration: 10,
             repeat: -1,
             ease: "none",
-            duration: 10,
             rotate: -360,
         });
 
         // Hover Animation Speed
         const hover = gsap.to(target, {
+            duration: 0.8,
             repeat: -1,
             ease: "none",
-            duration: 0.8,
             rotate: 360,
             paused: true,
         });

@@ -1,20 +1,23 @@
+import { gsap } from "gsap";
+
 const accordion = {
-    importImgs: function(r) {
+    importImgs: (r) => {
         let images = {};
         r.keys().map(item => images[item.replace('./', '')] = r(item) );
         return images;
     },
 
-    props: function(data) {
+    props: (data) => {
         const imgs = accordion.importImgs(require.context('../../images/img', false, /\.(jpe?g|png|gif)$/));
         const imgsUrl = Object.values(imgs);
         accordion.open(data, imgsUrl)
     },
 
-    open: function(data, imgsUrl) {
+    open: (data, imgsUrl) => {
         const targets = document.querySelectorAll('.list');
 
         targets.forEach((elem, i) => {
+            const tooltip = document.querySelector('.tooltip_box');
             const detail = elem.nextElementSibling;
             const html = `
                 <div class="carousel">
@@ -31,36 +34,86 @@ const accordion = {
                     <p>FX Artist. ${data[i].fx}</p>
                 </div>
             `;
-
+            detail.innerHTML = html;
+            
             elem.addEventListener('click', () => {
-                const tooltip = document.querySelector('.tooltip_box');
-                detail.innerHTML = html;
-
-                setTimeout(() => {
-                    if (detail.classList.contains("open")) {
-                        detail.style.height = null;
-                        detail.classList.remove("open");
-                        elem.classList.remove("open");
-                        return
-                    }
-    
+                if (!detail.classList.contains("open")) {
                     accordion.clear();
-                    detail.classList.add("open");
-                    elem.classList.add("open");
-                    detail.style.height = detail.scrollHeight + "px";
                     tooltip.style.display = "none";
-                }, 10);
+                    openD();
+                    elem.classList.add("open");
+                    detail.classList.add("open");
+                } else {
+                    closeD();
+                    elem.classList.remove("open");
+                    detail.classList.remove("open");
+                }
             });
+
+            const openD = () => {
+                const tl = gsap.timeline();
+                return tl
+                .to(elem, {
+                    duration: 0.5,
+                    "--width": "100%",
+                    ease: "expo.in",
+                    onComplete: accordion.scroll,
+                    onCompleteParams: [elem, i]
+                })
+                .to(detail, {
+                    duration: 0.3,
+                    height: detail.scrollHeight + "px",
+                    borderWidth: 2,
+                    ease: "power4.inOut",
+                }, "<")
+            }
+
+            const closeD = () => {
+                const tl = gsap.timeline();
+                return tl
+                .to(elem, {
+                    duration: 0.5,
+                    "--width": "0%",
+                    ease: "expo.in"
+                })
+                .to(detail, {
+                    duration: 0.3,
+                    height: 0,
+                    borderWidth: 0,
+                    ease: "power4.inOut"
+                }, "<");
+            }
         });
     },
 
-    clear: function() {
+    clear: () => {
         const details = document.querySelectorAll(".detail");
-        details.forEach(elem => {
-            elem.style.height = null;
-            elem.classList.remove("open");
-            elem.previousElementSibling.classList.remove("open");
+        details.forEach(detail => {
+            if (!detail.classList.contains("open")) return;
+
+            const tl = gsap.timeline();
+            tl
+            .to(detail.previousElementSibling, {
+                duration: 0.5,
+                "--width": "0%",
+                ease: "expo.in"
+            })
+            .to(detail, {
+                duration: 0.3,
+                height: 0,
+                borderWidth: 0,
+                ease: "power4.inOut"
+            });
+            detail.classList.remove("open");
         });
+    },
+
+    scroll: (elem, i) => {
+        elem.parentNode.scrollTo({
+            left: 0,
+            top: (elem.clientHeight + 2) * i,
+            behavior: 'smooth'
+        })
     }
 }
 

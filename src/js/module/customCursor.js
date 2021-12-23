@@ -3,7 +3,7 @@ import platformCheck from './PlatformCheck.js';
 
 const customCursor = {
     // Created Cursor Element
-    create: function () {
+    create: () => {
         if (!platformCheck()) { return }
         
         const createElem = document.createElement("div");
@@ -16,7 +16,7 @@ const customCursor = {
     },
 
     // Cursor Init
-    init: function () {
+    init: () => {
         const cursor = document.querySelector(".cursor");
         const pos = {
             x: window.innerWidth / 2,
@@ -39,7 +39,7 @@ const customCursor = {
     },
 
     // Update Coordinate
-    run: function (rest) {
+    run: (rest) => {
         const pos = rest.pos;
         const mouse = rest.mouse;
         const speed = rest.speed;
@@ -64,7 +64,7 @@ const customCursor = {
     },
 
     // Reverse Color
-    reverseColor: function (cursor) {
+    reverseColor: (cursor) => {
         const hoverTag = document.querySelectorAll(".reverse");
         const arr = [];
         
