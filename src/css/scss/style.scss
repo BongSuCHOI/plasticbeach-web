@@ -37,6 +37,7 @@ body {
         pointer-events: none;
         background: var(--color);
         border-radius: 50%;
+        mix-blend-mode: difference;
     }
 }
 .cursor.reverse {

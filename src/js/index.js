@@ -49,9 +49,10 @@ class DomTextBind {
             const dd = document.createElement("dd");
 
             // list
-            dt.setAttribute("class", "list");
+            dt.setAttribute("class", "list luxy-el");
             dt.setAttribute("name", obj.name);
             dt.setAttribute("category", obj.category);
+            dt.setAttribute("data-speed-y", 5);
             dt.innerHTML = `
                 <span
                     href="#"
