@@ -109,6 +109,10 @@ const accordion = {
     },
 
     scroll: (elem, i) => {
+        // 카테고리별로 왔다갔다 거려도 전체 길이대비 값이 아니라 바뀐 순서대로 위치를....음..
+        // 그리고 behavior 아마 모바일 안먹어서 다른 스크립트로 교체해야함
+        console.log((elem.clientHeight + 2) * i)
+        console.log(elem.offsetTop);
         elem.parentNode.scrollTo({
             left: 0,
             top: (elem.clientHeight + 2) * i,

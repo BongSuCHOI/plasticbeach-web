@@ -16,9 +16,13 @@ function workCategory() {
         if (this.id == 'all') { // 전체
             tl
             .to(elem, {
+                duration: 0,
+                display: "flex"
+            })
+            .to(elem, {
                 duration: 0.3,
                 height: height,
-            })
+            }, "<")
             .to(elem, {
                 duration: 0,
                 autoAlpha: 1,
@@ -27,6 +31,10 @@ function workCategory() {
         } else if (listCategory == this.id) { // 선택한 카테고리에 맞는 것
             if (arrs.some(check)) { // 상세가(카테고리 상관없이 전체) 열려 있다면
                 tl
+                .to(elem, {
+                    duration: 0,
+                    display: "flex"
+                })
                 .to(elem, {
                     duration: 0.3,
                     height: height,
@@ -39,9 +47,13 @@ function workCategory() {
             } else { // 상세가(카테고리 상관없이 전체) 닫혀 있다면
                 tl
                 .to(elem, {
+                    duration: 0,
+                    display: "flex"
+                })
+                .to(elem, {
                     duration: 0.3,
                     height: height,
-                })
+                }, "<")
                 .to(elem, {
                     duration: 0,
                     autoAlpha: 1,
@@ -56,7 +68,11 @@ function workCategory() {
                         duration: 0.3,
                         height: 0,
                         borderWidth: 0,
-                    });
+                    })
+                    .to(elem, {
+                        duration: 0,
+                        display: "none"
+                    }, ">");
                 }
                 tl
                 .to(elem, {
@@ -72,7 +88,11 @@ function workCategory() {
                     duration: 0.3,
                     height: 0,
                     borderWidth: 0,
-                }, "-=0.1");
+                }, "-=0.1")
+                .to(elem, {
+                    duration: 0,
+                    display: "none"
+                }, ">");
 
                 elem.classList.remove("open")
                 elem.nextElementSibling.classList.remove("open")
@@ -82,7 +102,11 @@ function workCategory() {
                     duration: 0.3,
                     height: 0,
                     borderWidth: 0,
-                });
+                })
+                .to(elem, {
+                    duration: 0,
+                    display: "none"
+                }, ">");
             }
         }
     })
