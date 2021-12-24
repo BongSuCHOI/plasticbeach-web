@@ -38,7 +38,7 @@ function workCategory() {
                 .to(elem, {
                     duration: 0.3,
                     height: height,
-                }, "+=0.5")
+                })
                 .to(elem, {
                     duration: 0,
                     autoAlpha: 1,
@@ -53,7 +53,7 @@ function workCategory() {
                 .to(elem, {
                     duration: 0.3,
                     height: height,
-                }, "<")
+                })
                 .to(elem, {
                     duration: 0,
                     autoAlpha: 1,
@@ -78,12 +78,14 @@ function workCategory() {
                 .to(elem, {
                     duration: 0.5,
                     "--width": "0%",
+                    ease: "expo.in"
                 })
                 .to(elem.nextElementSibling, {
-                    duration: 0.3,
+                    duration: 0.4,
                     height: 0,
                     borderWidth: 0,
-                }, "-=0.2")
+                    ease: "power4.inOut"
+                }, "<")
                 .to(elem, {
                     duration: 0.3,
                     height: 0,

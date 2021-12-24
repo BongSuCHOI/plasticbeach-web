@@ -7,7 +7,7 @@
 /*common*/
 .list { --width: 0%; }
 
-.work_box { position: relative; width: calc(100% - 654px); height: 100%; }
+.work_box { position: relative; width: calc(100% - 686px); height: 100%; }
 
 .work_box .category { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; z-index: 2; position: absolute; top: 18px; right: 68px; }
 
@@ -21,9 +21,9 @@
 
 .work_box .category .radio input[type="radio"]:checked + label { background: var(--radio-on-ico) no-repeat center left; background-size: 30px; }
 
-.work_box .work_list { overflow-x: hidden; overflow-y: scroll; width: 100%; height: 100%; }
+.work_box .work_list { width: 100%; height: 100%; }
 
-.work_box .work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; overflow: hidden; position: relative; width: 100%; height: 160px; padding: 0 25px; border-bottom: 2px solid var(--color); background: var(--background); }
+.work_box .work_list .list { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; overflow: hidden; position: relative; width: 100%; height: 160px; padding-left: 25px; border-bottom: 2px solid var(--color); }
 
 .work_box .work_list .list::before { content: ""; overflow: hidden; position: absolute; left: 0; top: 0; width: var(--width); height: 100%; background: var(--color); }
 

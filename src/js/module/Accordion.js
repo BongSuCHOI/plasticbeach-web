@@ -1,4 +1,7 @@
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Scrollbar from 'smooth-scrollbar';
+gsap.registerPlugin(ScrollTrigger);
 
 const accordion = {
     importImgs: (r) => {
@@ -14,11 +17,10 @@ const accordion = {
     },
 
     open: (data, imgsUrl) => {
-        const targets = document.querySelectorAll('.list');
-
-        targets.forEach((elem, i) => {
+        const lists = document.querySelectorAll('.list');
+        lists.forEach((list, i) => {
             const tooltip = document.querySelector('.tooltip_box');
-            const detail = elem.nextElementSibling;
+            const detail = list.nextElementSibling;
             const html = `
                 <div class="carousel">
                     <img src="${imgsUrl[i]}" alt="${data[i].name}" />
@@ -36,16 +38,16 @@ const accordion = {
             `;
             detail.innerHTML = html;
             
-            elem.addEventListener('click', () => {
+            list.addEventListener('click', () => {
                 if (!detail.classList.contains("open")) {
                     accordion.clear();
                     tooltip.style.display = "none";
                     openD();
-                    elem.classList.add("open");
+                    list.classList.add("open");
                     detail.classList.add("open");
                 } else {
                     closeD();
-                    elem.classList.remove("open");
+                    list.classList.remove("open");
                     detail.classList.remove("open");
                 }
             });
@@ -53,15 +55,13 @@ const accordion = {
             const openD = () => {
                 const tl = gsap.timeline();
                 return tl
-                .to(elem, {
+                .to(list, {
                     duration: 0.5,
                     "--width": "100%",
                     ease: "expo.in",
-                    onComplete: accordion.scroll,
-                    onCompleteParams: [elem, i]
                 })
                 .to(detail, {
-                    duration: 0.3,
+                    duration: 0.4,
                     height: detail.scrollHeight + "px",
                     borderWidth: 2,
                     ease: "power4.inOut",
@@ -71,19 +71,21 @@ const accordion = {
             const closeD = () => {
                 const tl = gsap.timeline();
                 return tl
-                .to(elem, {
+                .to(list, {
                     duration: 0.5,
                     "--width": "0%",
                     ease: "expo.in"
                 })
                 .to(detail, {
-                    duration: 0.3,
+                    duration: 0.4,
                     height: 0,
                     borderWidth: 0,
                     ease: "power4.inOut"
                 }, "<");
             }
         });
+
+        accordion.scroll();
     },
 
     clear: () => {
@@ -99,24 +101,39 @@ const accordion = {
                 ease: "expo.in"
             })
             .to(detail, {
-                duration: 0.3,
+                duration: 0.4,
                 height: 0,
                 borderWidth: 0,
                 ease: "power4.inOut"
-            });
+            }, "<");
             detail.classList.remove("open");
         });
     },
 
-    scroll: (elem, i) => {
-        // 카테고리별로 왔다갔다 거려도 전체 길이대비 값이 아니라 바뀐 순서대로 위치를....음..
-        // 그리고 behavior 아마 모바일 안먹어서 다른 스크립트로 교체해야함
-        console.log((elem.clientHeight + 2) * i)
-        console.log(elem.offsetTop);
-        elem.parentNode.scrollTo({
-            left: 0,
-            top: (elem.clientHeight + 2) * i,
-            behavior: 'smooth'
+    scroll: () => {
+        const lists = document.querySelectorAll('.list');
+        const scroller = document.querySelector(".work_list");
+        const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
+        bodyScrollBar.track.yAxis.element.remove();
+        bodyScrollBar.track.xAxis.element.remove();
+
+        // to keep ScrollTrigger and Smooth Scrollbar in sync
+        ScrollTrigger.scrollerProxy(scroller, {
+            scrollTop(value) {
+                if (arguments.length) {
+                    bodyScrollBar.scrollTop = value;
+                }
+                return bodyScrollBar.scrollTop;
+            }
+        });
+
+        // update ScrollTrigger when scrollbar updates
+        bodyScrollBar.addListener(ScrollTrigger.update);
+
+        // scrollTo
+        lists.forEach(list => {
+            let scrollToHere = list.offsetTop;
+            list.addEventListener("click", () => {bodyScrollBar.scrollTo(0, scrollToHere, 800)})
         })
     }
 }
