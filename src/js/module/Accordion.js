@@ -20,7 +20,7 @@ const accordion = {
         const lists = document.querySelectorAll('.list');
         lists.forEach((list, i) => {
             const tooltip = document.querySelector('.tooltip_box');
-            const detail = list.nextElementSibling;
+            const detail = list.querySelector(".detail");
             const html = `
                 <div class="carousel">
                     <img src="${imgsUrl[i]}" alt="${data[i].name}" />
@@ -41,13 +41,15 @@ const accordion = {
             list.addEventListener('click', () => {
                 if (!detail.classList.contains("open")) {
                     accordion.clear();
-                    tooltip.style.display = "none";
                     openD();
-                    list.classList.add("open");
                     detail.classList.add("open");
+                    gsap.to(tooltip, {
+                        duration: 0.3,
+                        opacity: 0,
+                        display: "none"
+                    })
                 } else {
                     closeD();
-                    list.classList.remove("open");
                     detail.classList.remove("open");
                 }
             });
@@ -59,6 +61,10 @@ const accordion = {
                     duration: 0.5,
                     "--width": "100%",
                     ease: "expo.in",
+                    // onUpdate: function() {
+                    //     document.querySelector(".work_list").scrollTo(0, 50);
+                    //     console.log(1)
+                    // }
                 })
                 .to(detail, {
                     duration: 0.4,
@@ -95,7 +101,7 @@ const accordion = {
 
             const tl = gsap.timeline();
             tl
-            .to(detail.previousElementSibling, {
+            .to(detail.parentElement, {
                 duration: 0.5,
                 "--width": "0%",
                 ease: "expo.in"
@@ -106,11 +112,13 @@ const accordion = {
                 borderWidth: 0,
                 ease: "power4.inOut"
             }, "<");
+
             detail.classList.remove("open");
         });
     },
 
     scroll: () => {
+        const radios = document.querySelectorAll('[type=radio]');
         const lists = document.querySelectorAll('.list');
         const scroller = document.querySelector(".work_list");
         const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
@@ -133,8 +141,11 @@ const accordion = {
         // scrollTo
         lists.forEach(list => {
             let scrollToHere = list.offsetTop;
-            list.addEventListener("click", () => {bodyScrollBar.scrollTo(0, scrollToHere, 800)})
+            list.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 800))
         })
+
+        // workListCategory
+        radios.forEach(elem => elem.addEventListener('click', () => bodyScrollBar.scrollTo(0, 0, 500)));
     }
 }
 

@@ -45,30 +45,27 @@ class DomTextBind {
         let detailData = [];
         
         data.forEach(obj => {
-            const dt = document.createElement("dt");
-            const dd = document.createElement("dd");
+            const li = document.createElement("li");
+            const btn = document.createElement("button");
+            const div = document.createElement("div");
 
             // list
-            dt.setAttribute("class", "list");
-            dt.setAttribute("name", obj.name);
-            dt.setAttribute("category", obj.category);
-            dt.innerHTML = `
-                <span
-                    href="#"
-                    class="Nefarious toggle_font"
-                    data-content="${obj.title.en}"
-                >
-                    ${obj.title.en}
-                </span>`;
+            li.setAttribute("class", "list");
+            li.setAttribute("name", obj.name);
+            li.setAttribute("category", obj.category);
+            btn.setAttribute("class", "Nefarious toggle_font");
+            btn.setAttribute("data-content", obj.title.en);
+            btn.innerHTML = obj.title.en;
 
             // detail(accordion menu)
-            dd.setAttribute("class", "detail");
-            dd.setAttribute("name", obj.name);
-            dd.setAttribute("category", obj.category);
+            div.setAttribute("class", "detail");
+            div.setAttribute("name", obj.name);
+            div.setAttribute("category", obj.category);
             
             // append
-            parent.appendChild(dt);
-            parent.appendChild(dd);
+            li.appendChild(btn);
+            li.appendChild(div);
+            parent.appendChild(li);
 
             // data push to variable
             embedURL.push(obj.url);

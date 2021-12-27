@@ -6,7 +6,7 @@ function mouseOverTooltip(embedData) {
     
     const tooltipBox = document.querySelector(".tooltip_box");
     const iframe = document.createElement("iframe");
-    const hoverBox = document.querySelectorAll(".work_list .list");
+    const hoverBox = document.querySelectorAll(".work_list .list button");
     
     iframe.setAttribute("class", "video_tooltip");
     iframe.setAttribute("name", "work");
