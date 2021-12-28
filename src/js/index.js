@@ -6,9 +6,10 @@ import workJson from "./data/work.json";
 import textJson from "./data/text.json";
 
 // module import
-import platformCheck from './module/PlatformCheck.js';
-import Contact from "./contact.js";
 import Work from "./work.js";
+import Contact from "./contact.js";
+import Convert from "./module/Convert.js";
+import platformCheck from './module/PlatformCheck.js';
 
 // css import
 import styleCSS from "../css/scss/style.scss";
@@ -34,7 +35,7 @@ class DomTextBind extends GetData{
         await this._textData.then(res => this.textData = res);
         
         this.bind();
-        convert.setData([this.workData, this.textData]);
+        Convert.setData([this.workData, this.textData]);
         Work(this.workData);
     }
 
@@ -109,133 +110,6 @@ class DomTextBind extends GetData{
         bindFuc(timelineArr, 'timeline');
     }
 }
-
-// convert color & text
-class Convert{
-    constructor() {
-        this.workData;
-        this.textData;
-        this.lang = "en";
-    }
-
-    setData(datas) {
-        this.workData = datas[0]
-        this.textData = datas[1]
-    }
-
-    changeText() {
-        const workData = this.workData;
-        const textData = this.textData;
-        const textArr = Object.entries(textData[0]);
-        const budgietArr = Object.entries(textData[1]);
-        const timelineArr = Object.entries(textData[2]);
-        let lang = this.lang;
-
-        // contents
-        function changeFuc(variable, name) {
-            // 일반 content text 및 category select radio btn text
-            if (name == 'content') {
-                variable.forEach(data => {
-                    const key = data[0];
-                    const val = data[1];
-                    const target = document.querySelector(`[data-name='${key}']`);
-                    
-                    if (lang === "en") {
-                        target.innerHTML = val.en;
-                        // marquee text
-                        if (target.classList.contains("marquee_text")) {
-                            target.innerHTML = val.en + val.en;
-                        }
-                        // contact input placeholder
-                        if (target.hasAttribute('placeholder')) {
-                            target.setAttribute('placeholder', val.en)
-                        }
-                    } else {
-                        target.innerHTML = val.ko;
-                        // marquee text
-                        if (target.classList.contains("marquee_text")) {
-                            target.innerHTML = val.ko + val.ko;
-                        }
-                        // contact input placeholder
-                        if (target.hasAttribute('placeholder')) {
-                            target.setAttribute('placeholder', val.ko)
-                        }
-                    }
-                })
-            }
-            // 예산/일정 select box option text
-            else if (name == 'budgiet' || name == 'timeline') {
-                variable.forEach(data => {
-                    const key = data[0];
-                    const val = data[1];
-                    const target = document.querySelector(`.${key}`);
-                    
-                    if (lang === "en") {
-                        target.innerHTML = val.en;
-                    } else {
-                        target.innerHTML = val.ko;
-                    }
-                })
-            }
-        }
-
-        // work
-        workData.forEach((data, i) => {
-            const lists = document.querySelectorAll(".list");
-            const target = lists[i].querySelector("button");
-
-            if (this.lang === "en") {
-                target.innerHTML = data.title.en;
-                target.setAttribute("data-content", data.title.en);
-            } else {
-                target.innerHTML = data.title.ko;
-                target.setAttribute("data-content", data.title.ko);
-            }
-        })
-
-        changeFuc(textArr, 'content');
-        changeFuc(budgietArr, 'budgiet');
-        changeFuc(timelineArr, 'timeline');
-
-        this.reverseColorTheme();
-    }
-
-    reverseColorTheme() {
-        const state = document.documentElement.getAttribute("color-theme");
-
-        if (state === "white") {
-            document.documentElement.setAttribute("color-theme", "blue");
-        } else {
-            document.documentElement.setAttribute("color-theme", "white");
-        }
-    }
-
-    change() {
-        const enFont = document.querySelectorAll(".toggle_font");
-
-        convert.lang === "en" ? (convert.lang = "ko") : (convert.lang = "en");
-        convert.changeText();
-
-        enFont.forEach(elem => {
-            if (elem.classList.contains("Nefarious")) {
-                elem.classList.remove("Nefarious")
-            } else {
-                elem.classList.add("Nefarious")
-            }
-        })
-    }
-}
-
-// custom input[type="file"](file-name bind)
-const bindFileInput = (() => {
-    const elem = document.querySelector("#file");
-    const bindTarget = document.querySelector(".file_name");
-
-    elem.addEventListener("change", function () {
-        let value = this.value;
-        bindTarget.value = value;
-    });
-})();
 
 // Custom Cursor
 const customCursor = {
@@ -478,13 +352,9 @@ const circleLogoAnimation = {
 
 // instance
 const domTextBind = new DomTextBind();
-const convert = new Convert();
 
 // run
 domTextBind.init();
 customCursor.create();
 circleLogoAnimation.bindSGV();
 marquee(".marquee", 0.2);
-
-// reverse color/text
-document.querySelector(".reverse_color").addEventListener("click", convert.change);

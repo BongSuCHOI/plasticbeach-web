@@ -1,7 +1,7 @@
 import emailjs from 'emailjs-com';
 
 // Email Js Library
-function EmailJs() {
+const EmailJs = () => {
     document.getElementById('contact-form').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -19,4 +19,18 @@ function EmailJs() {
             });
     });
 }
-EmailJs()
+
+// custom input[type="file"](file-name bind)
+const bindFileInput = () => {
+    const elem = document.querySelector("#file");
+    const bindTarget = document.querySelector(".file_name");
+
+    elem.addEventListener("change", function () {
+        let value = this.value;
+        bindTarget.value = value;
+    });
+};
+
+// run
+EmailJs();
+bindFileInput();
