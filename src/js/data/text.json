@@ -79,6 +79,18 @@
         "marquee": {
             "ko": "우리는 당신이 상상하는 모든 것들을 플라스틱 비치에서 만들어냅니다.",
             "en": "creative every fantasy whateever you imagine in plastic beach"
+        },
+        "category_all": {
+            "ko": "전체",
+            "en": "ALL"
+        },
+        "category_mv": {
+            "ko": "뮤직비디오",
+            "en": "MV"
+        },
+        "category_ad": {
+            "ko": "광고",
+            "en": "AD"
         }
     },
     {
@@ -99,20 +111,6 @@
         "timeline_option02": {
             "ko": "3 주",
             "en": "3 week"
-        }
-    },
-    {
-        "category_all": {
-            "ko": "전체",
-            "en": "ALL"
-        },
-        "category_mv": {
-            "ko": "뮤직비디오",
-            "en": "MV"
-        },
-        "category_ad": {
-            "ko": "광고",
-            "en": "AD"
         }
     }
 ]

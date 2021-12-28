@@ -1,5 +1,6 @@
 import emailjs from 'emailjs-com';
 
+// Email Js Library
 function EmailJs() {
     document.getElementById('contact-form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -19,5 +20,3 @@ function EmailJs() {
     });
 }
 EmailJs()
-
-export default EmailJs;
