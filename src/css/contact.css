@@ -15,7 +15,7 @@
 
 .contact form { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; height: calc(100% - 216px); padding: 50px 68px 50px 45px; }
 
-.contact form > div { width: 100%; }
+.contact form > div { -ms-flex-negative: 0; flex-shrink: 0; width: 100%; }
 
 .contact form > div p { margin-bottom: 10px; color: var(--color); }
 
@@ -67,6 +67,6 @@
 
 .contact form .project_info .chk input[type="checkbox"]:checked + label { background: var(--check-on-ico) no-repeat; background-size: 12px; background-position: left center; }
 
-.contact form .submit_btn { width: 100%; height: 80px; margin: 40px 0; font-size: 46px; color: var(--color); border: 2px solid var(--color); -webkit-transition: all 0.1s linear; transition: all 0.1s linear; }
+.contact form .submit_btn { -ms-flex-negative: 0; flex-shrink: 0; width: 100%; height: 80px; margin: 40px 0; font-size: 46px; color: var(--color); border: 2px solid var(--color); -webkit-transition: all 0.1s linear; transition: all 0.1s linear; }
 
 .contact form .submit_btn:hover { color: var(--background); border: 2px solid var(--background); background: var(--color); }
