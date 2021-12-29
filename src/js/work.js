@@ -91,19 +91,25 @@ const accordion = {
 
     open: (data, imgsUrl, imgs) => {
         const lists = document.querySelectorAll('.list');
-
-        // console.log(Object.entries(imgs), 'imgs')
-        // console.log(Object.keys(imgs), 'key')
-        // console.log(Object.values(imgs), 'val')
+        
+        //
         const test = data.map(f => f.imgName)
         const testFlat = test.flat()
         const keys = Object.keys(imgs)
-        console.log(testFlat, "data")
-        console.log(keys, "img")
+        const url = Object.values(imgs)
+        // console.log(testFlat, "data")
+        // console.log(keys, "key")
+
+        let z = [];
         for (let i = 0; i < testFlat.length; i++) {
             let asd = keys.findIndex(e => e == testFlat[i])
-            console.log(i, asd)
+            // console.log(i, asd)
+            z.push(url[asd])
         }
+        // console.log(z)
+
+        const zip = (...arr) => Array.from({ length: Math.max(...arr.map((a) => a.length)) }, (_, i) => arr.map((a) => a[i]));
+        console.log(zip(testFlat, z))
         //
 
         lists.forEach((list, i) => {
