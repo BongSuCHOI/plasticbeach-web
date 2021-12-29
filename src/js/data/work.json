@@ -8,7 +8,11 @@
             "en": "music video - gas pedal"
         },
         "detail": {
-            "imgName": "sample_detail01.jpg",
+            "imgName": [
+                "aespa01_01.jpg",
+                "aespa01_02.jpg",
+                "aespa01_03.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -28,7 +32,10 @@
             "en": "music video - 02test 02test 02test"
         },
         "detail": {
-            "imgName": "sample_detail02.jpg",
+            "imgName": [
+                "bigbang_01.jpg",
+                "bigbang_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -49,7 +56,10 @@
             "en": "ad - 03test 03test 03test"
         },
         "detail": {
-            "imgName": "sample_detail03.jpg",
+            "imgName": [
+                "nctu_01.jpg",
+                "nctu_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -69,7 +79,10 @@
             "en": "ad - 04test 04test 04test"
         },
         "detail": {
-            "imgName": "sample_detail04.jpg",
+            "imgName": [
+                "itzy01_01.jpg",
+                "itzy01_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -89,7 +102,10 @@
             "en": "music video - 05test 05test 05test"
         },
         "detail": {
-            "imgName": "sample_detail05.jpg",
+            "imgName": [
+                "izone_01.jpg",
+                "izone_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -109,7 +125,10 @@
             "en": "music video - 06test 06test 06test"
         },
         "detail": {
-            "imgName": "sample_detail06.jpg",
+            "imgName": [
+                "blackpink_01.jpg",
+                "blackpink_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -129,7 +148,10 @@
             "en": "ad - 07test 07test 07test"
         },
         "detail": {
-            "imgName": "sample_detail07.jpg",
+            "imgName": [
+                "itzy02_01.jpg",
+                "itzy02_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -149,7 +171,10 @@
             "en": "ad - 08test 08test 08test"
         },
         "detail": {
-            "imgName": "sample_detail08.jpg",
+            "imgName": [
+                "aespa02_01.jpg",
+                "aespa02_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -169,7 +194,10 @@
             "en": "music video - 09test 09test 09test"
         },
         "detail": {
-            "imgName": "sample_detail09.jpg",
+            "imgName": [
+                "wannaone_01.jpg",
+                "wannaone_02.jpg"
+            ],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",

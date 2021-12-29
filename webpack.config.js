@@ -47,6 +47,13 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/i,
+                loader: "html-loader",
+                options: {
+                    sources: true,
+                },
+            },
+            {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {

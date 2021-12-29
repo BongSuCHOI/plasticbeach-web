@@ -85,12 +85,27 @@ const accordion = {
         const imgs = accordion.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
         const imgsUrl = Object.values(imgs);
 
-        accordion.open(data, imgsUrl)
+        accordion.open(data, imgsUrl, imgs)
         accordion.scroll();
     },
 
-    open: (data, imgsUrl) => {
+    open: (data, imgsUrl, imgs) => {
         const lists = document.querySelectorAll('.list');
+
+        // console.log(Object.entries(imgs), 'imgs')
+        // console.log(Object.keys(imgs), 'key')
+        // console.log(Object.values(imgs), 'val')
+        const test = data.map(f => f.imgName)
+        const testFlat = test.flat()
+        const keys = Object.keys(imgs)
+        console.log(testFlat, "data")
+        console.log(keys, "img")
+        for (let i = 0; i < testFlat.length; i++) {
+            let asd = keys.findIndex(e => e == testFlat[i])
+            console.log(i, asd)
+        }
+        //
+
         lists.forEach((list, i) => {
             const tooltip = document.querySelector('.tooltip_box');
             const detail = list.querySelector(".detail");
