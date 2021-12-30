@@ -83,41 +83,22 @@ const accordion = {
 
     init: (data) => {
         const imgs = accordion.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
-        const imgsUrl = Object.values(imgs);
-
-        accordion.open(data, imgsUrl, imgs)
+        accordion.open(data, imgs)
         accordion.scroll();
     },
 
-    open: (data, imgsUrl, imgs) => {
+    open: (data, imgs) => {
         const lists = document.querySelectorAll('.list');
-        
-        //
-        const test = data.map(f => f.imgName)
-        const testFlat = test.flat()
-        const keys = Object.keys(imgs)
-        const url = Object.values(imgs)
-        // console.log(testFlat, "data")
-        // console.log(keys, "key")
-
-        let z = [];
-        for (let i = 0; i < testFlat.length; i++) {
-            let asd = keys.findIndex(e => e == testFlat[i])
-            // console.log(i, asd)
-            z.push(url[asd])
-        }
-        // console.log(z)
-
-        const zip = (...arr) => Array.from({ length: Math.max(...arr.map((a) => a.length)) }, (_, i) => arr.map((a) => a[i]));
-        console.log(zip(testFlat, z))
-        //
-
         lists.forEach((list, i) => {
             const tooltip = document.querySelector('.tooltip_box');
             const detail = list.querySelector(".detail");
             const html = `
                 <div class="carousel">
-                    <img src="${imgsUrl[i]}" alt="${data[i].name}" />
+                    ${data[i].imgName.map(data => `
+                        <div>
+                            <img src="${imgs[data]}" alt="" />
+                        </div>
+                    `).join("")}
                 </div>
                 <div class="info_text">
                     <p>VFX. ${data[i].vfx}</p>
