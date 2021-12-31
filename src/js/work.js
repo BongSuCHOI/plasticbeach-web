@@ -2,6 +2,9 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scrollbar from 'smooth-scrollbar';
+import Swiper, { Pagination, Autoplay } from 'swiper';
+import 'swiper/css/bundle';
+import 'swiper/css/pagination';
 gsap.registerPlugin(ScrollTrigger);
 
 // module import
@@ -13,7 +16,7 @@ const prodData = (data) => {
     const details = data.map(d => d.detail);
 
     mouseOverTooltip(embedUrls);
-    accordion.init(details)
+    bind_detail.init(details)
 }
 
 // Mouse Over Tooltip
@@ -73,8 +76,8 @@ const mouseOverTooltip = (embedUrl) => {
     });
 }
 
-// Accordion
-const accordion = {
+// detail bind
+const bind_detail = {
     importImgs: (r) => {
         let images = {};
         r.keys().map(item => images[item.replace('./', '')] = r(item) );
@@ -82,23 +85,25 @@ const accordion = {
     },
 
     init: (data) => {
-        const imgs = accordion.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
-        accordion.open(data, imgs)
-        accordion.scroll();
+        const imgs = bind_detail.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
+        bind_detail.bind(data, imgs)
+        bind_detail.scroll();
     },
 
-    open: (data, imgs) => {
+    bind: (data, imgs) => {
         const lists = document.querySelectorAll('.list');
         lists.forEach((list, i) => {
-            const tooltip = document.querySelector('.tooltip_box');
             const detail = list.querySelector(".detail");
             const html = `
-                <div class="carousel">
-                    ${data[i].imgName.map(data => `
-                        <div>
-                            <img src="${imgs[data]}" alt="" />
-                        </div>
-                    `).join("")}
+                <div class="swiper img_slide">
+                    <div class="swiper-wrapper">
+                        ${data[i].imgName.map(data => `
+                            <div class="swiper-slide">
+                                <img src="${imgs[data]}" alt="" />
+                            </div>
+                        `).join("")}
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
                 <div class="info_text">
                     <p>VFX. ${data[i].vfx}</p>
@@ -112,7 +117,51 @@ const accordion = {
                 </div>
             `;
             detail.innerHTML = html;
-            
+        });
+
+        accordion.open();
+    },
+
+    scroll: () => {
+        const radios = document.querySelectorAll('[type=radio]');
+        const lists = document.querySelectorAll('.list');
+        const scroller = document.querySelector(".work_list");
+        const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
+        bodyScrollBar.track.yAxis.element.remove();
+        bodyScrollBar.track.xAxis.element.remove();
+
+        // to keep ScrollTrigger and Smooth Scrollbar in sync
+        ScrollTrigger.scrollerProxy(scroller, {
+            scrollTop(value) {
+                if (arguments.length) {
+                    bodyScrollBar.scrollTop = value;
+                }
+                return bodyScrollBar.scrollTop;
+            }
+        });
+
+        // update ScrollTrigger when scrollbar updates
+        bodyScrollBar.addListener(ScrollTrigger.update);
+
+        // scrollTo
+        lists.forEach(list => {
+            let scrollToHere = list.offsetTop;
+            list.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 800))
+        })
+
+        // workListCategory
+        radios.forEach(elem => elem.addEventListener('click', () => bodyScrollBar.scrollTo(0, 0, 500)));
+    }
+}
+
+// Accordion
+const accordion = {
+    open: () => {
+        const lists = document.querySelectorAll('.list');
+        lists.forEach(list => {
+            const tooltip = document.querySelector('.tooltip_box');
+            const detail = list.querySelector(".detail");
+
             list.addEventListener('click', () => {
                 if (!detail.classList.contains("open")) {
                     accordion.clear();
@@ -123,10 +172,13 @@ const accordion = {
                         opacity: 0,
                         display: "none"
                     })
+                    slider("start");
                 } else {
                     closeD();
                     detail.classList.remove("open");
+                    slider("stop");
                 }
+                
             });
 
             const openD = () => {
@@ -147,6 +199,7 @@ const accordion = {
                     borderWidth: 2,
                     ease: "power4.inOut",
                 }, "<")
+
             }
 
             const closeD = () => {
@@ -188,40 +241,40 @@ const accordion = {
 
             detail.classList.remove("open");
         });
-    },
-
-    scroll: () => {
-        const radios = document.querySelectorAll('[type=radio]');
-        const lists = document.querySelectorAll('.list');
-        const scroller = document.querySelector(".work_list");
-        const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
-        bodyScrollBar.track.yAxis.element.remove();
-        bodyScrollBar.track.xAxis.element.remove();
-
-        // to keep ScrollTrigger and Smooth Scrollbar in sync
-        ScrollTrigger.scrollerProxy(scroller, {
-            scrollTop(value) {
-                if (arguments.length) {
-                    bodyScrollBar.scrollTop = value;
-                }
-                return bodyScrollBar.scrollTop;
-            }
-        });
-
-        // update ScrollTrigger when scrollbar updates
-        bodyScrollBar.addListener(ScrollTrigger.update);
-
-        // scrollTo
-        lists.forEach(list => {
-            let scrollToHere = list.offsetTop;
-            list.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 800))
-        })
-
-        // workListCategory
-        radios.forEach(elem => elem.addEventListener('click', () => bodyScrollBar.scrollTo(0, 0, 500)));
     }
 }
 
+// detail slider
+const slider = (state) => {
+    const swiper = new Swiper('.img_slide', {
+        modules: [
+            Pagination,
+            Autoplay,
+        ],
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        speed: 500,
+        autoHeight: true,
+        loop: true,
+        loopAdditionalSlides: 1,
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        observer: true,
+        observeParents: true,
+    });
+    const lists = document.querySelectorAll('.list');
+    lists.forEach((list, i) => {
+        if (state === "stop") {
+            swiper[i].autoplay.stop()
+        } else {
+            swiper[i].autoplay.start()
+        }
+        swiper[i].update()
+    });
+}
 // Work List Category
 const workCategory = (e) => {
     const lists = document.querySelectorAll('.work_list .list');

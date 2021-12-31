@@ -89,10 +89,11 @@
             height: 0px;
             transition: height 0.2s ease-in-out;
             border-bottom: 0px solid var(--color);
-            .carousel {
+            .swiper {
                 width: 100%;
                 height: auto;
                 img {
+                    display: block;
                     width: 100%;
                 }
             }
