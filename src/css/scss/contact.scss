@@ -72,6 +72,10 @@
                 border-bottom: 1px solid var(--color);
                 background: transparent var(--select-ico) no-repeat right 5px center;
                 background-size: 10px;
+                option{
+                    color: var(--color);
+                    background: var(--background);
+                }
             }
         }
         .project_info {

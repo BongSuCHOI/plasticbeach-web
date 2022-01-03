@@ -31,6 +31,22 @@ const bindFileInput = () => {
     });
 };
 
+// custom select box
+const customSelect = {
+    init: () => {
+    
+    },
+
+    open: () => {
+
+    },
+
+    selection: () => {
+
+    },
+}
+
 // run
 EmailJs();
 bindFileInput();
+customSelect.init();

@@ -33,7 +33,7 @@
 
 .work_box .work_list .detail { overflow: hidden; width: 100%; height: 0px; -webkit-transition: height 0.2s ease-in-out; transition: height 0.2s ease-in-out; border-bottom: 0px solid var(--color); }
 
-.work_box .work_list .detail .swiper { width: 100%; height: auto; }
+.work_box .work_list .detail .swiper { width: 100%; height: auto; border-bottom: 2px solid var(--color); }
 
 .work_box .work_list .detail .swiper img { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; display: block; width: 100%; }
 
