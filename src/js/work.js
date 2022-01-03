@@ -2,9 +2,8 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scrollbar from 'smooth-scrollbar';
-import Swiper, { Pagination, Autoplay } from 'swiper';
+import Swiper, { Pagination, Navigation, Lazy } from 'swiper';
 import 'swiper/css/bundle';
-import 'swiper/css/pagination';
 gsap.registerPlugin(ScrollTrigger);
 
 // module import
@@ -12,17 +11,15 @@ import platformCheck from './module/PlatformCheck.js';
 
 // Prod Data
 const prodData = (data) => {
-    const embedUrls = data.map(d => d.url);
-    const details = data.map(d => d.detail);
-
-    mouseOverTooltip(embedUrls);
-    bind_detail.init(details)
+    mouseOverTooltip(data);
+    bind_detail.init(data)
 }
 
 // Mouse Over Tooltip
-const mouseOverTooltip = (embedUrl) => {
+const mouseOverTooltip = (data) => {
     if (!platformCheck()) { return }
     
+    const embedUrl = data.map(d => d.url);
     const tooltipBox = document.querySelector(".tooltip_box");
     const iframe = document.createElement("iframe");
     const hoverBox = document.querySelectorAll(".work_list .list button");
@@ -91,35 +88,49 @@ const bind_detail = {
     },
 
     bind: (data, imgs) => {
+        const detailData = data.map(d => d.detail);
         const lists = document.querySelectorAll('.list');
+
         lists.forEach((list, i) => {
             const detail = list.querySelector(".detail");
             const html = `
                 <div class="swiper img_slide">
                     <div class="swiper-wrapper">
-                        ${data[i].imgName.map(data => `
+                        ${detailData[i].imgName.map(name => `
                             <div class="swiper-slide">
-                                <img src="${imgs[data]}" alt="" />
+                                <img data-src="${imgs[name]}" alt="" class="swiper-lazy" />
                             </div>
                         `).join("")}
                     </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                     <div class="swiper-pagination"></div>
                 </div>
-                <div class="info_text">
-                    <p>VFX. ${data[i].vfx}</p>
-                    <p>VFX Supervisor. ${data[i].sv}</p>
-                    <p>VFX Assistant Supervisor. ${data[i].asv}</p>
-                    <p>VFX Project Manager. ${data[i].pm}</p>
-                    <p>VFX Producer. ${data[i].pd}</p>
-                    <p>3D Artist. ${data[i].art3d}</p>
-                    <p>2D Artist. ${data[i].art2d}</p>
-                    <p>FX Artist. ${data[i].fx}</p>
+                <div class="info_box">
+                    <div class="left">
+                        <p class="project_name">
+                            <span class="year">${data[i].year}</span>
+                            ${data[i].title.en.toUpperCase()}
+                        </p>
+                        <a class="link" href="https://www.youtube.com/watch?v=${data[i].url}" target="_blank">WATCH ON YOUTUBE</a>
+                    </div>
+                    <div class="right">
+                        <p>VFX. ${detailData[i].vfx}</p>
+                        <p>VFX Supervisor. ${detailData[i].sv}</p>
+                        <p>VFX Assistant Supervisor. ${detailData[i].asv}</p>
+                        <p>VFX Project Manager. ${detailData[i].pm}</p>
+                        <p>VFX Producer. ${detailData[i].pd}</p>
+                        <p>3D Artist. ${detailData[i].art3d}</p>
+                        <p>2D Artist. ${detailData[i].art2d}</p>
+                        <p>FX Artist. ${detailData[i].fx}</p>
+                    </div>
                 </div>
             `;
             detail.innerHTML = html;
         });
 
         accordion.open();
+        slider();
     },
 
     scroll: () => {
@@ -145,8 +156,9 @@ const bind_detail = {
 
         // scrollTo
         lists.forEach(list => {
+            const btn = list.querySelector('button');
             let scrollToHere = list.offsetTop;
-            list.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 800))
+            btn.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 800))
         })
 
         // workListCategory
@@ -160,9 +172,10 @@ const accordion = {
         const lists = document.querySelectorAll('.list');
         lists.forEach(list => {
             const tooltip = document.querySelector('.tooltip_box');
+            const btn = list.querySelector("button");
             const detail = list.querySelector(".detail");
 
-            list.addEventListener('click', () => {
+            btn.addEventListener('click', () => {
                 if (!detail.classList.contains("open")) {
                     accordion.clear();
                     openD();
@@ -172,11 +185,9 @@ const accordion = {
                         opacity: 0,
                         display: "none"
                     })
-                    slider("start");
                 } else {
                     closeD();
                     detail.classList.remove("open");
-                    slider("stop");
                 }
                 
             });
@@ -184,7 +195,7 @@ const accordion = {
             const openD = () => {
                 const tl = gsap.timeline();
                 return tl
-                .to(list, {
+                .to(btn, {
                     duration: 0.5,
                     "--width": "100%",
                     ease: "expo.in",
@@ -205,7 +216,7 @@ const accordion = {
             const closeD = () => {
                 const tl = gsap.timeline();
                 return tl
-                .to(list, {
+                .to(btn, {
                     duration: 0.5,
                     "--width": "0%",
                     ease: "expo.in"
@@ -221,13 +232,16 @@ const accordion = {
     },
 
     clear: () => {
-        const details = document.querySelectorAll(".detail");
-        details.forEach(detail => {
+        const lists = document.querySelectorAll('.list');
+        lists.forEach(list => {
+            const btn = list.querySelector("button");
+            const detail = list.querySelector(".detail");
+            
             if (!detail.classList.contains("open")) return;
-
+    
             const tl = gsap.timeline();
             tl
-            .to(detail.parentElement, {
+            .to(btn, {
                 duration: 0.5,
                 "--width": "0%",
                 ease: "expo.in"
@@ -238,41 +252,33 @@ const accordion = {
                 borderWidth: 0,
                 ease: "power4.inOut"
             }, "<");
-
+    
             detail.classList.remove("open");
         });
     }
 }
 
 // detail slider
-const slider = (state) => {
-    const swiper = new Swiper('.img_slide', {
+const slider = () => {
+    return new Swiper('.img_slide', {
         modules: [
             Pagination,
-            Autoplay,
+            Navigation,
+            Lazy
         ],
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
         speed: 500,
         autoHeight: true,
-        loop: true,
-        loopAdditionalSlides: 1,
         pagination: {
             el: '.swiper-pagination',
         },
-        observer: true,
-        observeParents: true,
-    });
-    const lists = document.querySelectorAll('.list');
-    lists.forEach((list, i) => {
-        if (state === "stop") {
-            swiper[i].autoplay.stop()
-        } else {
-            swiper[i].autoplay.start()
-        }
-        swiper[i].update()
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        preloadImages: false,
+        lazy: {
+            loadPrevNext : true
+        },
     });
 }
 // Work List Category
@@ -282,6 +288,7 @@ const workCategory = (e) => {
 
     lists.forEach(elem => {
         const listCategory = elem.getAttribute('category');
+        const btn = elem.querySelector("button");
         const detail = elem.querySelector(".detail");
         const open = Boolean(elem.querySelector(".detail.open"));
         const tl = gsap.timeline();
@@ -328,7 +335,7 @@ const workCategory = (e) => {
                     duration: 0,
                     display: "none"
                 }, ">")
-                .to(elem, {
+                .to(btn, {
                     duration: 0,
                     "--width": "0%",
                 }, ">")

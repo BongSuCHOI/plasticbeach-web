@@ -42,8 +42,6 @@
         }
     }
     .work_list {
-        // overflow-x: hidden;
-        // overflow-y: scroll;
         width: 100%;
         height: 100%;
         .list {
@@ -93,17 +91,80 @@
                 width: 100%;
                 height: auto;
                 img {
+                    user-select: none;
                     display: block;
                     width: 100%;
                 }
+                .swiper-wrapper{
+                    .swiper-slide{transform: translate3d(0, 0, 0);}
+                }
+                .swiper-button-next, .swiper-button-prev{
+                    z-index: 1;
+                    width: 30px;
+                    height: 30px;
+                    margin-top: 0;
+                    cursor: none;
+                    &::after{
+                        width: 100%;
+                        height: 100%;
+                        text-indent: -9999999px;
+                        font-family: initial;
+                        font-size: 0px;
+                        background-position: center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                    }
+                    &.swiper-button-next{
+                        right: 30px;
+                        &::after{background-image: url("../../images/btn/slide_next.png");}
+                    }
+                    &.swiper-button-prev{
+                        left: 30px;
+                        &::after{background-image: url("../../images/btn/slide_prev.png");}
+                    }
+                }
+                .swiper-pagination{
+                    bottom: 24px;
+                    .swiper-pagination-bullet{
+                        background: $white;
+                        opacity: 0.6;
+                        &.swiper-pagination-bullet-active{
+                            opacity: 1;
+                        }
+                    }
+                }
             }
-            .info_text {
-                padding: 30px;
-                p {
-                    line-height: 1.3;
-                    font-weight: 500;
-                    font-size: 39px;
-                    color: var(--color);
+            .info_box {
+                display: flex;
+                & > div{
+                    flex-shrink: 0;
+                    width: 50%;
+                    padding: 30px;
+                    p, a{font-weight: 500;}
+                    img{display: block;}
+                }
+                .left{
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: space-between;
+                    .project_name{
+                        .year{display: block;}
+                        font-size: 51px;
+                        color: var(--color);
+                    }
+                    .link{
+                        @include text_underline(var(--color));
+                        font-size: 24px;
+                        color: var(--color);
+                    }
+                }
+                .right{
+                    border-left: 2px solid var(--color);
+                    p{
+                        line-height: 1.3;
+                        font-size: 24px;
+                        color: var(--color);
+                    }
                 }
             }
         }
