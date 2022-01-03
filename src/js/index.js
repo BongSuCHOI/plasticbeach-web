@@ -37,6 +37,7 @@ class DomTextBind extends GetData{
         this.bind();
         Convert.setData([this.workData, this.textData]);
         Work(this.workData);
+        Contact.init();
     }
 
     bind() {
