@@ -70,11 +70,9 @@ class DomTextBind extends GetData{
             }
             else if (name == 'budgiet' || name == 'timeline') {
                 variable.forEach(obj => {
-                    const key = obj[0];
                     const val = obj[1];
                     const parent = document.querySelector(`select.${name}`);
                     const html = document.createElement("option");
-                    html.setAttribute("class", key);
                     html.innerHTML = val.en;
                     parent.appendChild(html);
                 })

@@ -1,6 +1,5 @@
+import { gsap } from "gsap";
 import emailjs from 'emailjs-com';
-import { _colorStringFilter } from 'gsap/gsap-core';
-import { wrap } from 'gsap/gsap-core';
 
 // Email Js Library
 const EmailJs = () => {
@@ -36,45 +35,45 @@ const bindFileInput = () => {
 // custom select box
 const customSelect = {
     init: () => {
-        const select = document.querySelectorAll("select");
+        const selects = document.querySelectorAll("select");
 
         // 대체 selectBox 만들기
-        select.forEach((elem, i) => {
+        selects.forEach((select, i) => {
             const div = document.createElement("div");
             const ul = document.createElement("ul");
             const button = document.createElement("button");
-            const span = document.createElement("span");
-            const spanText = document.createTextNode(elem.options[0].text);
-            elem.style.display = "none";
-            
-            // ul
-            elem.parentNode.insertBefore(div, elem);
-            div.appendChild(elem);
-            div.className = `select_dropdown sBox${i}`;
-            button.className = `dropdown_btn sBtn${i}`;
-            button.setAttribute("data-value", "");
-            button.setAttribute("type", "button");
-            span.className = `placeholder`;
-            ul.className  = `dropdown_list`;
+            const btnText = document.createTextNode(select.options[0].text);
+            select.style.display = "none";
 
+            // wrapper
+            select.parentNode.insertBefore(div, select);
+            div.className = `select_dropdown sBox${i}`;
+            button.className = `dropdown_btn`;
+            button.setAttribute("data-value", "");
+            button.setAttribute("data-name", `${select.className}_default`);
+            button.setAttribute("type", "button");
+            ul.className  = `dropdown_list`;
+            
+            div.appendChild(select);
             div.appendChild(button);
-            span.appendChild(spanText);
-            button.appendChild(span);
             div.appendChild(ul);            
+            button.appendChild(btnText);
             
             // li
-            for (let i = 0; i < elem.options.length; i++) {
+            for (let i = 1; i < select.options.length; i++) {
                 const li = document.createElement("li");
-                const optionValue = elem.options[i].value;
-                const optionText = document.createTextNode(elem.options[i].text);
+                const optionValue = select.options[i].value;
+                const optionText = document.createTextNode(select.options[i].text);
                 li.className = "select_list";
                 li.setAttribute("data-value", optionValue);
+                li.setAttribute("data-name", `${select.className}_option${i}`);
                 li.appendChild(optionText);
                 ul.appendChild(li);
             }
         });
 
         customSelect.open();
+        customSelect.close();
     },
 
     open: () => {
@@ -94,18 +93,22 @@ const customSelect = {
 
     displayUl: (target) => {
         const parent = target.parentNode;
+
         if (target.tagName == "BUTTON") {
             const dropdownList = parent.querySelector("ul.dropdown_list");
             dropdownList.classList.toggle("active");
+            customSelect.toggleAni(dropdownList)
         } else if (target.tagName == "LI") {
             const selectClass = parent.parentNode.querySelector("select").className;
             const divChildBtn = parent.parentNode.querySelector("button.dropdown_btn");
-            const btnChildSpan = divChildBtn.querySelector("button.dropdown_btn span");
             const targetValue = target.getAttribute("data-value");
+            const targetDataName = target.getAttribute("data-name");
             parent.classList.toggle("active");
+            customSelect.toggleAni(parent)
             divChildBtn.setAttribute("data-value", targetValue);
-            btnChildSpan.textContent = target.textContent;
-
+            divChildBtn.setAttribute("copy", targetDataName);
+            divChildBtn.textContent = target.textContent;
+            
             customSelect.setSelect(selectClass, targetValue)
         }
     },
@@ -114,6 +117,50 @@ const customSelect = {
         const target = document.querySelector(`.${className}`);
         target.value = valueToSelect;
         target.setAttribute("selected", "selected");
+    },
+
+    close: () => {
+        document.body.addEventListener("click", (e) => {
+            // 클릭한 target이 아래 class를 가진 elements가 아니면 전부 닫음
+            if (e.target.className == "dropdown_btn" ||
+                e.target.className == "placeholder" ||
+                e.target.className == "dropdown_list" ||
+                e.target.className == "select_list"
+            ) return
+            else {
+                const activeUl = document.querySelectorAll(".dropdown_list");
+                activeUl.forEach(ul => {
+                    ul.classList.remove("active")
+                    customSelect.toggleAni(ul)
+                });
+            }
+        })
+    },
+
+    toggleAni: (elem) => {
+        if (elem.classList[1] == "active") {
+            let tl = gsap.timeline();
+            tl.to(elem, {
+                duration: 0,
+                display: "block",
+            })
+            .to(elem, {
+                duration: 0.4,
+                height: "auto",
+                ease: "power4.inOut"
+            }, ">")
+        } else {
+            let tl = gsap.timeline();
+            tl.to(elem, {
+                duration: 0.4,
+                height: "0",
+                ease: "power4.inOut"
+            })
+            .to(elem, {
+                duration: 0,
+                display: "none"
+            }, ">")
+        }
     }
 }
 

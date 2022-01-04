@@ -56,12 +56,23 @@ class Convert{
                 variable.forEach(data => {
                     const key = data[0];
                     const val = data[1];
-                    const target = document.querySelector(`.${key}`);
-                    
+                    const target = document.querySelector(`[data-name='${key}']`);
+                    const copyTarget = document.querySelector(`.select_dropdown button[copy='${key}']`);
+
                     if (lang === "en") {
                         target.innerHTML = val.en;
+
+                        if (!copyTarget) {return}
+                        else if (copyTarget.getAttribute("copy") == key) {
+                            copyTarget.innerHTML = val.en
+                        }
                     } else {
                         target.innerHTML = val.ko;
+                        
+                        if (!copyTarget) return
+                        else if (copyTarget.getAttribute("copy") == key) {
+                            copyTarget.innerHTML = val.ko
+                        }
                     }
                 })
             }

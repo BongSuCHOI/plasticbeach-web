@@ -1,7 +1,7 @@
 /**/
 :root[color-theme="white"] { --background: #fff; --color: #0035dd; --select-ico: url("../../images/btn/select_box.png"); --check-off-ico: url("../../images/btn/chk_off.png"); --check-on-ico: url("../../images/btn/chk_on.png"); --radio-off-ico: url("../../images/btn/radio_off.png"); --radio-on-ico: url("../../images/btn/radio_on.png"); }
 
-:root[color-theme="blue"] { --background: #0035dd; --color: #fff; --selectIco: url("../../images/btn/select_box_w.png"); --check-off-ico: url("../../images/btn/chk_off_w.png"); --check-on-ico: url("../../images/btn/chk_on_w.png"); --radio-off-ico: url("../../images/btn/radio_off_w.png"); --radio-on-ico: url("../../images/btn/radio_on_w.png"); }
+:root[color-theme="blue"] { --background: #0035dd; --color: #fff; --select-ico: url("../../images/btn/select_box_w.png"); --check-off-ico: url("../../images/btn/chk_off_w.png"); --check-on-ico: url("../../images/btn/chk_on_w.png"); --radio-off-ico: url("../../images/btn/radio_off_w.png"); --radio-on-ico: url("../../images/btn/radio_on_w.png"); }
 
 /* extend */
 /*common*/
