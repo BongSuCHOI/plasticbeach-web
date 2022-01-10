@@ -99,6 +99,7 @@ const bind_detail = {
                         ${detailData[i].imgName.map(name => `
                             <div class="swiper-slide">
                                 <img data-src="${imgs[name]}" alt="" class="swiper-lazy" />
+                                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                             </div>
                         `).join("")}
                     </div>
@@ -157,12 +158,20 @@ const bind_detail = {
         // scrollTo
         lists.forEach(list => {
             const btn = list.querySelector('button');
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => scrollToHere = mutation.target.offsetTop);
+            });
             let scrollToHere = list.offsetTop;
-            btn.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 800))
+            
+            observer.observe(list, {attributeFilter: ['style']});
+            btn.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 700))
         })
-
+        
         // workListCategory
-        radios.forEach(elem => elem.addEventListener('click', () => bodyScrollBar.scrollTo(0, 0, 500)));
+        radios.forEach(elem => elem.addEventListener('click', (e) => {
+            bodyScrollBar.scrollTo(0, 0, 500);
+            workCategory(e);
+        }));
     }
 }
 
@@ -180,16 +189,15 @@ const accordion = {
                     accordion.clear();
                     openD();
                     detail.classList.add("open");
-                    gsap.to(tooltip, {
-                        duration: 0.3,
-                        opacity: 0,
-                        display: "none"
-                    })
                 } else {
                     closeD();
                     detail.classList.remove("open");
                 }
-                
+                gsap.to(tooltip, {
+                    duration: 0.3,
+                    opacity: 0,
+                    display: "none"
+                })
             });
 
             const openD = () => {
@@ -199,12 +207,9 @@ const accordion = {
                     duration: 0.5,
                     "--width": "100%",
                     ease: "expo.in",
-                    // onUpdate: function() {
-                    //     document.querySelector(".work_list").scrollTo(0, 50);
-                    //     console.log(1)
-                    // }
                 })
                 .to(detail, {
+                    force3D: true,
                     duration: 0.4,
                     height: detail.scrollHeight + "px",
                     borderWidth: 2,
@@ -277,7 +282,7 @@ const slider = () => {
         },
         preloadImages: false,
         lazy: {
-            loadPrevNext : true
+            loadPrevNext : true,
         },
     });
 }
@@ -360,7 +365,5 @@ const workCategory = (e) => {
         }
     })
 }
-const radios = document.querySelectorAll('[type=radio]');
-radios.forEach(elem => elem.addEventListener('click', workCategory));
 
 export default prodData;
