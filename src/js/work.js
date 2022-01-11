@@ -89,46 +89,103 @@ const bind_detail = {
 
     bind: (data, imgs) => {
         const detailData = data.map(d => d.detail);
-        const lists = document.querySelectorAll('.list');
+        const ul = document.querySelector(".work_list");
+        const winHeight = window.innerHeight;
+        const listHeight = document.querySelector(".disposable").clientHeight;
+        const lengthMath = Math.floor(winHeight / listHeight);
+        const listLength = lengthMath + Math.round(lengthMath / 2);
+        let pageNum = 1;
 
-        lists.forEach((list, i) => {
-            const detail = list.querySelector(".detail");
-            const html = `
-                <div class="swiper img_slide">
-                    <div class="swiper-wrapper">
-                        ${detailData[i].imgName.map(name => `
-                            <div class="swiper-slide">
-                                <img data-src="${imgs[name]}" alt="" class="swiper-lazy" />
-                                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-                            </div>
-                        `).join("")}
+        document.querySelector(".disposable").remove();
+
+        const addList = () => {
+            for (let i = (pageNum - 1) * listLength + 1; i <= pageNum * listLength; i++) {
+                const li = document.createElement("li");
+                const btn = document.createElement("button");
+                const div = document.createElement("div");
+                let I = i - 1;
+                let detailHtml;
+
+                if (I == data.length) break
+
+                // list
+                li.setAttribute("class", "list");
+                li.setAttribute("name", data[I].name);
+                li.setAttribute("category", data[I].category);
+                btn.setAttribute("class", "Nefarious toggle_font");
+                btn.setAttribute("data-content", data[I].title.en);
+                btn.innerHTML = data[I].title.en;
+
+                // detail(accordion menu)
+                div.setAttribute("class", "detail");
+                div.setAttribute("name", data[I].name);
+                div.setAttribute("category", data[I].category);
+                detailHtml = `
+                    <div class="swiper img_slide">
+                        <div class="swiper-wrapper">
+                            ${detailData[I].imgName.map(name => `
+                                <div class="swiper-slide">
+                                    <img data-src="${imgs[name]}" alt="" class="swiper-lazy" />
+                                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                                </div>
+                            `).join("")}
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-pagination"></div>
-                </div>
-                <div class="info_box">
-                    <div class="left">
-                        <p class="project_name">
-                            <span class="year">${data[i].year}</span>
-                            ${data[i].title.en.toUpperCase()}
-                        </p>
-                        <a class="link" href="https://www.youtube.com/watch?v=${data[i].url}" target="_blank">WATCH ON YOUTUBE</a>
+                    <div class="info_box">
+                        <div class="left">
+                            <p class="project_name">
+                                <span class="year">${data[I].year}</span>
+                                ${data[I].title.en.toUpperCase()}
+                            </p>
+                            <a class="link" href="https://www.youtube.com/watch?v=${data[I].url}" target="_blank">WATCH ON YOUTUBE</a>
+                        </div>
+                        <div class="right">
+                            <p>VFX. ${detailData[I].vfx}</p>
+                            <p>VFX Supervisor. ${detailData[I].sv}</p>
+                            <p>VFX Assistant Supervisor. ${detailData[I].asv}</p>
+                            <p>VFX Project Manager. ${detailData[I].pm}</p>
+                            <p>VFX Producer. ${detailData[I].pd}</p>
+                            <p>3D Artist. ${detailData[I].art3d}</p>
+                            <p>2D Artist. ${detailData[I].art2d}</p>
+                            <p>FX Artist. ${detailData[I].fx}</p>
+                        </div>
                     </div>
-                    <div class="right">
-                        <p>VFX. ${detailData[i].vfx}</p>
-                        <p>VFX Supervisor. ${detailData[i].sv}</p>
-                        <p>VFX Assistant Supervisor. ${detailData[i].asv}</p>
-                        <p>VFX Project Manager. ${detailData[i].pm}</p>
-                        <p>VFX Producer. ${detailData[i].pd}</p>
-                        <p>3D Artist. ${detailData[i].art3d}</p>
-                        <p>2D Artist. ${detailData[i].art2d}</p>
-                        <p>FX Artist. ${detailData[i].fx}</p>
-                    </div>
-                </div>
-            `;
-            detail.innerHTML = html;
-        });
+                `;
+                div.innerHTML = detailHtml;
+                
+                // append
+                li.appendChild(btn);
+                li.appendChild(div);
+                ul.appendChild(li);
+            }
+        }
+
+        const io = new IntersectionObserver(([entry], observer) => {
+            if (!entry.isIntersecting) return
+            addList(++pageNum);
+            observer.unobserve(entry.target);
+            ioReStart(observer);
+            // 아코디언, 슬라이드 에러 발견
+            accordion.open();
+            slider();
+        }, { threshold: 0.1 });
+
+        const ioReStart = (intersectionObserver) => {
+            const lists = document.querySelectorAll(".list");
+            lists.forEach(list => {
+                if (!list.nextSibling && pageNum < Math.ceil(data.length/listLength)) {
+                    intersectionObserver.observe(list)
+                } else if (pageNum >= Math.ceil(data.length/listLength)) {
+                    intersectionObserver.disconnect()
+                }
+            })
+        }
+
+        addList();
+        ioReStart(io);
 
         accordion.open();
         slider();
@@ -137,7 +194,7 @@ const bind_detail = {
     scroll: () => {
         const radios = document.querySelectorAll('[type=radio]');
         const lists = document.querySelectorAll('.list');
-        const scroller = document.querySelector(".work_list");
+        const scroller = document.querySelector(".scroll_box");
         const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
         bodyScrollBar.track.yAxis.element.remove();
         bodyScrollBar.track.xAxis.element.remove();
@@ -272,7 +329,7 @@ const slider = () => {
             Lazy
         ],
         speed: 500,
-        autoHeight: true,
+        // autoHeight: true,
         pagination: {
             el: '.swiper-pagination',
         },
