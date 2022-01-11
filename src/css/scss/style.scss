@@ -52,7 +52,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    width: 90px;
+    width: max(4.6875vw, 63px); // 90px
     height: 100%;
     color: var(--color);
     border-left: 2px solid var(--color);
@@ -60,15 +60,15 @@ body {
     p {
         transform: rotate(270deg);
         white-space: nowrap;
-        font-size: 43px;
+        font-size: max(2.24vw, 32px); // 43px
     }
 }
 
 // reverse color
 .reverse_color {
     position: fixed;
-    right: 40px;
-    bottom: 40px;
+    right: max(2.08vmax, 30px); // 40px
+    bottom: max(2.08vmax, 30px); // 40px
     width: auto;
     height: auto;
     display: block;
@@ -78,6 +78,7 @@ body {
     &:hover{transform:scale(1.15);}
     .circleLogo {
         display: block;
+        width: 8.64vmax; // auto
         fill: var(--color);
     }
 }

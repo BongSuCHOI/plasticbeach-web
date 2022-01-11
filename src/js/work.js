@@ -121,7 +121,7 @@ const bind_detail = {
                 div.setAttribute("name", data[I].name);
                 div.setAttribute("category", data[I].category);
                 detailHtml = `
-                    <div class="swiper img_slide">
+                    <div class="swiper slide-${data[I].name}">
                         <div class="swiper-wrapper">
                             ${detailData[I].imgName.map(name => `
                                 <div class="swiper-slide">
@@ -160,6 +160,27 @@ const bind_detail = {
                 li.appendChild(btn);
                 li.appendChild(div);
                 ul.appendChild(li);
+
+                // swiper
+                const swiper = new Swiper(`.slide-${data[I].name}`, {
+                    modules: [
+                        Pagination,
+                        Navigation,
+                        Lazy
+                    ],
+                    speed: 500,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    preloadImages: false,
+                    lazy: {
+                        loadPrevNext : true,
+                    }
+                });
             }
         }
 
@@ -168,9 +189,8 @@ const bind_detail = {
             addList(++pageNum);
             observer.unobserve(entry.target);
             ioReStart(observer);
-            // 아코디언, 슬라이드 에러 발견
+            // 아코디언 에러 발견 (scrollTo랑 mouseOverTooltip버그 발견)
             accordion.open();
-            slider();
         }, { threshold: 0.1 });
 
         const ioReStart = (intersectionObserver) => {
@@ -188,7 +208,6 @@ const bind_detail = {
         ioReStart(io);
 
         accordion.open();
-        slider();
     },
 
     scroll: () => {
@@ -320,29 +339,6 @@ const accordion = {
     }
 }
 
-// detail slider
-const slider = () => {
-    return new Swiper('.img_slide', {
-        modules: [
-            Pagination,
-            Navigation,
-            Lazy
-        ],
-        speed: 500,
-        // autoHeight: true,
-        pagination: {
-            el: '.swiper-pagination',
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        preloadImages: false,
-        lazy: {
-            loadPrevNext : true,
-        },
-    });
-}
 // Work List Category
 const workCategory = (e) => {
     const lists = document.querySelectorAll('.work_list .list');
