@@ -31,9 +31,11 @@ class DomTextBind extends GetData{
     }
 
     async init() {
-        await this._workData.then(res => this.workData = res);
-        await this._textData.then(res => this.textData = res);
-        
+        await Promise.all([this._workData, this._textData]).then(datas => {
+            this.workData = datas[0];
+            this.textData = datas[1];
+        });
+
         this.bind();
         Convert.setData([this.workData, this.textData]);
         Work(this.workData);
@@ -334,3 +336,12 @@ domTextBind.init();
 customCursor.create();
 circleLogoAnimation.bindSGV();
 marquee(".marquee", 0.2);
+
+/**
+ * 인트로는 MutationObserver으로 document에 변화를 감시하다가(load="ing"같은 attr)
+ * 돔이 로드되고 난 후에(load이벤트 또는 기타 등등... [노마드 코더 리액트 예제에 있던 호출에 1초정도 걸리던 api가져와서 테스트해보면 좋을듯])
+ * 인트로가 아직도 재생중이면, 인트로가 끝날때까지 기다리고 끝나면 감시하던 속성을 변경해서 인트로를 종료
+ * 반대로 인트로가 끝났는데 아직도 돔이 로드되고 있으면, 로드가 끝날때까지 인트로 유지 후 로드가 끝나면 감시하던 속성을 변경해서 인트로를 종료
+ * 감시하던 속성(attr같은) 제거 후
+ * MutationObserver 종료 (일시정지 X)
+**/

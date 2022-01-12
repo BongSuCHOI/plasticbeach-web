@@ -11,7 +11,7 @@ import platformCheck from './module/PlatformCheck.js';
 
 // Prod Data
 const prodData = (data) => {
-    bind_detail.init(data)
+    bind_work.init(data)
     mouseOverTooltip(data);
 }
 
@@ -73,8 +73,8 @@ const mouseOverTooltip = (data) => {
     });
 }
 
-// detail bind
-const bind_detail = {
+// work bind
+const bind_work = {
     importImgs: (r) => {
         let images = {};
         r.keys().map(item => images[item.replace('./', '')] = r(item) );
@@ -82,9 +82,9 @@ const bind_detail = {
     },
 
     init: (data) => {
-        const imgs = bind_detail.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
-        bind_detail.bind(data, imgs)
-        bind_detail.scroll();
+        const imgs = bind_work.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
+        bind_work.bind(data, imgs)
+        bind_work.scroll();
     },
 
     bind: (data, imgs) => {
@@ -252,6 +252,15 @@ const bind_detail = {
             workCategory(e);
         }));
     }
+}
+
+// work list event
+const listEvent = {
+    // 아코디언 함수
+    // 스크롤 이동 함수
+    // 비디오 툴팁 함수
+
+    // 이렇게 work list 그리는 부분, list에 걸리는 이벤트 부분을 나누자
 }
 
 // Accordion
