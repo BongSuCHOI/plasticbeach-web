@@ -11,13 +11,13 @@ import platformCheck from './module/PlatformCheck.js';
 
 // Prod Data
 const prodData = (data) => {
-    mouseOverTooltip(data);
     bind_detail.init(data)
+    mouseOverTooltip(data);
 }
 
 // Mouse Over Tooltip
 const mouseOverTooltip = (data) => {
-    if (!platformCheck()) { return }
+    if (!platformCheck()) return;
     
     const embedUrl = data.map(d => d.url);
     const tooltipBox = document.querySelector(".tooltip_box");
@@ -106,7 +106,7 @@ const bind_detail = {
                 let I = i - 1;
                 let detailHtml;
 
-                if (I == data.length) break
+                if (I == data.length) break;
 
                 // list
                 li.setAttribute("class", "list");
@@ -240,7 +240,10 @@ const bind_detail = {
             let scrollToHere = list.offsetTop;
             
             observer.observe(list, {attributeFilter: ['style']});
-            btn.addEventListener("click", () => bodyScrollBar.scrollTo(0, scrollToHere, 700))
+            btn.addEventListener("click", (e) => {
+                bodyScrollBar.scrollTo(0, scrollToHere, 700)
+                e.stopImmediatePropagation();
+            })
         })
         
         // workListCategory
