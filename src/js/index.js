@@ -81,7 +81,30 @@ class DomTextBind extends GetData{
             }
         }
 
-        // work는 lazy-loading때문에 우선 work.js로 뺏음 나중에 리팩토링
+        // work
+        workData.forEach(data => {
+            const li = document.createElement("li");
+            const btn = document.createElement("button");
+            const div = document.createElement("div");
+
+            // list
+            li.setAttribute("class", "list");
+            li.setAttribute("name", data.name);
+            li.setAttribute("category", data.category);
+            btn.setAttribute("class", "Nefarious toggle_font");
+            btn.setAttribute("data-content", data.title.en);
+            btn.innerHTML = data.title.en;
+
+            // detail(accordion menu)
+            div.setAttribute("class", "detail");
+            div.setAttribute("name", data.name);
+            div.setAttribute("category", data.category);
+            
+            // append
+            li.appendChild(btn);
+            li.appendChild(div);
+            parent.appendChild(li);
+        })
 
         bindFuc(textArr, 'content');
         bindFuc(budgietArr, 'budgiet');

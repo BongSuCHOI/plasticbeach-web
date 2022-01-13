@@ -25,7 +25,6 @@
                 & + label {
                     display: block;
                     width: 100%;
-                    // padding-bottom: 7px;
                     padding-left: max(2.3437vw, 34px); // 45px
                     white-space: nowrap;
                     font-weight: 700;
@@ -67,6 +66,7 @@
                     text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
                     color: var(--color);
                     border-bottom: 2px solid var(--color);
+                    transition: all 0.3s linear;
                     &::before{
                         content: "";
                         position: absolute;

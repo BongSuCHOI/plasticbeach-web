@@ -11,70 +11,12 @@ import platformCheck from './module/PlatformCheck.js';
 
 // Prod Data
 const prodData = (data) => {
-    bind_work.init(data)
-    mouseOverTooltip(data);
+    bind_detail.init(data);
+    listEvent.overEvent.tooltip(data);
 }
 
-// Mouse Over Tooltip
-const mouseOverTooltip = (data) => {
-    if (!platformCheck()) return;
-    
-    const embedUrl = data.map(d => d.url);
-    const tooltipBox = document.querySelector(".tooltip_box");
-    const iframe = document.createElement("iframe");
-    const hoverBox = document.querySelectorAll(".work_list .list button");
-    
-    iframe.setAttribute("class", "video_tooltip");
-    iframe.setAttribute("name", "work");
-    iframe.setAttribute("frameborder", "0");
-    iframe.width = "560";
-    iframe.height = "315";
-    tooltipBox.appendChild(iframe);
-
-    hoverBox.forEach((obj, i) => {
-        obj.addEventListener("mouseenter", function() {
-            gsap.to(".cursor", {
-                duration: 0.1,
-                scale: 1.8,
-                mixBlendMode: "difference"
-            })
-            gsap.to(tooltipBox, {
-                duration: 0.3,
-                opacity: 1,
-                display: "block",
-            })
-            iframe.src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
-        });
-        
-        obj.addEventListener("mousemove", (e) => {
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-
-            tooltipBox.style.left = mouseX + "px";
-            tooltipBox.style.top = mouseY - tooltipBox.clientHeight + "px";
-
-            if (tooltipBox.offsetTop < 0) {
-                tooltipBox.style.top = mouseY + "px";
-            }
-        });
-
-        obj.addEventListener("mouseleave", function() {
-            gsap.to(".cursor", {
-                duration: 0.1,
-                scale: 1,
-                mixBlendMode: "normal"
-            })
-            gsap.to(tooltipBox, {
-                duration: 0.3,
-                opacity: 0,
-                display: "none",
-            })
-        });
-    });
-}
-
-// work bind
-const bind_work = {
+// detail bind
+const bind_detail = {
     importImgs: (r) => {
         let images = {};
         r.keys().map(item => images[item.replace('./', '')] = r(item) );
@@ -82,14 +24,13 @@ const bind_work = {
     },
 
     init: (data) => {
-        const imgs = bind_work.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
-        bind_work.bind(data, imgs)
-        bind_work.scroll();
+        const imgs = bind_detail.importImgs(require.context('../images/img', false, /\.(jpe?g|png|gif)$/));
+        bind_detail.bind(data, imgs);
     },
 
     bind: (data, imgs) => {
         const detailData = data.map(d => d.detail);
-        const ul = document.querySelector(".work_list");
+        const lists = document.querySelectorAll(".list");
         const winHeight = window.innerHeight;
         const listHeight = document.querySelector(".disposable").clientHeight;
         const lengthMath = Math.floor(winHeight / listHeight);
@@ -100,26 +41,13 @@ const bind_work = {
 
         const addList = () => {
             for (let i = (pageNum - 1) * listLength + 1; i <= pageNum * listLength; i++) {
-                const li = document.createElement("li");
-                const btn = document.createElement("button");
-                const div = document.createElement("div");
                 let I = i - 1;
                 let detailHtml;
 
                 if (I == data.length) break;
 
-                // list
-                li.setAttribute("class", "list");
-                li.setAttribute("name", data[I].name);
-                li.setAttribute("category", data[I].category);
-                btn.setAttribute("class", "Nefarious toggle_font");
-                btn.setAttribute("data-content", data[I].title.en);
-                btn.innerHTML = data[I].title.en;
-
+                const detail = lists[I].querySelector(".detail");
                 // detail(accordion menu)
-                div.setAttribute("class", "detail");
-                div.setAttribute("name", data[I].name);
-                div.setAttribute("category", data[I].category);
                 detailHtml = `
                     <div class="swiper slide-${data[I].name}">
                         <div class="swiper-wrapper">
@@ -154,12 +82,7 @@ const bind_work = {
                         </div>
                     </div>
                 `;
-                div.innerHTML = detailHtml;
-                
-                // append
-                li.appendChild(btn);
-                li.appendChild(div);
-                ul.appendChild(li);
+                detail.innerHTML = detailHtml;
 
                 // swiper
                 const swiper = new Swiper(`.slide-${data[I].name}`, {
@@ -189,12 +112,10 @@ const bind_work = {
             addList(++pageNum);
             observer.unobserve(entry.target);
             ioReStart(observer);
-            // 아코디언 에러 발견 (scrollTo랑 mouseOverTooltip버그 발견)
-            accordion.open();
+            listEvent.clickEvent();
         }, { threshold: 0.1 });
 
         const ioReStart = (intersectionObserver) => {
-            const lists = document.querySelectorAll(".list");
             lists.forEach(list => {
                 if (!list.nextSibling && pageNum < Math.ceil(data.length/listLength)) {
                     intersectionObserver.observe(list)
@@ -207,17 +128,18 @@ const bind_work = {
         addList();
         ioReStart(io);
 
-        accordion.open();
+        listEvent.smoothScroll();
+        listEvent.clickEvent();
     },
+}
 
-    scroll: () => {
-        const radios = document.querySelectorAll('[type=radio]');
-        const lists = document.querySelectorAll('.list');
+// work list event
+const listEvent = {
+    smoothScroll: () => {
         const scroller = document.querySelector(".scroll_box");
         const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
         bodyScrollBar.track.yAxis.element.remove();
         bodyScrollBar.track.xAxis.element.remove();
-
         // to keep ScrollTrigger and Smooth Scrollbar in sync
         ScrollTrigger.scrollerProxy(scroller, {
             scrollTop(value) {
@@ -227,67 +149,107 @@ const bind_work = {
                 return bodyScrollBar.scrollTop;
             }
         });
-
         // update ScrollTrigger when scrollbar updates
         bodyScrollBar.addListener(ScrollTrigger.update);
 
-        // scrollTo
-        lists.forEach(list => {
-            const btn = list.querySelector('button');
-            const observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => scrollToHere = mutation.target.offsetTop);
+        return bodyScrollBar;
+    },
+
+    overEvent: {
+        tooltip: (data) => {
+            if (!platformCheck()) return;
+
+            const embedUrl = data.map(d => d.url);
+            const tooltipBox = document.querySelector(".tooltip_box");
+            const iframe = document.createElement("iframe");
+            const hoverBox = document.querySelectorAll(".work_list .list button");
+
+            iframe.setAttribute("class", "video_tooltip");
+            iframe.setAttribute("name", "work");
+            iframe.setAttribute("frameborder", "0");
+            iframe.width = "560";
+            iframe.height = "315";
+            tooltipBox.appendChild(iframe);
+
+            hoverBox.forEach((obj, i) => {
+                obj.addEventListener("mouseenter", function() {
+                    const tl = gsap.timeline();
+                    tl
+                    .to(".cursor", {
+                        duration: 0.1,
+                        scale: 1.8,
+                        mixBlendMode: "difference",
+                    })
+                    .to(this, {
+                        duration: 0.3,
+                        letterSpacing: "3px",
+                    }, "<")
+                    .to(tooltipBox, {
+                        duration: 0.3,
+                        opacity: 1,
+                        display: "block",
+                    }, "<");
+                    iframe.src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
+                });
+
+                obj.addEventListener("mouseleave", function() {
+                    const tl = gsap.timeline();
+                    tl
+                    .to(".cursor", {
+                        duration: 0.1,
+                        scale: 1,
+                        mixBlendMode: "normal",
+                    })
+                    .to(this, {
+                        duration: 0.3,
+                        "letter-spacing": "0",
+                    }, "<")
+                    .to(tooltipBox, {
+                        duration: 0.3,
+                        opacity: 0,
+                        display: "none",
+                    }, "<");
+                });
+                
+                obj.addEventListener("mousemove", (e) => {
+                    const mouseX = e.clientX;
+                    const mouseY = e.clientY;
+
+                    tooltipBox.style.left = mouseX + "px";
+                    tooltipBox.style.top = mouseY - tooltipBox.clientHeight + "px";
+
+                    if (tooltipBox.offsetTop < 0) {
+                        tooltipBox.style.top = mouseY + "px";
+                    }
+                });
             });
-            let scrollToHere = list.offsetTop;
-            
-            observer.observe(list, {attributeFilter: ['style']});
-            btn.addEventListener("click", (e) => {
-                bodyScrollBar.scrollTo(0, scrollToHere, 700)
-                e.stopImmediatePropagation();
-            })
-        })
+        },
+    },
+
+    clickEvent: () => {
+        const bodyScrollBar = listEvent.smoothScroll();
+        const lists = document.querySelectorAll('.list');
+        const tooltip = document.querySelector('.tooltip_box');
+        const radios = document.querySelectorAll('[type=radio]');
         
-        // workListCategory
+        // category
         radios.forEach(elem => elem.addEventListener('click', (e) => {
             bodyScrollBar.scrollTo(0, 0, 500);
             workCategory(e);
         }));
-    }
-}
 
-// work list event
-const listEvent = {
-    // 아코디언 함수
-    // 스크롤 이동 함수
-    // 비디오 툴팁 함수
-
-    // 이렇게 work list 그리는 부분, list에 걸리는 이벤트 부분을 나누자
-}
-
-// Accordion
-const accordion = {
-    open: () => {
-        const lists = document.querySelectorAll('.list');
         lists.forEach(list => {
-            const tooltip = document.querySelector('.tooltip_box');
-            const btn = list.querySelector("button");
+            const btn = list.querySelector('button');
             const detail = list.querySelector(".detail");
-
-            btn.addEventListener('click', () => {
-                if (!detail.classList.contains("open")) {
-                    accordion.clear();
-                    openD();
-                    detail.classList.add("open");
-                } else {
-                    closeD();
-                    detail.classList.remove("open");
-                }
-                gsap.to(tooltip, {
-                    duration: 0.3,
-                    opacity: 0,
-                    display: "none"
-                })
+            
+            // scrollTo
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => scrollToHere = mutation.target.offsetTop)
             });
+            let scrollToHere = list.offsetTop;
+            observer.observe(list, {attributeFilter: ['style']});
 
+            // accordion
             const openD = () => {
                 const tl = gsap.timeline();
                 return tl
@@ -303,9 +265,7 @@ const accordion = {
                     borderWidth: 2,
                     ease: "power4.inOut",
                 }, "<")
-
             }
-
             const closeD = () => {
                 const tl = gsap.timeline();
                 return tl
@@ -321,34 +281,49 @@ const accordion = {
                     ease: "power4.inOut"
                 }, "<");
             }
-        });
-    },
+            const clear = (e) => {
+                const target = e.currentTarget.parentElement;
+                const siblings = t => [...t.parentElement.children].filter(s => s != t)
+                siblings(target).forEach(e => {
+                    const btnAll = e.querySelector("button");
+                    const detailAll = e.querySelector(".detail");
+                    const tl = gsap.timeline();
+                    tl
+                    .to(btnAll, {
+                        duration: 0.5,
+                        "--width": "0%",
+                        ease: "expo.in"
+                    })
+                    .to(detailAll, {
+                        duration: 0.4,
+                        height: 0,
+                        borderWidth: 0,
+                        ease: "power4.inOut"
+                    }, "<");
+                    detailAll.classList.remove("open");
+                })
+            }
 
-    clear: () => {
-        const lists = document.querySelectorAll('.list');
-        lists.forEach(list => {
-            const btn = list.querySelector("button");
-            const detail = list.querySelector(".detail");
-            
-            if (!detail.classList.contains("open")) return;
-    
-            const tl = gsap.timeline();
-            tl
-            .to(btn, {
-                duration: 0.5,
-                "--width": "0%",
-                ease: "expo.in"
+            // event
+            btn.addEventListener("click", (e) => {
+                bodyScrollBar.scrollTo(0, scrollToHere, 700);
+                if (!detail.classList.contains("open")) {
+                    clear(e);
+                    openD();
+                    detail.classList.add("open");
+                } else {
+                    closeD();
+                    detail.classList.remove("open");
+                }
+                gsap.to(tooltip, {
+                    duration: 0.3,
+                    opacity: 0,
+                    display: "none"
+                });
+                e.stopImmediatePropagation();
             })
-            .to(detail, {
-                duration: 0.4,
-                height: 0,
-                borderWidth: 0,
-                ease: "power4.inOut"
-            }, "<");
-    
-            detail.classList.remove("open");
-        });
-    }
+        })
+    },
 }
 
 // Work List Category
