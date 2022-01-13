@@ -189,7 +189,7 @@ const listEvent = {
                         opacity: 1,
                         display: "block",
                     }, "<");
-                    iframe.src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
+                    // iframe.src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
                 });
 
                 obj.addEventListener("mouseleave", function() {
