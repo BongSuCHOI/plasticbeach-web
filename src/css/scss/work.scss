@@ -2,7 +2,9 @@
 @import "mixin";
 
 // click animation variables
-.list {--width: 0%;}
+.list {
+    --width: 0%;
+}
 
 // work_box
 .work_box {
@@ -40,12 +42,12 @@
             }
         }
     }
-    .scroll_box{
+    .scroll_box {
         width: 100%;
         height: 100%;
         .work_list {
             width: 100%;
-            .disposable{
+            .disposable {
                 width: 100%;
                 height: 8.7vw;
             }
@@ -66,8 +68,7 @@
                     text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
                     color: var(--color);
                     border-bottom: 2px solid var(--color);
-                    transition: all 0.3s linear;
-                    &::before{
+                    &::before {
                         content: "";
                         position: absolute;
                         left: 0;
@@ -76,7 +77,7 @@
                         height: 100%;
                         background: var(--color);
                     }
-                    &::after{
+                    &::after {
                         content: attr(data-content);
                         overflow: hidden;
                         position: absolute;
@@ -103,16 +104,19 @@
                         display: block;
                         width: 100%;
                     }
-                    .swiper-wrapper{
-                        .swiper-slide{transform: translate3d(0, 0, 0);}
+                    .swiper-wrapper {
+                        .swiper-slide {
+                            transform: translate3d(0, 0, 0);
+                        }
                     }
-                    .swiper-button-next, .swiper-button-prev{
+                    .swiper-button-next,
+                    .swiper-button-prev {
                         z-index: 1;
                         width: 30px;
                         height: 30px;
                         margin-top: 0;
                         cursor: none;
-                        &::after{
+                        &::after {
                             width: 100%;
                             height: 100%;
                             text-indent: -9999999px;
@@ -122,21 +126,25 @@
                             background-size: cover;
                             background-repeat: no-repeat;
                         }
-                        &.swiper-button-next{
+                        &.swiper-button-next {
                             right: 30px;
-                            &::after{background-image: url("../../images/btn/slide_next.png");}
+                            &::after {
+                                background-image: url("../../images/btn/slide_next.png");
+                            }
                         }
-                        &.swiper-button-prev{
+                        &.swiper-button-prev {
                             left: 30px;
-                            &::after{background-image: url("../../images/btn/slide_prev.png");}
+                            &::after {
+                                background-image: url("../../images/btn/slide_prev.png");
+                            }
                         }
                     }
-                    .swiper-pagination{
+                    .swiper-pagination {
                         bottom: 24px;
-                        .swiper-pagination-bullet{
+                        .swiper-pagination-bullet {
                             background: $white;
                             opacity: 0.6;
-                            &.swiper-pagination-bullet-active{
+                            &.swiper-pagination-bullet-active {
                                 opacity: 1;
                             }
                         }
@@ -144,31 +152,38 @@
                 }
                 .info_box {
                     display: flex;
-                    & > div{
+                    & > div {
                         flex-shrink: 0;
                         width: 50%;
                         padding: max(1.5625vw, 22px); // 30px
-                        p, a{font-weight: 500;}
-                        img{display: block;}
+                        p,
+                        a {
+                            font-weight: 500;
+                        }
+                        img {
+                            display: block;
+                        }
                     }
-                    .left{
+                    .left {
                         display: flex;
                         flex-wrap: wrap;
                         align-content: space-between;
-                        .project_name{
-                            .year{display: block;}
+                        .project_name {
+                            .year {
+                                display: block;
+                            }
                             font-size: max(2.6562vw, 38px); // 51px
                             color: var(--color);
                         }
-                        .link{
+                        .link {
                             @include text_underline(var(--color));
                             font-size: max(1.25vw, 18px); // 24px
                             color: var(--color);
                         }
                     }
-                    .right{
+                    .right {
                         border-left: 2px solid var(--color);
-                        p{
+                        p {
                             line-height: 1.3;
                             font-size: max(1.25vw, 18px); // 24px
                             color: var(--color);
