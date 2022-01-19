@@ -183,44 +183,24 @@ const customCursor = {
 
     // Hover Effect
     hoverEffect: () => {
-        const cursorLine = document.querySelector(".cursor .line");
-        const hoverElem = document.querySelector(".cursor .hover");
+        const cursor = document.querySelector(".cursor");
+        const hoverElem = cursor.querySelector(".hover");
         const targets = document.querySelectorAll(".cursor_effect");
         const tArr = [...targets];
 
         // Mouse Enter Effect
         const enterEffect = () => {
-            const tl = gsap.timeline();
-            tl.to(cursorLine, {
+            return gsap.to(hoverElem, {
                 duration: 0.3,
-                scale: 0,
-            }).to(
-                hoverElem,
-                {
-                    duration: 0.3,
-                    scale: 1,
-                },
-                "<"
-            );
-
-            return tl;
+                scale: 1,
+            });
         };
         // Mouse Leave Effect
         const leaveEffect = () => {
-            const tl = gsap.timeline();
-            tl.to(hoverElem, {
+            return gsap.to(hoverElem, {
                 duration: 0.3,
                 scale: 0,
-            }).to(
-                cursorLine,
-                {
-                    duration: 0.3,
-                    scale: 1,
-                },
-                "<"
-            );
-
-            return tl;
+            });
         };
         tArr.forEach((obj) => {
             obj.addEventListener("mouseenter", enterEffect);
