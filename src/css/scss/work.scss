@@ -68,7 +68,6 @@
                     text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
                     color: var(--color);
                     border-bottom: 2px solid var(--color);
-                    cursor: pointer;
                     &::before {
                         content: "";
                         position: absolute;

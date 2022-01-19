@@ -1,95 +1,153 @@
 @charset "utf-8";
 
 /* font */
-@font-face{
-	font-family: "Noto Sans KR";
-	font-style: normal;
-	font-weight: 400;
-	src:url('../../fonts/NotoSansKR-Regular.woff2') format('woff2'),
-		url('../../fonts/NotoSansKR-Regular.woff') format('woff'),
-		url('../../fonts/NotoSansKR-Regular.ttf') format('truetype');
-	unicode-range: U+AC00-D7A3;
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../../fonts/NotoSansKR-Regular.woff2") format("woff2"), url("../../fonts/NotoSansKR-Regular.woff") format("woff"), url("../../fonts/NotoSansKR-Regular.ttf") format("truetype");
+    unicode-range: U+AC00-D7A3;
 }
-@font-face{
-	font-family: "Noto Sans KR";
-	font-style: normal;
-	font-weight: 500;
-	src:url('../../fonts/NotoSansKR-Medium.woff2') format('woff2'),
-		url('../../fonts/NotoSansKR-Medium.woff') format('woff'),
-		url('../../fonts/NotoSansKR-Medium.ttf') format('truetype');
-	unicode-range: U+AC00-D7A3;
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../../fonts/NotoSansKR-Medium.woff2") format("woff2"), url("../../fonts/NotoSansKR-Medium.woff") format("woff"), url("../../fonts/NotoSansKR-Medium.ttf") format("truetype");
+    unicode-range: U+AC00-D7A3;
 }
-@font-face{
-	font-family: "Noto Sans KR";
-	font-style: normal;
-	font-weight: 700;
-	src:url('../../fonts/NotoSansKR-Bold.woff2') format('woff2'),
-		url('../../fonts/NotoSansKR-Bold.woff') format('woff'),
-		url('../../fonts/NotoSansKR-Bold.ttf') format('truetype');
-	unicode-range: U+AC00-D7A3;
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../../fonts/NotoSansKR-Bold.woff2") format("woff2"), url("../../fonts/NotoSansKR-Bold.woff") format("woff"), url("../../fonts/NotoSansKR-Bold.ttf") format("truetype");
+    unicode-range: U+AC00-D7A3;
 }
-@font-face{
-	font-family: "Montserrat";
-	font-style: normal;
-	font-weight: 400;
-	src:url('../../fonts/Montserrat-Regular.woff2') format('woff2'),
-		url('../../fonts/Montserrat-Regular.woff') format('woff'),
-		url('../../fonts/Montserrat-Regular.ttf') format('truetype');
-	unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../../fonts/Montserrat-Regular.woff2") format("woff2"), url("../../fonts/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat-Regular.ttf") format("truetype");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
 }
-@font-face{
-	font-family: "Montserrat";
-	font-style: normal;
-	font-weight: 500;
-	src:url('../../fonts/Montserrat-Medium.woff2') format('woff2'),
-		url('../../fonts/Montserrat-Medium.woff') format('woff'),
-		url('../../fonts/Montserrat-Medium.ttf') format('truetype');
-	unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../../fonts/Montserrat-Medium.woff2") format("woff2"), url("../../fonts/Montserrat-Medium.woff") format("woff"), url("../../fonts/Montserrat-Medium.ttf") format("truetype");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
 }
-@font-face{
-	font-family: "Montserrat";
-	font-style: normal;
-	font-weight: 700;
-	src:url('../../fonts/Montserrat-Bold.woff2') format('woff2'),
-		url('../../fonts/Montserrat-Bold.woff') format('woff'),
-		url('../../fonts/Montserrat-Bold.ttf') format('truetype');
-	unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../../fonts/Montserrat-Bold.woff2") format("woff2"), url("../../fonts/Montserrat-Bold.woff") format("woff"), url("../../fonts/Montserrat-Bold.ttf") format("truetype");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
 }
-@font-face{
-	font-family: "Nefarious";
-	font-style: normal;
-	font-weight: 400;
-	src:url('../../fonts/Nefarious.otf') format('opentype'),
-		url('../../fonts/Nefarious.woff2') format('woff2'),
-		url('../../fonts/Nefarious.woff') format('woff'),
-		url('../../fonts/Nefarious.ttf') format('truetype');
-	unicode-range: U+0061-007A, U+0030-0039;
+@font-face {
+    font-family: "Nefarious";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../../fonts/Nefarious.otf") format("opentype"), url("../../fonts/Nefarious.woff2") format("woff2"), url("../../fonts/Nefarious.woff") format("woff"),
+        url("../../fonts/Nefarious.ttf") format("truetype");
+    unicode-range: U+0061-007A, U+0030-0039;
 }
-.Nefarious{
-	font-family: 'Nefarious', serif;
-	text-shadow: -0.1px 0 var(--color), 0 0.1px var(--color), 0.1px 0 var(--color), 0 -0.1px var(--color);
-	font-weight: bold;
+.Nefarious {
+    font-family: "Nefarious", serif;
+    text-shadow: -0.1px 0 var(--color), 0 0.1px var(--color), 0.1px 0 var(--color), 0 -0.1px var(--color);
+    font-weight: bold;
 }
 
 /* common */
-*{margin:0; padding:0; box-sizing: border-box;}
-html,body,th,td,input,select,textarea,button{font-family:"Noto Sans KR", "Montserrat", sans-serif; font-weight:400; font-size:max(0.8333vw, 13px); color: #000; line-height: 1; letter-spacing: -0.5px;}
-fieldset,img{border:0}
-dl,ul,ol,menu,li{list-style:none}
-input,select,textarea,button{vertical-align:middle; outline: none;}
-button{border:none; background:none; outline: none;}
-a{color:#000;text-decoration:none}
-address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
-input[type="button"]{appearance:none;}
-select::-ms-expand{display: none;}
-::-webkit-scrollbar{display: none;}
-textarea{resize:none;}
-body{position:relative;}
-table{padding:0; border:0; border-spacing:0px; border-collapse:collapse;}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+html,
+body,
+th,
+td,
+input,
+select,
+textarea,
+button {
+    font-family: "Noto Sans KR", "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: max(0.8333vw, 13px);
+    color: #000;
+    line-height: 1;
+    letter-spacing: -0.5px;
+}
+fieldset,
+img {
+    border: 0;
+}
+dl,
+ul,
+ol,
+menu,
+li {
+    list-style: none;
+}
+input,
+select,
+textarea,
+button {
+    vertical-align: middle;
+    outline: none;
+}
+button {
+    border: none;
+    background: none;
+    outline: none;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+input[type="button"] {
+    appearance: none;
+}
+select::-ms-expand {
+    display: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+textarea {
+    resize: none;
+}
+body {
+    position: relative;
+}
+table {
+    padding: 0;
+    border: 0;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
 
 /*ios에서 인풋들 모서리 라운딩과 상단 그림자 제거*/
-input, textarea, select{border-radius:0; -webkit-appearance:none;}
-*{-webkit-tap-highlight-color: transparent;}
+input,
+textarea,
+select {
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 
 /* ios font-size 16px 미만일때 포커스시 줌되는 현상 수정 */
 // input[type="text"], input[type="password"], input[type="number"], textarea{
@@ -98,14 +156,20 @@ input, textarea, select{border-radius:0; -webkit-appearance:none;}
 
 /* 텍스트 선택, 드래그, 더블클릭 막기 :not()은 예외처리 */
 // *:not(input){user-select: none;}
-.user_select_text{user-select: text !important;}
+.user_select_text {
+    user-select: text !important;
+}
 
 /* global */
-.show{display:block !important;}
-.hide{display:none !important;}
+.show {
+    display: block !important;
+}
+.hide {
+    display: none !important;
+}
 
 // modal 오픈시 스크롤 막기
-.scrollX{
+.scrollX {
     overflow: hidden !important;
     touch-action: none;
 }

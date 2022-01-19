@@ -121,21 +121,34 @@ const customCursor = {
         }
 
         const cursor = document.querySelector(".cursor");
+        const dot = document.querySelector(".cursor_dot");
         const tooltipBox = document.querySelector(".tooltip_box");
-        const pos = {
+        const cursorPos = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2,
+        };
+        const dotPos = {
             x: window.innerWidth / 2,
             y: window.innerHeight / 2,
         };
         const mouse = {
-            x: pos.x,
-            y: pos.y,
+            x: cursorPos.x,
+            y: cursorPos.y,
         };
-        const speed = 0.1;
+        const cursorSpeed = 1;
+        const dotSpeed = 0.05;
         const cursorSetX = gsap.quickSetter(cursor, "x", "px");
         const cursorSetY = gsap.quickSetter(cursor, "y", "px");
+        const dotSetX = gsap.quickSetter(dot, "x", "px");
+        const dotSetY = gsap.quickSetter(dot, "y", "px");
         const tooltipSetX = gsap.quickSetter(tooltipBox, "x", "px");
         const tooltipSetY = gsap.quickSetter(tooltipBox, "y", "px");
         gsap.set(cursor, {
+            xPercent: -50,
+            yPercent: -50,
+            opacity: 0,
+        });
+        gsap.set(dot, {
             xPercent: -50,
             yPercent: -50,
             opacity: 0,
@@ -144,20 +157,28 @@ const customCursor = {
         window.addEventListener(
             "mousemove",
             () => {
-                gsap.to(cursor, {
+                const tl = gsap.timeline();
+                tl.to(cursor, {
                     opacity: 1,
                     duration: 0.3,
-                });
+                }).to(
+                    dot,
+                    {
+                        opacity: 1,
+                        duration: 0.3,
+                    },
+                    "<"
+                );
             },
             { once: true }
         );
 
-        customCursor.run({ pos, mouse, speed, cursorSetX, cursorSetY, tooltipSetX, tooltipSetY });
+        customCursor.run({ cursorPos, dotPos, mouse, cursorSpeed, dotSpeed, cursorSetX, cursorSetY, dotSetX, dotSetY, tooltipSetX, tooltipSetY });
     },
 
     // Update Coordinate
     run: (rest) => {
-        const { pos, mouse, speed, cursorSetX, cursorSetY, tooltipSetX, tooltipSetY } = rest;
+        const { cursorPos, dotPos, mouse, cursorSpeed, dotSpeed, cursorSetX, cursorSetY, dotSetX, dotSetY, tooltipSetX, tooltipSetY } = rest;
 
         window.addEventListener("mousemove", (e) => {
             mouse.x = e.x;
@@ -167,15 +188,21 @@ const customCursor = {
         // Follow Mouse
         gsap.ticker.add(() => {
             // adjust speed for higher refresh monitors
-            const cursorDT = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
-            const tooltipDT = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
-            let cursorPosX = (pos.x += (mouse.x - pos.x) * cursorDT);
-            let cursorPosY = (pos.y += (mouse.y - pos.y) * cursorDT);
-            let tooltipPosX = (pos.x += (mouse.x - pos.x) * tooltipDT);
-            let tooltipPosY = (pos.y += (mouse.y - pos.y) * tooltipDT);
+            const cursorDT = 1.0 - Math.pow(1.0 - cursorSpeed, gsap.ticker.deltaRatio());
+            const dotDT = 1.0 - Math.pow(1.0 - dotSpeed, gsap.ticker.deltaRatio());
+            const tooltipDT = 1.0 - Math.pow(1.0 - dotSpeed, gsap.ticker.deltaRatio());
+
+            let cursorPosX = (cursorPos.x += (mouse.x - cursorPos.x) * cursorDT);
+            let cursorPosY = (cursorPos.y += (mouse.y - cursorPos.y) * cursorDT);
+            let dotPosX = (dotPos.x += (mouse.x - dotPos.x) * dotDT);
+            let dotPosY = (dotPos.y += (mouse.y - dotPos.y) * dotDT);
+            let tooltipPosX = (dotPos.x += (mouse.x - dotPos.x) * tooltipDT);
+            let tooltipPosY = (dotPos.y += (mouse.y - dotPos.y) * tooltipDT);
 
             cursorSetX(cursorPosX);
             cursorSetY(cursorPosY);
+            dotSetX(dotPosX);
+            dotSetY(dotPosY);
             tooltipSetX(tooltipPosX);
             tooltipSetY(tooltipPosY);
         });
@@ -183,10 +210,26 @@ const customCursor = {
 
     // Hover Effect
     hoverEffect: () => {
-        const cursor = document.querySelector(".cursor");
-        const hoverElem = cursor.querySelector(".hover");
+        const hoverElem = document.querySelector(".cursor_dot .hover");
         const targets = document.querySelectorAll(".cursor_effect");
         const tArr = [...targets];
+        
+        // 테스트
+        const cursor = document.querySelector(".cursor");
+        const cursorText = document.querySelector(".cursor_text");
+        const cursorPointer = document.querySelector(".cursor_pointer");
+        cursorText.addEventListener("mouseenter", () => {
+            cursor.classList.add("text");
+        });
+        cursorText.addEventListener("mouseleave", () => {
+            cursor.classList.remove("text");
+        });
+        cursorPointer.addEventListener("mouseenter", () => {
+            cursor.classList.add("pointer");
+        });
+        cursorPointer.addEventListener("mouseleave", () => {
+            cursor.classList.remove("pointer");
+        });
 
         // Mouse Enter Effect
         const enterEffect = () => {
