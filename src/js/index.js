@@ -213,22 +213,26 @@ const customCursor = {
         const hoverElem = document.querySelector(".cursor_dot .hover");
         const targets = document.querySelectorAll(".cursor_effect");
         const tArr = [...targets];
-        
+
         // 테스트
         const cursor = document.querySelector(".cursor");
         const cursorText = document.querySelector(".cursor_text");
         const cursorPointer = document.querySelector(".cursor_pointer");
         cursorText.addEventListener("mouseenter", () => {
             cursor.classList.add("text");
+            cursor.classList.remove("default");
         });
         cursorText.addEventListener("mouseleave", () => {
             cursor.classList.remove("text");
+            cursor.classList.add("default");
         });
         cursorPointer.addEventListener("mouseenter", () => {
             cursor.classList.add("pointer");
+            cursor.classList.remove("default");
         });
         cursorPointer.addEventListener("mouseleave", () => {
             cursor.classList.remove("pointer");
+            cursor.classList.add("default");
         });
 
         // Mouse Enter Effect
