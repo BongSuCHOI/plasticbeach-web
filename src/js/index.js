@@ -1,310 +1,106 @@
-// library import
-import { gsap } from "gsap";
-
 // data
 import workJson from "./data/work.json";
 import textJson from "./data/text.json";
 
-// module import
-import Work from "./work.js";
-import Contact from "./contact.js";
-import Convert from "./module/Convert.js";
-import platformCheck from "./module/PlatformCheck.js";
+// module
+import Work from "./work";
+import Contact from "./contact";
+import Convert from "./module/convert";
+import CustomCursor from "./module/customCursor";
+import SymbolAnimation from "./module/symbolAnimation";
+import Marquee from "./module/marquee";
 
 // css import
 import styleCSS from "../css/scss/style.scss";
 
-// Get Data
-class GetData {
-    constructor(_workData, _textData) {
-        this._workData = fetch(workJson).then((workRes) => workRes.json());
-        this._textData = fetch(textJson).then((textRes) => textRes.json());
-    }
+// get data
+async function getData() {
+    const work = await (await fetch(workJson)).json();
+    const text = await (await fetch(textJson)).json();
+    const dataAll = await Promise.all([work, text]);
+    return {
+        workData: dataAll[0],
+        textData: dataAll[1],
+    };
 }
 
-// DOM text bind
-class DomTextBind extends GetData {
-    constructor(_workData, _textData) {
-        super(_workData, _textData);
-        this.workData;
-        this.textData;
-    }
+// bind dom
+async function bindDom() {
+    const { workData, textData } = await getData();
+    const parent = document.querySelector(".work_list");
+    const textArr = Object.entries(textData[0]);
+    const budgietArr = Object.entries(textData[1]);
+    const timelineArr = Object.entries(textData[2]);
 
-    async init() {
-        await Promise.all([this._workData, this._textData]).then((datas) => {
-            this.workData = datas[0];
-            this.textData = datas[1];
+    // select options
+    const selectOptions = (variable, name) => {
+        variable.forEach((obj) => {
+            const val = obj[1];
+            const parent = document.querySelector(`select.${name}`);
+            const html = document.createElement("option");
+            html.innerHTML = val.en;
+            parent.appendChild(html);
         });
+    };
 
-        this.bind();
-        Work(this.workData);
-        Contact.init();
-        Convert.setData([this.workData, this.textData]);
-        customCursor.hoverEffect();
-    }
+    // contents
+    textArr.forEach((data) => {
+        const key = data[0];
+        const val = data[1];
+        const target = document.querySelector(`[data-name='${key}']`);
+        target.innerHTML = val.en;
 
-    bind() {
-        const workData = this.workData;
-        const textData = this.textData;
-        const parent = document.querySelector(".work_list");
-        const textArr = Object.entries(textData[0]);
-        const budgietArr = Object.entries(textData[1]);
-        const timelineArr = Object.entries(textData[2]);
+        // marquee text (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+        if (target.classList.contains("marquee_text")) {
+            target.innerHTML = val.en + val.en;
+        }
+        // input placeholder (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+        if (target.hasAttribute("placeholder")) {
+            target.innerHTML = "";
+            target.setAttribute("placeholder", val.en);
+        }
+    });
 
-        // contents
-        const bindFuc = (variable, name) => {
-            if (name == "content") {
-                variable.forEach((obj) => {
-                    const key = obj[0];
-                    const val = obj[1];
-                    const target = document.querySelector(`[data-name='${key}']`);
-                    target.innerHTML = val.en;
+    // work
+    workData.forEach((data) => {
+        const li = document.createElement("li");
+        const btn = document.createElement("button");
+        const div = document.createElement("div");
 
-                    // marquee text
-                    if (target.classList.contains("marquee_text")) {
-                        target.innerHTML = val.en + val.en;
-                    }
-                    // contact input placeholder
-                    if (target.hasAttribute("placeholder")) {
-                        target.innerHTML = "";
-                        target.setAttribute("placeholder", val.en);
-                    }
-                });
-            } else if (name == "budgiet" || name == "timeline") {
-                variable.forEach((obj) => {
-                    const val = obj[1];
-                    const parent = document.querySelector(`select.${name}`);
-                    const html = document.createElement("option");
-                    html.innerHTML = val.en;
-                    parent.appendChild(html);
-                });
-            }
-        };
+        // make list
+        li.setAttribute("class", "list");
+        li.setAttribute("name", data.name);
+        li.setAttribute("category", data.category);
+        btn.setAttribute("class", "Nefarious toggle_font cursor_effect");
+        btn.setAttribute("data-content", data.title.en);
+        btn.innerHTML = data.title.en;
 
-        // work
-        workData.forEach((data) => {
-            const li = document.createElement("li");
-            const btn = document.createElement("button");
-            const div = document.createElement("div");
+        // detail(accordion menu)
+        div.setAttribute("class", "detail");
+        div.setAttribute("name", data.name);
+        div.setAttribute("category", data.category);
 
-            // list
-            li.setAttribute("class", "list");
-            li.setAttribute("name", data.name);
-            li.setAttribute("category", data.category);
-            btn.setAttribute("class", "Nefarious toggle_font cursor_effect");
-            btn.setAttribute("data-content", data.title.en);
-            btn.innerHTML = data.title.en;
+        // append
+        li.appendChild(btn);
+        li.appendChild(div);
+        parent.appendChild(li);
+    });
 
-            // detail(accordion menu)
-            div.setAttribute("class", "detail");
-            div.setAttribute("name", data.name);
-            div.setAttribute("category", data.category);
-
-            // append
-            li.appendChild(btn);
-            li.appendChild(div);
-            parent.appendChild(li);
-        });
-
-        bindFuc(textArr, "content");
-        bindFuc(budgietArr, "budgiet");
-        bindFuc(timelineArr, "timeline");
-    }
+    selectOptions(budgietArr, "budgiet");
+    selectOptions(timelineArr, "timeline");
+    Work(workData);
+    Convert.setData({ workData, textData });
 }
-
-// Custom Cursor
-const customCursor = {
-    // Cursor Init
-    init: () => {
-        if (!platformCheck()) {
-            return;
-        }
-
-        const cursor = document.querySelector(".cursor");
-        const dot = document.querySelector(".cursor_dot");
-        const tooltipBox = document.querySelector(".tooltip_box");
-        const cursorPos = {
-            x: window.innerWidth / 2,
-            y: window.innerHeight / 2,
-        };
-        const dotPos = {
-            x: window.innerWidth / 2,
-            y: window.innerHeight / 2,
-        };
-        const mouse = {
-            x: cursorPos.x,
-            y: cursorPos.y,
-        };
-        const cursorSpeed = 1;
-        const dotSpeed = 0.05;
-        const cursorSetX = gsap.quickSetter(cursor, "x", "px");
-        const cursorSetY = gsap.quickSetter(cursor, "y", "px");
-        const dotSetX = gsap.quickSetter(dot, "x", "px");
-        const dotSetY = gsap.quickSetter(dot, "y", "px");
-        const tooltipSetX = gsap.quickSetter(tooltipBox, "x", "px");
-        const tooltipSetY = gsap.quickSetter(tooltipBox, "y", "px");
-        gsap.set(cursor, {
-            xPercent: -50,
-            yPercent: -50,
-            opacity: 0,
-        });
-        gsap.set(dot, {
-            xPercent: -50,
-            yPercent: -50,
-            opacity: 0,
-        });
-
-        window.addEventListener(
-            "mousemove",
-            () => {
-                const tl = gsap.timeline();
-                tl.to(cursor, {
-                    opacity: 1,
-                    duration: 0.3,
-                }).to(
-                    dot,
-                    {
-                        opacity: 1,
-                        duration: 0.3,
-                    },
-                    "<"
-                );
-            },
-            { once: true }
-        );
-
-        customCursor.run({ cursorPos, dotPos, mouse, cursorSpeed, dotSpeed, cursorSetX, cursorSetY, dotSetX, dotSetY, tooltipSetX, tooltipSetY });
-    },
-
-    // Update Coordinate
-    run: (rest) => {
-        const { cursorPos, dotPos, mouse, cursorSpeed, dotSpeed, cursorSetX, cursorSetY, dotSetX, dotSetY, tooltipSetX, tooltipSetY } = rest;
-
-        window.addEventListener("mousemove", (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        // Follow Mouse
-        gsap.ticker.add(() => {
-            // adjust speed for higher refresh monitors
-            const cursorDT = 1.0 - Math.pow(1.0 - cursorSpeed, gsap.ticker.deltaRatio());
-            const dotDT = 1.0 - Math.pow(1.0 - dotSpeed, gsap.ticker.deltaRatio());
-            const tooltipDT = 1.0 - Math.pow(1.0 - dotSpeed, gsap.ticker.deltaRatio());
-
-            let cursorPosX = (cursorPos.x += (mouse.x - cursorPos.x) * cursorDT);
-            let cursorPosY = (cursorPos.y += (mouse.y - cursorPos.y) * cursorDT);
-            let dotPosX = (dotPos.x += (mouse.x - dotPos.x) * dotDT);
-            let dotPosY = (dotPos.y += (mouse.y - dotPos.y) * dotDT);
-            let tooltipPosX = (dotPos.x += (mouse.x - dotPos.x) * tooltipDT);
-            let tooltipPosY = (dotPos.y += (mouse.y - dotPos.y) * tooltipDT);
-
-            cursorSetX(cursorPosX);
-            cursorSetY(cursorPosY);
-            dotSetX(dotPosX);
-            dotSetY(dotPosY);
-            tooltipSetX(tooltipPosX);
-            tooltipSetY(tooltipPosY);
-        });
-    },
-
-    // Hover Effect
-    hoverEffect: () => {
-        const hoverElem = document.querySelector(".cursor_dot .hover");
-        const targets = document.querySelectorAll(".cursor_effect");
-        const tArr = [...targets];
-
-        // 테스트
-        const cursor = document.querySelector(".cursor");
-        const cursorText = document.querySelector(".cursor_text");
-        const cursorPointer = document.querySelector(".cursor_pointer");
-        cursorText.addEventListener("mouseenter", () => {
-            cursor.classList.add("text");
-            cursor.classList.remove("default");
-        });
-        cursorText.addEventListener("mouseleave", () => {
-            cursor.classList.remove("text");
-            cursor.classList.add("default");
-        });
-        cursorPointer.addEventListener("mouseenter", () => {
-            cursor.classList.add("pointer");
-            cursor.classList.remove("default");
-        });
-        cursorPointer.addEventListener("mouseleave", () => {
-            cursor.classList.remove("pointer");
-            cursor.classList.add("default");
-        });
-
-        // Mouse Enter Effect
-        const enterEffect = () => {
-            return gsap.to(hoverElem, {
-                duration: 0.3,
-                scale: 1,
-            });
-        };
-        // Mouse Leave Effect
-        const leaveEffect = () => {
-            return gsap.to(hoverElem, {
-                duration: 0.3,
-                scale: 0,
-            });
-        };
-        tArr.forEach((obj) => {
-            obj.addEventListener("mouseenter", enterEffect);
-            obj.addEventListener("mouseleave", leaveEffect);
-        });
-    },
-};
-
-// Marquee
-const marquee = (selector, speed) => {
-    const parentElem = document.querySelector(selector);
-    const childElem = parentElem.children[0];
-    const copyText = childElem.innerText;
-    childElem.append(copyText);
-    let i = 0;
-
-    setInterval(function () {
-        childElem.style.marginTop = `${i}px`;
-        if (i > childElem.clientWidth / 2) {
-            i = 0;
-        }
-        i = i + speed;
-    }, 0);
-};
-
-// Circle Logo Animation
-const circleLogoAnimation = () => {
-    const parentBtn = document.querySelector(".reverse_color");
-    const target = parentBtn.querySelector(".circleLogo");
-
-    gsap.from(target, {
-        duration: 10,
-        repeat: -1,
-        ease: "none",
-        rotate: -360,
-    });
-
-    // Hover Animation Speed
-    const hover = gsap.to(target, {
-        duration: 0.8,
-        repeat: -1,
-        ease: "none",
-        rotate: 360,
-        paused: true,
-    });
-    target.addEventListener("mouseenter", () => hover.play());
-    target.addEventListener("mouseleave", () => hover.pause());
-};
-
-// instance
-const domTextBind = new DomTextBind();
 
 // run
-domTextBind.init();
-customCursor.init();
-circleLogoAnimation();
-marquee(".marquee", 0.2);
+async function run() {
+    await bindDom();
+    Contact.init();
+    CustomCursor();
+    SymbolAnimation();
+    Marquee(".marquee", 0.2);
+}
+run();
 
 /**
  * 인트로는 MutationObserver으로 document에 변화를 감시하다가(load="ing"같은 attr)

@@ -7,264 +7,265 @@ import "swiper/css/bundle";
 gsap.registerPlugin(ScrollTrigger);
 
 // module import
-import platformCheck from "./module/PlatformCheck.js";
+import platformCheck from "./module/platformCheck.js";
 
 // Prod Data
-const prodData = (data) => {
-    bind_detail.init(data);
-    listEvent.overEvent(data);
-};
+function prodData(data) {
+    bindDetail(data);
+    listOverEvent(data);
+}
 
-// detail bind
-const bind_detail = {
-    importImgs: (r) => {
-        let images = {};
-        r.keys().map((item) => (images[item.replace("./", "")] = r(item)));
-        return images;
-    },
+// import work detail img
+function importImgs(r) {
+    let images = {};
+    r.keys().map((item) => (images[item.replace("./", "")] = r(item)));
+    return images;
+}
 
-    init: (data) => {
-        const imgs = bind_detail.importImgs(require.context("../images/img", false, /\.(jpe?g|png|gif)$/));
-        bind_detail.bind(data, imgs);
-    },
+// bind work detail (lazy-loading)
+function bindDetail(data) {
+    const detailData = data.map((d) => d.detail);
+    const imgs = importImgs(require.context("../images/img", false, /\.(jpe?g|png|gif)$/));
+    const lists = document.querySelectorAll(".list");
 
-    bind: (data, imgs) => {
-        const detailData = data.map((d) => d.detail);
-        const lists = document.querySelectorAll(".list");
-        const winHeight = window.innerHeight;
-        const listHeight = document.querySelector(".disposable").clientHeight;
-        const lengthMath = Math.floor(winHeight / listHeight);
-        const listLength = lengthMath + Math.round(lengthMath / 2);
-        let pageNum = 1;
+    // 처음 화면에 보여질 리스트 갯수 계산
+    const winHeight = window.innerHeight;
+    const listHeight = document.querySelector(".disposable").clientHeight;
+    const lengthMath = Math.floor(winHeight / listHeight);
+    const listLength = lengthMath + Math.round(lengthMath / 2);
+    let pageNum = 1;
 
-        document.querySelector(".disposable").remove();
+    // 계산 후 삭제 되는 일회성 element
+    document.querySelector(".disposable").remove();
 
-        const addList = () => {
-            for (let i = (pageNum - 1) * listLength + 1; i <= pageNum * listLength; i++) {
-                let I = i - 1;
-                let detailHtml;
+    // 계산 한 갯수의 리스트에만 상세내용 bind
+    const addDetail = () => {
+        for (let i = (pageNum - 1) * listLength + 1; i <= pageNum * listLength; i++) {
+            let I = i - 1;
+            const detail = lists[I].querySelector(".detail");
+            if (I == data.length) break;
 
-                if (I == data.length) break;
-
-                const detail = lists[I].querySelector(".detail");
-                // detail(accordion menu)
-                detailHtml = `
-                    <div class="swiper slide-${data[I].name}">
-                        <div class="swiper-wrapper">
-                            ${detailData[I].imgName
-                                .map(
-                                    (name) => `
-                                <div class="swiper-slide">
-                                    <img data-src="${imgs[name]}" alt="" class="swiper-lazy" />
-                                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-                                </div>
-                            `
-                                )
-                                .join("")}
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
+            detail.innerHTML = `
+                <div class="swiper slide-${data[I].name}">
+                    <div class="swiper-wrapper">
+                        ${detailData[I].imgName
+                            .map(
+                                (name) => `
+                            <div class="swiper-slide">
+                                <img data-src="${imgs[name]}" alt="" class="swiper-lazy" />
+                                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                            </div>
+                        `
+                            )
+                            .join("")}
                     </div>
-                    <div class="info_box">
-                        <div class="left">
-                            <p class="project_name">
-                                <span class="year">${data[I].year}</span>
-                                ${data[I].title.en.toUpperCase()}
-                            </p>
-                            <a class="link" href="https://www.youtube.com/watch?v=${data[I].url}" target="_blank">WATCH ON YOUTUBE</a>
-                        </div>
-                        <div class="right">
-                            <p>VFX. ${detailData[I].vfx}</p>
-                            <p>VFX Supervisor. ${detailData[I].sv}</p>
-                            <p>VFX Assistant Supervisor. ${detailData[I].asv}</p>
-                            <p>VFX Project Manager. ${detailData[I].pm}</p>
-                            <p>VFX Producer. ${detailData[I].pd}</p>
-                            <p>3D Artist. ${detailData[I].art3d}</p>
-                            <p>2D Artist. ${detailData[I].art2d}</p>
-                            <p>FX Artist. ${detailData[I].fx}</p>
-                        </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="info_box">
+                    <div class="left">
+                        <p class="project_name">
+                            <span class="year">${data[I].year}</span>
+                            ${data[I].title.en.toUpperCase()}
+                        </p>
+                        <a class="link" href="https://www.youtube.com/watch?v=${data[I].url}" target="_blank">WATCH ON YOUTUBE</a>
                     </div>
-                `;
-                detail.innerHTML = detailHtml;
+                    <div class="right">
+                        <p>VFX. ${detailData[I].vfx}</p>
+                        <p>VFX Supervisor. ${detailData[I].sv}</p>
+                        <p>VFX Assistant Supervisor. ${detailData[I].asv}</p>
+                        <p>VFX Project Manager. ${detailData[I].pm}</p>
+                        <p>VFX Producer. ${detailData[I].pd}</p>
+                        <p>3D Artist. ${detailData[I].art3d}</p>
+                        <p>2D Artist. ${detailData[I].art2d}</p>
+                        <p>FX Artist. ${detailData[I].fx}</p>
+                    </div>
+                </div>
+            `;
 
-                // swiper
-                const swiper = new Swiper(`.slide-${data[I].name}`, {
-                    modules: [Pagination, Navigation, Lazy],
-                    speed: 500,
-                    pagination: {
-                        el: ".swiper-pagination",
-                    },
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    preloadImages: false,
-                    lazy: {
-                        loadPrevNext: true,
-                    },
-                });
+            // swiper(각 리스트마다)
+            const swiper = new Swiper(`.slide-${data[I].name}`, {
+                modules: [Pagination, Navigation, Lazy],
+                speed: 500,
+                pagination: {
+                    el: ".swiper-pagination",
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                preloadImages: false,
+                lazy: {
+                    loadPrevNext: true,
+                },
+            });
+        }
+    };
+
+    // intersection observer
+    const io = new IntersectionObserver(([entry], observer) => {
+        if (!entry.isIntersecting) return;
+        addDetail(++pageNum);
+        observer.unobserve(entry.target);
+        ioReStart(observer);
+        listClickEvent();
+    });
+
+    // restart intersection observer
+    const ioReStart = (intersectionObserver) => {
+        const currentLoadSwiper = document.querySelectorAll(".swiper");
+        const lastElem = currentLoadSwiper[currentLoadSwiper.length - 1];
+        const currentLastLi = lastElem.parentElement.parentElement;
+        const totalPageNum = Math.ceil(data.length / listLength);
+
+        if (pageNum < totalPageNum) {
+            intersectionObserver.observe(currentLastLi);
+        } else if (pageNum >= totalPageNum) {
+            intersectionObserver.disconnect();
+        }
+    };
+
+    addDetail();
+    ioReStart(io);
+    smoothScroll();
+    listClickEvent();
+}
+
+// smoothScroll
+function smoothScroll() {
+    const scroller = document.querySelector(".scroll_box");
+    const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
+    bodyScrollBar.track.yAxis.element.remove();
+    bodyScrollBar.track.xAxis.element.remove();
+
+    // to keep ScrollTrigger and Smooth Scrollbar in sync
+    ScrollTrigger.scrollerProxy(scroller, {
+        scrollTop(value) {
+            if (arguments.length) {
+                bodyScrollBar.scrollTop = value;
             }
-        };
+            return bodyScrollBar.scrollTop;
+        },
+    });
 
-        const io = new IntersectionObserver(([entry], observer) => {
-            if (!entry.isIntersecting) return;
-            addList(++pageNum);
-            observer.unobserve(entry.target);
-            ioReStart(observer);
-            listEvent.clickEvent();
+    // update ScrollTrigger when scrollbar updates
+    bodyScrollBar.addListener(ScrollTrigger.update);
+
+    return bodyScrollBar;
+}
+
+// list mouse over event
+function listOverEvent(data) {
+    if (!platformCheck()) return;
+    const embedUrl = data.map((d) => d.url);
+    const hoverBox = document.querySelectorAll(".work_list .list button");
+    const tooltipBox = document.querySelector(".tooltip_box");
+    const iframe = document.querySelector(".video_tooltip");
+
+    // mouse enter/leave event
+    const enterFuc = () => {
+        return gsap.to(tooltipBox, {
+            duration: 0.3,
+            opacity: 1,
+            display: "block",
         });
-
-        const ioReStart = (intersectionObserver) => {
-            const currentLoadSwiper = document.querySelectorAll(".swiper");
-            const lastElem = currentLoadSwiper[currentLoadSwiper.length - 1];
-            const currentLastLi = lastElem.parentElement.parentElement;
-            if (pageNum < Math.ceil(data.length / listLength)) {
-                intersectionObserver.observe(currentLastLi);
-            } else if (pageNum >= Math.ceil(data.length / listLength)) {
-                intersectionObserver.disconnect();
-            }
-        };
-
-        addList();
-        ioReStart(io);
-
-        listEvent.smoothScroll();
-        listEvent.clickEvent();
-    },
-};
-
-// work list event
-const listEvent = {
-    smoothScroll: () => {
-        const scroller = document.querySelector(".scroll_box");
-        const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
-        bodyScrollBar.track.yAxis.element.remove();
-        bodyScrollBar.track.xAxis.element.remove();
-        // to keep ScrollTrigger and Smooth Scrollbar in sync
-        ScrollTrigger.scrollerProxy(scroller, {
-            scrollTop(value) {
-                if (arguments.length) {
-                    bodyScrollBar.scrollTop = value;
-                }
-                return bodyScrollBar.scrollTop;
-            },
+    };
+    const leaveFuc = () => {
+        return gsap.to(tooltipBox, {
+            duration: 0.3,
+            opacity: 0,
+            display: "block",
         });
-        // update ScrollTrigger when scrollbar updates
-        bodyScrollBar.addListener(ScrollTrigger.update);
+    };
 
-        return bodyScrollBar;
-    },
+    // eventlistener and embed url
+    hoverBox.forEach((obj, i) => {
+        const src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
 
-    overEvent: (data) => {
-        if (!platformCheck()) return;
+        obj.addEventListener("mouseenter", () => {
+            enterFuc();
+            iframe.src = src;
+        });
+        obj.addEventListener("mouseleave", leaveFuc);
+    });
+}
 
-        const embedUrl = data.map((d) => d.url);
-        const hoverBox = document.querySelectorAll(".work_list .list button");
-        const tooltipBox = document.querySelector(".tooltip_box");
-        const iframe = document.querySelector(".video_tooltip");
+// list click event
+function listClickEvent() {
+    const bodyScrollBar = smoothScroll();
+    const lists = document.querySelectorAll(".list");
+    const tooltip = document.querySelector(".tooltip_box");
+    const radios = document.querySelectorAll("[type=radio]");
 
-        // Mouse Enter Effect
-        const enterEffect = (e) => {
+    // click
+    lists.forEach((list) => {
+        const btn = list.querySelector("button");
+        const detail = list.querySelector(".detail");
+
+        // 카테고리 변경 할 때마다 각 리스트 offsetTop 재계산
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => (scrollToHere = mutation.target.offsetTop));
+        });
+        let scrollToHere = list.offsetTop;
+        observer.observe(list, { attributeFilter: ["style"] });
+
+        // accordion open
+        const open = () => {
             const tl = gsap.timeline();
-            // .to(e.currentTarget, {
-            //     duration: 0.3,
-            //     letterSpacing: "3px",
-            // })
-            tl.to(
-                tooltipBox,
+            tl.to(btn, {
+                duration: 0.5,
+                "--width": "100%",
+                ease: "expo.in",
+            }).to(
+                detail,
                 {
-                    duration: 0.3,
-                    opacity: 1,
-                    display: "block",
+                    force3D: true,
+                    duration: 0.4,
+                    height: detail.scrollHeight + "px",
+                    borderWidth: 2,
+                    ease: "power4.inOut",
                 },
                 "<"
             );
-
             return tl;
         };
-        // Mouse Leave Effect
-        const leaveEffect = (e) => {
+
+        // accordion close
+        const close = () => {
             const tl = gsap.timeline();
-            // .to(e.currentTarget, {
-            //     duration: 0.3,
-            //     letterSpacing: "0px",
-            // })
-            tl.to(
-                tooltipBox,
+            tl.to(btn, {
+                duration: 0.5,
+                "--width": "0%",
+                ease: "expo.in",
+            }).to(
+                detail,
                 {
-                    duration: 0.3,
-                    opacity: 0,
-                    display: "block",
+                    duration: 0.4,
+                    height: 0,
+                    borderWidth: 0,
+                    ease: "power4.inOut",
                 },
                 "<"
             );
-
             return tl;
         };
-        hoverBox.forEach((obj, i) => {
-            obj.addEventListener("mouseenter", (e) => {
-                enterEffect(e);
-                iframe.src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
-            });
-            obj.addEventListener("mouseleave", leaveEffect);
-        });
-    },
 
-    clickEvent: () => {
-        const bodyScrollBar = listEvent.smoothScroll();
-        const lists = document.querySelectorAll(".list");
-        const tooltip = document.querySelector(".tooltip_box");
-        const radios = document.querySelectorAll("[type=radio]");
+        // accordion clear(all close)
+        const clear = (e) => {
+            const target = e.currentTarget.parentElement;
+            const siblings = [...target.parentElement.children].filter((sibling) => sibling != target);
 
-        // category
-        radios.forEach((elem) =>
-            elem.addEventListener("click", (e) => {
-                bodyScrollBar.scrollTo(0, 0, 500);
-                workCategory(e);
-            })
-        );
-
-        lists.forEach((list) => {
-            const btn = list.querySelector("button");
-            const detail = list.querySelector(".detail");
-
-            // scrollTo
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => (scrollToHere = mutation.target.offsetTop));
-            });
-            let scrollToHere = list.offsetTop;
-            observer.observe(list, { attributeFilter: ["style"] });
-
-            // accordion
-            const openD = () => {
+            siblings.forEach((elem) => {
+                const btnAll = elem.querySelector("button");
+                const detailAll = elem.querySelector(".detail");
                 const tl = gsap.timeline();
-                tl.to(btn, {
-                    duration: 0.5,
-                    "--width": "100%",
-                    ease: "expo.in",
-                }).to(
-                    detail,
-                    {
-                        force3D: true,
-                        duration: 0.4,
-                        height: detail.scrollHeight + "px",
-                        borderWidth: 2,
-                        ease: "power4.inOut",
-                    },
-                    "<"
-                );
-
-                return tl;
-            };
-            const closeD = () => {
-                const tl = gsap.timeline();
-                tl.to(btn, {
+                tl.to(btnAll, {
                     duration: 0.5,
                     "--width": "0%",
                     ease: "expo.in",
                 }).to(
-                    detail,
+                    detailAll,
                     {
                         duration: 0.4,
                         height: 0,
@@ -273,60 +274,43 @@ const listEvent = {
                     },
                     "<"
                 );
-
-                return tl;
-            };
-            const clear = (e) => {
-                const target = e.currentTarget.parentElement;
-                const siblings = (t) => [...t.parentElement.children].filter((s) => s != t);
-                siblings(target).forEach((e) => {
-                    const btnAll = e.querySelector("button");
-                    const detailAll = e.querySelector(".detail");
-                    const tl = gsap.timeline();
-                    tl.to(btnAll, {
-                        duration: 0.5,
-                        "--width": "0%",
-                        ease: "expo.in",
-                    }).to(
-                        detailAll,
-                        {
-                            duration: 0.4,
-                            height: 0,
-                            borderWidth: 0,
-                            ease: "power4.inOut",
-                        },
-                        "<"
-                    );
-                    detailAll.classList.remove("open");
-                });
-            };
-
-            // event
-            btn.addEventListener("click", (e) => {
-                bodyScrollBar.scrollTo(0, scrollToHere, 700);
-
-                if (!detail.classList.contains("open")) {
-                    clear(e);
-                    openD();
-                    detail.classList.add("open");
-                } else {
-                    closeD();
-                    detail.classList.remove("open");
-                }
-                gsap.to(tooltip, {
-                    duration: 0.3,
-                    opacity: 0,
-                    display: "none",
-                });
-
-                e.stopImmediatePropagation();
+                detailAll.classList.remove("open");
             });
-        });
-    },
-};
+        };
 
-// Work List Category
-const workCategory = (e) => {
+        // event
+        btn.addEventListener("click", (e) => {
+            bodyScrollBar.scrollTo(0, scrollToHere, 700);
+            clear(e);
+            open();
+
+            if (detail.classList.contains("open")) {
+                close();
+                detail.classList.remove("open");
+            }
+
+            gsap.to(tooltip, {
+                duration: 0.3,
+                opacity: 0,
+                display: "none",
+            });
+
+            detail.classList.add("open");
+            e.stopImmediatePropagation();
+        });
+    });
+
+    // category scroll
+    radios.forEach((elem) =>
+        elem.addEventListener("click", (e) => {
+            bodyScrollBar.scrollTo(0, 0, 500);
+            workCategory(e);
+        })
+    );
+}
+
+// Work List Category (조건식 리팩토링 할 수 있을거같음)
+function workCategory(e) {
     const lists = document.querySelectorAll(".work_list .list");
     const radioId = e.currentTarget.id;
 
@@ -424,6 +408,6 @@ const workCategory = (e) => {
             }
         }
     });
-};
+}
 
 export default prodData;
