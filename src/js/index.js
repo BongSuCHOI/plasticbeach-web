@@ -89,13 +89,13 @@ async function bindDom() {
     selectOptions(budgietArr, "budgiet");
     selectOptions(timelineArr, "timeline");
     Work(workData);
-    Convert.setData({ workData, textData });
+    Convert({ workData, textData });
 }
 
 // run
 async function run() {
     await bindDom();
-    Contact.init();
+    Contact();
     CustomCursor();
     SymbolAnimation();
     Marquee(".marquee", 0.2);

@@ -26,21 +26,31 @@ body {
         @include flex_center;
         z-index: 999;
         position: fixed;
-        top: 0;
-        left: 0;
         opacity: 0;
         pointer-events: none;
-        &.default svg.default {
-            display: block;
-            width: 14px;
+        &.default {
+            top: 11px;
+            left: 7px;
+            svg.default {
+                display: block;
+                width: 16px;
+            }
         }
-        &.pointer svg.pointer {
-            display: block;
-            width: 18px;
+        &.pointer {
+            top: 8px;
+            left: 4px;
+            svg.pointer {
+                display: block;
+                width: 20px;
+            }
         }
-        &.text svg.text {
-            display: block;
-            height: 24px;
+        &.text {
+            top: 1px;
+            left: 2px;
+            svg.text {
+                display: block;
+                height: 26px;
+            }
         }
         svg {
             position: absolute;
