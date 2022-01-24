@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
     entry: "./src/js/index.js",
@@ -33,7 +33,7 @@ module.exports = {
         ],
         splitChunks: {
             name: "vendor",
-            filename: 'asset/js/[contenthash].js',
+            filename: "asset/js/[contenthash].js",
             chunks: "all",
         },
     },
@@ -41,7 +41,7 @@ module.exports = {
     performance: {
         hints: false,
         maxEntrypointSize: 512000,
-        maxAssetSize: 512000
+        maxAssetSize: 512000,
     },
 
     module: {
@@ -54,7 +54,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.m?js$/,
+                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: "babel-loader",
@@ -78,6 +78,9 @@ module.exports = {
             {
                 test: /\.json$/,
                 type: "asset",
+                generator: {
+                    filename: "asset/js/data/[contenthash].[ext]",
+                },
             },
             {
                 test: /\.(woff|woff2|ttf|otf)$/i,
