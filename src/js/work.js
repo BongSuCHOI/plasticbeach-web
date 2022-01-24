@@ -42,8 +42,8 @@ function bindDetail(data) {
     const addDetail = () => {
         for (let i = (pageNum - 1) * listLength + 1; i <= pageNum * listLength; i++) {
             let I = i - 1;
-            const detail = lists[I].querySelector(".detail");
             if (I == data.length) break;
+            const detail = lists[I].querySelector(".detail");
 
             detail.innerHTML = `
                 <div class="swiper slide-${data[I].name}">
