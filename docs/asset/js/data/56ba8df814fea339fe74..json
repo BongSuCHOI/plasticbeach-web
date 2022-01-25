@@ -3,17 +3,13 @@
         "year": "2021",
         "name": "aespa01",
         "url": "4TWR90KJl84",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 01테스트 01테스트 01테스트",
-            "en": "music video - gas pedal"
+            "en": "abcdefghijklmn"
         },
         "detail": {
-            "imgName": [
-                "aespa01_01.jpg",
-                "aespa01_02.jpg",
-                "aespa01_03.jpg"
-            ],
+            "imgName": ["aespa01_01.jpg", "aespa01_02.jpg", "aespa01_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -28,17 +24,13 @@
         "year": "2021",
         "name": "bigbang01",
         "url": "1CTced9CMMk",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 02테스트 02테스트 02테스트",
-            "en": "music video - 02test 02test 02test"
+            "en": "opqrstuvwxyz"
         },
         "detail": {
-            "imgName": [
-                "bigbang01_01.jpg",
-                "bigbang01_02.jpg",
-                "bigbang01_03.jpg"
-            ],
+            "imgName": ["bigbang01_01.jpg", "bigbang01_02.jpg", "bigbang01_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -48,23 +40,18 @@
             "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
             "fx": "WE JUNGIN"
         }
-        
     },
     {
         "year": "2021",
         "name": "nctu01",
         "url": "tyrVtwE8Gv0",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 03테스트 03테스트 03테스트",
             "en": "ad - 03test 03test 03test"
         },
         "detail": {
-            "imgName": [
-                "nctu01_01.jpg",
-                "nctu01_02.jpg",
-                "nctu01_03.jpg"
-            ],
+            "imgName": ["nctu01_01.jpg", "nctu01_02.jpg", "nctu01_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -79,17 +66,13 @@
         "year": "2021",
         "name": "itzy01",
         "url": "_ysomCGaZLw",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 04테스트 04테스트 04테스트",
             "en": "ad - 04test 04test 04test"
         },
         "detail": {
-            "imgName": [
-                "itzy01_01.jpg",
-                "itzy01_02.jpg",
-                "itzy01_03.jpg"
-            ],
+            "imgName": ["itzy01_01.jpg", "itzy01_02.jpg", "itzy01_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -104,17 +87,13 @@
         "year": "2021",
         "name": "izone",
         "url": "WZwr2a_lFWY",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 05테스트 05테스트 05테스트",
             "en": "music video - 05test 05test 05test"
         },
         "detail": {
-            "imgName": [
-                "izone_01.jpg",
-                "izone_02.jpg",
-                "izone_03.jpg"
-            ],
+            "imgName": ["izone_01.jpg", "izone_02.jpg", "izone_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -129,17 +108,13 @@
         "year": "2021",
         "name": "blackpink01",
         "url": "Amq-qlqbjYA",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 06테스트 06테스트 06테스트",
             "en": "music video - 06test 06test 06test"
         },
         "detail": {
-            "imgName": [
-                "blackpink01_01.jpg",
-                "blackpink01_03.jpg",
-                "blackpink01_02.jpg"
-            ],
+            "imgName": ["blackpink01_01.jpg", "blackpink01_03.jpg", "blackpink01_02.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -154,17 +129,13 @@
         "year": "2021",
         "name": "itzt02",
         "url": "pNfTK39k55U",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 07테스트 07테스트 07테스트",
             "en": "ad - 07test 07test 07test"
         },
         "detail": {
-            "imgName": [
-                "itzy02_01.jpg",
-                "itzy02_02.jpg",
-                "itzy02_03.jpg"
-            ],
+            "imgName": ["itzy02_01.jpg", "itzy02_02.jpg", "itzy02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -179,17 +150,13 @@
         "year": "2021",
         "name": "aespa02",
         "url": "ZeerrnuLi5E",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 08테스트 08테스트 08테스트",
             "en": "ad - 08test 08test 08test"
         },
         "detail": {
-            "imgName": [
-                "aespa02_01.jpg",
-                "aespa02_02.jpg",
-                "aespa02_03.jpg"
-            ],
+            "imgName": ["aespa02_01.jpg", "aespa02_02.jpg", "aespa02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -204,17 +171,13 @@
         "year": "2021",
         "name": "wannaone01",
         "url": "EVaV7AwqBWg",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 09테스트 09테스트 09테스트",
             "en": "music video - 09test 09test 09test"
         },
         "detail": {
-            "imgName": [
-                "wannaone01_01.jpg",
-                "wannaone01_02.jpg",
-                "wannaone01_03.jpg"
-            ],
+            "imgName": ["wannaone01_01.jpg", "wannaone01_02.jpg", "wannaone01_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -229,17 +192,13 @@
         "year": "2021",
         "name": "bigbang02",
         "url": "4TWR90KJl84",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 01테스트 01테스트 01테스트",
             "en": "music video - gas pedal"
         },
         "detail": {
-            "imgName": [
-                "bigbang02_01.jpg",
-                "bigbang02_02.jpg",
-                "bigbang02_03.jpg"
-            ],
+            "imgName": ["bigbang02_01.jpg", "bigbang02_02.jpg", "bigbang02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -254,17 +213,13 @@
         "year": "2021",
         "name": "blackpink02",
         "url": "1CTced9CMMk",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 02테스트 02테스트 02테스트",
             "en": "music video - 02test 02test 02test"
         },
         "detail": {
-            "imgName": [
-                "blackpink02_01.jpg",
-                "blackpink02_02.jpg",
-                "blackpink02_03.jpg"
-            ],
+            "imgName": ["blackpink02_01.jpg", "blackpink02_02.jpg", "blackpink02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -274,23 +229,18 @@
             "art2d": "JANG GIHOON / LEE HYUNJUN / SHIN HYEONSUNG",
             "fx": "WE JUNGIN"
         }
-        
     },
     {
         "year": "2021",
         "name": "bts01",
         "url": "tyrVtwE8Gv0",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 03테스트 03테스트 03테스트",
             "en": "ad - 03test 03test 03test"
         },
         "detail": {
-            "imgName": [
-                "bts01_01.jpg",
-                "bts01_02.jpg",
-                "bts01_03.jpg"
-            ],
+            "imgName": ["bts01_01.jpg", "bts01_02.jpg", "bts01_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -305,17 +255,13 @@
         "year": "2021",
         "name": "iu",
         "url": "_ysomCGaZLw",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 04테스트 04테스트 04테스트",
             "en": "ad - 04test 04test 04test"
         },
         "detail": {
-            "imgName": [
-                "iu_01.jpg",
-                "iu_02.jpg",
-                "iu_03.jpg"
-            ],
+            "imgName": ["iu_01.jpg", "iu_02.jpg", "iu_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -330,17 +276,13 @@
         "year": "2021",
         "name": "bts02",
         "url": "WZwr2a_lFWY",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 05테스트 05테스트 05테스트",
             "en": "music video - 05test 05test 05test"
         },
         "detail": {
-            "imgName": [
-                "bts02_01.jpg",
-                "bts02_02.jpg",
-                "bts02_03.jpg"
-            ],
+            "imgName": ["bts02_01.jpg", "bts02_02.jpg", "bts02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -355,17 +297,13 @@
         "year": "2021",
         "name": "nas",
         "url": "Amq-qlqbjYA",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 06테스트 06테스트 06테스트",
             "en": "music video - 06test 06test 06test"
         },
         "detail": {
-            "imgName": [
-                "nas_01.jpg",
-                "nas_02.jpg",
-                "nas_03.jpg"
-            ],
+            "imgName": ["nas_01.jpg", "nas_02.jpg", "nas_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -380,17 +318,13 @@
         "year": "2021",
         "name": "nctu02",
         "url": "pNfTK39k55U",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 07테스트 07테스트 07테스트",
             "en": "ad - 07test 07test 07test"
         },
         "detail": {
-            "imgName": [
-                "nctu02_01.jpg",
-                "nctu02_02.jpg",
-                "nctu02_03.jpg"
-            ],
+            "imgName": ["nctu02_01.jpg", "nctu02_02.jpg", "nctu02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -405,17 +339,13 @@
         "year": "2021",
         "name": "psy",
         "url": "ZeerrnuLi5E",
-        "category" : "ad",
+        "category": "ad",
         "title": {
             "ko": "광고 - 08테스트 08테스트 08테스트",
             "en": "ad - 08test 08test 08test"
         },
         "detail": {
-            "imgName": [
-                "psy_01.jpg",
-                "psy_02.jpg",
-                "psy_03.jpg"
-            ],
+            "imgName": ["psy_01.jpg", "psy_02.jpg", "psy_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
@@ -430,17 +360,13 @@
         "year": "2021",
         "name": "wannaone02",
         "url": "EVaV7AwqBWg",
-        "category" : "mv",
+        "category": "mv",
         "title": {
             "ko": "뮤직비디오 - 09테스트 09테스트 09테스트",
             "en": "music video - 09test 09test 09test"
         },
         "detail": {
-            "imgName": [
-                "wannaone02_01.jpg",
-                "wannaone02_02.jpg",
-                "wannaone02_03.jpg"
-            ],
+            "imgName": ["wannaone02_01.jpg", "wannaone02_02.jpg", "wannaone02_03.jpg"],
             "vfx": "PLASTIC BEACH",
             "sv": "OHZEON",
             "asv": "JOJEEM",
