@@ -1,3 +1,6 @@
+// library import
+import { gsap } from "gsap";
+
 // data
 import archiveJson from "./data/archive.json";
 import textJson from "./data/text.json";
@@ -92,6 +95,52 @@ async function bindDom() {
     Convert({ archiveData, textData });
 }
 
+// mobile menu convert
+function mobileMenuConvert() {
+    const contactElem = document.querySelector("div.contact");
+    const archiveElem = document.querySelector("div.archive_box");
+    const contactMenuBtn = document.querySelector("button.to_contact");
+    const archiveMenuBtn = document.querySelector("button.to_archive");
+    const tl = gsap.timeline({ duration: 0.2, ease: "power4.inOut", force3D: true });
+
+    // to contact menu
+    const toContactAni = () => {
+        tl.to(contactElem, {
+            x: 0,
+        }).to(
+            archiveElem,
+            {
+                x: 0,
+            },
+            "<"
+        );
+        archiveMenuBtn.classList.remove("on");
+        contactMenuBtn.classList.add("on");
+
+        return tl;
+    };
+
+    // to archive menu
+    const toArchiveAni = () => {
+        tl.to(contactElem, {
+            x: "-100%",
+        }).to(
+            archiveElem,
+            {
+                x: "-100%",
+            },
+            "<"
+        );
+        contactMenuBtn.classList.remove("on");
+        archiveMenuBtn.classList.add("on");
+
+        return tl;
+    };
+
+    contactMenuBtn.addEventListener("click", toContactAni);
+    archiveMenuBtn.addEventListener("click", toArchiveAni);
+}
+
 // run
 async function run() {
     await bindDom();
@@ -99,6 +148,7 @@ async function run() {
     CustomCursor();
     SymbolAnimation();
     Marquee(".marquee", 0.2);
+    mobileMenuConvert();
 }
 run();
 

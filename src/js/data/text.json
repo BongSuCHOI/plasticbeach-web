@@ -83,6 +83,14 @@
         "category_ad": {
             "ko": "광고",
             "en": "AD"
+        },
+        "mobile_contact_btn": {
+            "ko": "문의",
+            "en": "contact"
+        },
+        "mobile_archive_btn": {
+            "ko": "저장소",
+            "en": "archive"
         }
     },
     {

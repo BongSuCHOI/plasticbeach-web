@@ -15,14 +15,14 @@ function prodData(data) {
     listOverEvent(data);
 }
 
-// import work detail img
+// import archive detail img
 function importImgs(r) {
     let images = {};
     r.keys().map((item) => (images[item.replace("./", "")] = r(item)));
     return images;
 }
 
-// bind work detail (lazy-loading)
+// bind archive detail (lazy-loading)
 function bindDetail(data) {
     const detailData = data.map((d) => d.detail);
     const imgs = importImgs(require.context("../images/img", false, /\.(jpe?g|png|gif)$/));
@@ -159,7 +159,7 @@ function smoothScroll() {
 function listOverEvent(data) {
     if (!platformCheck()) return;
     const embedUrl = data.map((d) => d.url);
-    const hoverBox = document.querySelectorAll(".work_list .list button");
+    const hoverBox = document.querySelectorAll(".archive_list .list button");
     const tooltipBox = document.querySelector(".tooltip_box");
     const iframe = document.querySelector(".video_tooltip");
 
@@ -304,14 +304,14 @@ function listClickEvent() {
     radios.forEach((elem) =>
         elem.addEventListener("click", (e) => {
             bodyScrollBar.scrollTo(0, 0, 500);
-            workCategory(e);
+            archiveCategory(e);
         })
     );
 }
 
-// Work List Category (조건식 리팩토링 할 수 있을거같음)
-function workCategory(e) {
-    const lists = document.querySelectorAll(".work_list .list");
+// archive List Category (조건식 리팩토링 할 수 있을거같음)
+function archiveCategory(e) {
+    const lists = document.querySelectorAll(".archive_list .list");
     const radioId = e.currentTarget.id;
 
     lists.forEach((elem) => {

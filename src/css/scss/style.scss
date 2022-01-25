@@ -9,6 +9,7 @@ body {
     background-color: var(--background);
 }
 #contents {
+    overflow: hidden;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -131,9 +132,6 @@ body {
     border: none;
     background: initial;
     transition: transform 0.15s;
-    &:hover {
-        transform: scale(1.15);
-    }
     .circleLogo {
         display: block;
         width: 8.64vmax; // auto
@@ -141,6 +139,81 @@ body {
     }
 }
 
-/* media query */
+// menu box
+.menu_box {
+    display: none;
+}
+
+/* media query 1024 이상 */
+@media (min-width: 1024px) {
+    // reverse color
+    .reverse_color:hover {
+        transform: scale(1.15);
+    }
+}
+
+/* media query 1024 이하 */
 @media (max-width: 1023px) {
+    #contents {
+        height: calc(100vh - 50px);
+    }
+
+    // cursor custom style
+    .cursor_box {
+        display: none;
+        .cursor {
+            display: none;
+        }
+        .cursor_dot {
+            display: none;
+        }
+        .tooltip_box {
+            display: none;
+        }
+    }
+
+    // marquee
+    .marquee {
+        display: none;
+    }
+
+    // reverse color
+    .reverse_color {
+        right: auto;
+        left: 50%;
+        bottom: max(2.08vmax, 21px);
+        transform: translateX(-50%);
+        .circleLogo {
+            width: 4.64vmax;
+        }
+    }
+
+    // menu box
+    .menu_box {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        width: 100%;
+        height: 50px;
+        div {
+            width: 50%;
+            height: 100%;
+            border-top: 2px solid var(--color);
+            &:first-of-type {
+                border-right: 2px solid var(--color);
+            }
+            button {
+                width: 100%;
+                height: 100%;
+                font-size: 30px;
+                color: var(--color);
+                background: var(--background);
+                &.on {
+                    color: var(--background);
+                    background: var(--color);
+                }
+            }
+        }
+    }
 }

@@ -197,4 +197,19 @@
 
 /* media query */
 @media (max-width: 1023px) {
+    // archive_box
+    .archive_box {
+        width: 100%;
+        .scroll_box {
+            .archive_list {
+                .list {
+                    &:last-child {
+                        button {
+                            border-bottom: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
