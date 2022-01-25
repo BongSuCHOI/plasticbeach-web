@@ -1,7 +1,7 @@
 @charset "utf-8";
 @import "common";
 @import "mixin";
-@import "work";
+@import "archive";
 @import "contact";
 
 body {
@@ -15,7 +15,7 @@ body {
     height: 100vh;
     .contact,
     .marquee,
-    .work_box {
+    .archive_box {
         flex-shrink: 0;
     }
 }
@@ -139,4 +139,8 @@ body {
         width: 8.64vmax; // auto
         fill: var(--color);
     }
+}
+
+/* media query */
+@media (max-width: 1023px) {
 }

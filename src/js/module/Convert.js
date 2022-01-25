@@ -1,10 +1,10 @@
-let workData = [];
+let archiveData = [];
 let textData = [];
 let lang = "en";
 
 // Prod Data
 function prodData(data) {
-    workData = data.workData;
+    archiveData = data.archiveData;
     textData = data.textData;
 }
 
@@ -63,8 +63,8 @@ function languageConvert() {
         }
     });
 
-    // work
-    workData.forEach((data, i) => {
+    // archive
+    archiveData.forEach((data, i) => {
         const lists = document.querySelectorAll(".list");
         const target = lists[i].querySelector("button");
 

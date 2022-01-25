@@ -1,9 +1,9 @@
 // data
-import workJson from "./data/work.json";
+import archiveJson from "./data/archive.json";
 import textJson from "./data/text.json";
 
 // module
-import Work from "./work";
+import Archive from "./Archive";
 import Contact from "./contact";
 import Convert from "./module/convert";
 import CustomCursor from "./module/customCursor";
@@ -15,19 +15,19 @@ import styleCSS from "../css/scss/style.scss";
 
 // get data
 async function getData() {
-    const work = await (await fetch(workJson)).json();
+    const archive = await (await fetch(archiveJson)).json();
     const text = await (await fetch(textJson)).json();
-    const dataAll = await Promise.all([work, text]);
+    const dataAll = await Promise.all([archive, text]);
     return {
-        workData: dataAll[0],
+        archiveData: dataAll[0],
         textData: dataAll[1],
     };
 }
 
 // bind dom
 async function bindDom() {
-    const { workData, textData } = await getData();
-    const parent = document.querySelector(".work_list");
+    const { archiveData, textData } = await getData();
+    const parent = document.querySelector(".archive_list");
     const textArr = Object.entries(textData[0]);
     const budgietArr = Object.entries(textData[1]);
     const timelineArr = Object.entries(textData[2]);
@@ -61,8 +61,8 @@ async function bindDom() {
         }
     });
 
-    // work
-    workData.forEach((data) => {
+    // archive
+    archiveData.forEach((data) => {
         const li = document.createElement("li");
         const btn = document.createElement("button");
         const div = document.createElement("div");
@@ -88,8 +88,8 @@ async function bindDom() {
 
     selectOptions(budgietArr, "budgiet");
     selectOptions(timelineArr, "timeline");
-    Work(workData);
-    Convert({ workData, textData });
+    Archive(archiveData);
+    Convert({ archiveData, textData });
 }
 
 // run
