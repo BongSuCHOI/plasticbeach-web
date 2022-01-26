@@ -72,14 +72,16 @@
             <form id="contact-form">
                 <div class="contact_info">
                     <p class="Nefarious toggle_font" data-name="contact_info"></p>
-                    <div class="input_box cursor_text">
+                    <div class="input_box">
                         <input type="hidden" name="contact_number">
-                        <input type="text" name="full_name" placeholder="" data-name="cus_full_name">
-                        <input type="text" name="position" placeholder="" data-name="cus_position">
-                        <input type="text" name="organization" placeholder="" data-name="cus_organization">
-                        <input type="email" name="email" placeholder="" data-name="cus_email">
-                        <input type="tel" name="phone" placeholder="" data-name="cus_phone">
-                        <input type="url" name="url" placeholder="" data-name="cus_url">
+                        <input class="cursor_text" type="text" name="full_name" placeholder=""
+                            data-name="cus_full_name">
+                        <input class="cursor_text" type="text" name="position" placeholder="" data-name="cus_position">
+                        <input class="cursor_text" type="text" name="organization" placeholder=""
+                            data-name="cus_organization">
+                        <input class="cursor_text" type="email" name="email" placeholder="" data-name="cus_email">
+                        <input class="cursor_text" type="tel" name="phone" placeholder="" data-name="cus_phone">
+                        <input class="cursor_text" type="url" name="url" placeholder="" data-name="cus_url">
                     </div>
                 </div>
                 <div class="budgiet_info">
@@ -94,16 +96,16 @@
                     <div class="input_box">
                         <div class="text_box">
                             <p data-name="project_text"></span></p>
-                            <textarea name="describe"></textarea>
+                            <textarea class="cursor_text" name="describe"></textarea>
                         </div>
                         <div class="file_box">
                             <p data-name="project_file"></p>
                             <input class="file_name" value="">
-                            <label for="file" data-name="file_btn"></label>
+                            <label class="cursor_pointer" for="file" data-name="file_btn"></label>
                             <input type="file" id="file" name="file">
                         </div>
                     </div>
-                    <div class="chk">
+                    <div class="chk cursor_pointer">
                         <input type="checkbox" name="policy" id="policy" />
                         <label for="policy" data-name="policy_chk"></label>
                     </div>
@@ -117,15 +119,15 @@
         </div>
         <div class="archive_box">
             <div class="category">
-                <div class="radio">
+                <div class="radio cursor_pointer">
                     <input type="radio" name="category" id="all" checked />
                     <label for="all" data-name="category_all"></label>
                 </div>
-                <div class="radio">
+                <div class="radio cursor_pointer">
                     <input type="radio" name="category" id="mv" />
                     <label for="mv" data-name="category_mv"></label>
                 </div>
-                <div class="radio">
+                <div class="radio cursor_pointer">
                     <input type="radio" name="category" id="ad" />
                     <label for="ad" data-name="category_ad"></label>
                 </div>

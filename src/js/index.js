@@ -74,7 +74,7 @@ async function bindDom() {
         li.setAttribute("class", "list");
         li.setAttribute("name", data.name);
         li.setAttribute("category", data.category);
-        btn.setAttribute("class", "Nefarious toggle_font cursor_effect");
+        btn.setAttribute("class", "Nefarious toggle_font cursor_effect cursor_pointer");
         btn.setAttribute("data-content", data.title.en);
         btn.innerHTML = data.title.en;
 

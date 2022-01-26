@@ -91,8 +91,8 @@ function event() {
     const hoverSvg = document.querySelector(".cursor_dot .hover");
     const targets = document.querySelectorAll(".cursor_effect");
     const cursor = document.querySelector(".cursor");
-    const cursorText = document.querySelector(".cursor_text");
-    const cursorPointer = document.querySelector(".cursor_pointer");
+    const cursorText = document.querySelectorAll(".cursor_text");
+    const cursorPointer = document.querySelectorAll(".cursor_pointer");
     const dot = document.querySelector(".cursor_dot");
 
     // change cursor type
@@ -120,17 +120,21 @@ function event() {
     };
 
     // change cursor type - eventListener
-    cursorText.addEventListener("mouseenter", () => {
-        enterFuc("text");
+    cursorText.forEach((elem) => {
+        elem.addEventListener("mouseenter", () => {
+            enterFuc("text");
+        });
+        elem.addEventListener("mouseleave", () => {
+            leaveFuc("text");
+        });
     });
-    cursorText.addEventListener("mouseleave", () => {
-        leaveFuc("text");
-    });
-    cursorPointer.addEventListener("mouseenter", () => {
-        enterFuc("pointer");
-    });
-    cursorPointer.addEventListener("mouseleave", () => {
-        leaveFuc("pointer");
+    cursorPointer.forEach((elem) => {
+        elem.addEventListener("mouseenter", () => {
+            enterFuc("pointer");
+        });
+        elem.addEventListener("mouseleave", () => {
+            leaveFuc("pointer");
+        });
     });
 
     // mouse effect - eventListener

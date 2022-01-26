@@ -47,12 +47,12 @@ function initCustomSelect() {
 
         // wrapper
         select.parentNode.insertBefore(div, select);
-        div.className = `select_dropdown sBox${i}`;
-        button.className = `dropdown_btn`;
+        div.setAttribute("class", `select_dropdown sBox${i}`);
+        button.setAttribute("class", "dropdown_btn cursor_pointer");
         button.setAttribute("data-value", "");
         button.setAttribute("data-name", `${select.className}_default`);
         button.setAttribute("type", "button");
-        ul.className = `dropdown_list`;
+        ul.setAttribute("class", "dropdown_list");
 
         div.appendChild(select);
         div.appendChild(button);
@@ -64,7 +64,7 @@ function initCustomSelect() {
             const li = document.createElement("li");
             const optionValue = select.options[i].value;
             const optionText = document.createTextNode(select.options[i].text);
-            li.className = "select_list";
+            li.setAttribute("class", "select_list cursor_pointer");
             li.setAttribute("data-value", optionValue);
             li.setAttribute("data-name", `${select.className}_option${i}`);
             li.appendChild(optionText);
@@ -96,7 +96,8 @@ function openCSB() {
 function closeCSB() {
     document.body.addEventListener("click", (e) => {
         // 클릭한 target이 아래 class를 가진 elements가 아니면 전부 닫음
-        if (e.target.className == "dropdown_btn" || e.target.className == "placeholder" || e.target.className == "dropdown_list" || e.target.className == "select_list") return;
+        const target = e.target;
+        if (target.classList.contains("dropdown_btn") || target.classList.contains("placeholder") || target.classList.contains("dropdown_list") || target.classList.contains("select_list")) return;
 
         const activeUl = document.querySelectorAll(".dropdown_list");
         activeUl.forEach((ul) => {
@@ -109,7 +110,6 @@ function closeCSB() {
 // display custom select box
 function displayCBS(target) {
     const parent = target.parentNode;
-
     if (target.tagName == "BUTTON") {
         const dropdownList = parent.querySelector("ul.dropdown_list");
         dropdownList.classList.toggle("active");

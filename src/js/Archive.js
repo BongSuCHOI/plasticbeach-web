@@ -59,8 +59,8 @@ function bindDetail(data) {
                             )
                             .join("")}
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next cursor_pointer"></div>
+                    <div class="swiper-button-prev cursor_pointer"></div>
                     <div class="swiper-pagination"></div>
                 </div>
                 <div class="info_box">
@@ -69,7 +69,7 @@ function bindDetail(data) {
                             <span class="year">${data[I].year}</span>
                             ${data[I].title.en.toUpperCase()}
                         </p>
-                        <a class="link" href="https://www.youtube.com/watch?v=${data[I].url}" target="_blank">WATCH ON YOUTUBE</a>
+                        <a class="link cursor_pointer" href="https://www.youtube.com/watch?v=${data[I].url}" target="_blank">WATCH ON YOUTUBE</a>
                     </div>
                     <div class="right">
                         <p>VFX. ${detailData[I].vfx}</p>
