@@ -181,11 +181,11 @@ function listOverEvent(data) {
 
     // eventlistener and embed url
     hoverBox.forEach((obj, i) => {
-        const src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
+        // const src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
 
         obj.addEventListener("mouseenter", () => {
             enterFuc();
-            iframe.src = src;
+            // iframe.src = src;
         });
         obj.addEventListener("mouseleave", leaveFuc);
     });

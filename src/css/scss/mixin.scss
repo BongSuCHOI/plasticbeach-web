@@ -4,20 +4,22 @@
 :root[color-theme="white"] {
     --background: #fff;
     --color: #0035dd;
-	--select-ico: url("../../images/btn/select_box.png");
-	--check-off-ico: url("../../images/btn/chk_off.png");
-	--check-on-ico: url("../../images/btn/chk_on.png");
-	--radio-off-ico: url("../../images/btn/radio_off.png");
-	--radio-on-ico: url("../../images/btn/radio_on.png");
+    --select-ico: url("../../images/btn/select_box.png");
+    --check-off-ico: url("../../images/btn/chk_off.png");
+    --check-on-ico: url("../../images/btn/chk_on.png");
+    --radio-off-ico: url("../../images/btn/radio_off.png");
+    --radio-on-ico: url("../../images/btn/radio_on.png");
+    --shadowBox: 0px 0px 36px rgba(0, 53, 221, 0.25);
 }
 :root[color-theme="blue"] {
     --background: #0035dd;
     --color: #fff;
-	--select-ico: url("../../images/btn/select_box_w.png");
-	--check-off-ico: url("../../images/btn/chk_off_w.png");
-	--check-on-ico: url("../../images/btn/chk_on_w.png");
-	--radio-off-ico: url("../../images/btn/radio_off_w.png");
-	--radio-on-ico: url("../../images/btn/radio_on_w.png");
+    --select-ico: url("../../images/btn/select_box_w.png");
+    --check-off-ico: url("../../images/btn/chk_off_w.png");
+    --check-on-ico: url("../../images/btn/chk_on_w.png");
+    --radio-off-ico: url("../../images/btn/radio_off_w.png");
+    --radio-on-ico: url("../../images/btn/radio_on_w.png");
+    --shadowBox: 0px 0px 36px rgba(255, 255, 255, 0.35);
 }
 $white: #fff;
 $black: #000;
@@ -26,66 +28,69 @@ $blue: #0035dd;
 /* extend */
 
 /*common*/
-@mixin ellipsis($w) {//한줄 ...처리
-	width:$w;
-	overflow:hidden;
-	display:block;
-	text-overflow:ellipsis;
-	white-space:nowrap;
+@mixin ellipsis($w) {
+    //한줄 ...처리
+    width: $w;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-@mixin ellipsis2($line, $w, $h) {//여러줄 ...처리
-	overflow: hidden;
-	display:-webkit-box;
-	-webkit-line-clamp:$line;
-	width:$w;
-	height:$h;
-	-webkit-box-orient:vertical;
-	text-overflow:ellipsis;
-	white-space: normal;
-	word-wrap:break-word;
+@mixin ellipsis2($line, $w, $h) {
+    //여러줄 ...처리
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    width: $w;
+    height: $h;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
 }
-@mixin box_center($x, $y, $w, $h) {//position:absolute로 센터 정렬하기(가로만, 세로만 설정가능)
-	position: absolute;
-	left:$x;
-	top:$y;
-	width:$w;
-	height:$h;
-	@if $x == 50% and $y == 50%{
-		transform: translate(-50%, -50%);
-	}@else if $y == 50%{
-		transform: translateY(-50%);
-	}@else if $x == 50%{
-		transform: translateX(-50%);
-	}
+@mixin box_center($x, $y, $w, $h) {
+    //position:absolute로 센터 정렬하기(가로만, 세로만 설정가능)
+    position: absolute;
+    left: $x;
+    top: $y;
+    width: $w;
+    height: $h;
+    @if $x == 50% and $y == 50% {
+        transform: translate(-50%, -50%);
+    } @else if $y == 50% {
+        transform: translateY(-50%);
+    } @else if $x == 50% {
+        transform: translateX(-50%);
+    }
 }
 @mixin border($color) {
-	border:1px solid $color;
+    border: 1px solid $color;
 }
 @mixin bs_bb {
-	box-sizing:border-box;
+    box-sizing: border-box;
 }
 @mixin font_smooth {
-	transform:rotate(-0.03deg);
+    transform: rotate(-0.03deg);
 }
 @mixin flex_center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 @mixin flex_align_center {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 @mixin letter_spacing($px) {
-	letter-spacing: $px;
+    letter-spacing: $px;
 }
 @mixin text_underline($color) {
-	&::after{
-		content: "";
-		display: block;
-		width: 100%;
-		height: 2px;
-		margin-top: 1.5px;
-		background: $color;
-	}
+    &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        margin-top: 1.5px;
+        background: $color;
+    }
 }
