@@ -203,5 +203,153 @@
     // archive_box
     .archive_box {
         width: 100%;
+        .category {
+            justify-content: space-between;
+            position: relative;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: min(7.1vmax, 60px);
+            padding: 0 4.615%;
+            border-bottom: 2px solid var(--color);
+            .radio {
+                margin-right: 0;
+                input[type="radio"] {
+                    & + label {
+                        padding-left: min(6.92vmin, 35px);
+                        font-size: min(6.15vmin, 30px);
+                        background-size: min(4.87vmin, 24px);
+                    }
+                    &:checked + label {
+                        background-size: min(4.87vmin, 24px);
+                    }
+                }
+            }
+        }
+        .scroll_box {
+            // 스크롤 박스 버그
+            // 마지막 리스트가 잘려서 노출되지 않고 끝까지 스크롤이 되면 상단 카테고리도 따라 올라감.
+            // archive.js에서 모바일에선 smooth-scroll-bar 라이브러리의 scoll만 비활성화 시키고 scrollTo만 쓰는 방향으로 고쳐봐야 할 듯
+            height: 100%;
+            margin-bottom: 14.872vmin;
+            .archive_list {
+                .disposable {
+                    height: 16.666vmin;
+                }
+                .list {
+                    button {
+                        height: 16.666vmin;
+                        padding: 0 4.615%;
+                        font-size: min(9.23vmin, 60px);
+                        border-bottom: 1px solid var(--color);
+                        &::after {
+                            left: 4.615%;
+                        }
+                    }
+                } // 까지 작업
+                .detail {
+                    overflow: hidden;
+                    width: 100%;
+                    height: 0px;
+                    transition: height 0.2s ease-in-out;
+                    border-bottom: 0px solid var(--color);
+                    .swiper {
+                        width: 100%;
+                        height: auto;
+                        border-bottom: 2px solid var(--color);
+                        img {
+                            user-select: none;
+                            display: block;
+                            width: 100%;
+                        }
+                        .swiper-wrapper {
+                            .swiper-slide {
+                                transform: translate3d(0, 0, 0);
+                            }
+                        }
+                        .swiper-button-next,
+                        .swiper-button-prev {
+                            z-index: 1;
+                            width: 30px;
+                            height: 30px;
+                            margin-top: 0;
+                            cursor: none;
+                            &::after {
+                                width: 100%;
+                                height: 100%;
+                                text-indent: -9999999px;
+                                font-family: initial;
+                                font-size: 0px;
+                                background-position: center;
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                            }
+                            &.swiper-button-next {
+                                right: 30px;
+                                &::after {
+                                    background-image: url("../../images/btn/slide_next.png");
+                                }
+                            }
+                            &.swiper-button-prev {
+                                left: 30px;
+                                &::after {
+                                    background-image: url("../../images/btn/slide_prev.png");
+                                }
+                            }
+                        }
+                        .swiper-pagination {
+                            bottom: 24px;
+                            .swiper-pagination-bullet {
+                                background: $white;
+                                opacity: 0.6;
+                                &.swiper-pagination-bullet-active {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                    .info_box {
+                        display: flex;
+                        & > div {
+                            flex-shrink: 0;
+                            width: 50%;
+                            padding: max(1.5625vw, 16px); // 30px
+                            p,
+                            a {
+                                font-weight: 500;
+                            }
+                            img {
+                                display: block;
+                            }
+                        }
+                        .left {
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-content: space-between;
+                            .project_name {
+                                .year {
+                                    display: block;
+                                }
+                                font-size: max(2.6562vw, 27px); // 51px
+                                color: var(--color);
+                            }
+                            .link {
+                                @include text_underline(var(--color));
+                                font-size: max(1.25vw, 13px); // 24px
+                                color: var(--color);
+                            }
+                        }
+                        .right {
+                            border-left: 2px solid var(--color);
+                            p {
+                                line-height: 1.3;
+                                font-size: max(1.25vw, 13px); // 24px
+                                color: var(--color);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
