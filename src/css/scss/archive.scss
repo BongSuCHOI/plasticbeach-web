@@ -55,6 +55,9 @@
                 overflow: hidden;
                 position: relative;
                 width: 100%;
+                &:last-child button {
+                    border-bottom: none;
+                }
                 button {
                     position: relative;
                     overflow: hidden;
@@ -200,16 +203,5 @@
     // archive_box
     .archive_box {
         width: 100%;
-        .scroll_box {
-            .archive_list {
-                .list {
-                    &:last-child {
-                        button {
-                            border-bottom: none;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
