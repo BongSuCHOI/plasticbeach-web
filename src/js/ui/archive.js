@@ -7,7 +7,7 @@ import "swiper/css/bundle";
 gsap.registerPlugin(ScrollTrigger);
 
 // module import
-import platformCheck from "./module/platformCheck.js";
+import platformCheck from "../utils/platformCheck.js";
 
 // Prod Data
 function prodData(data) {
@@ -25,7 +25,7 @@ function importImgs(r) {
 // bind archive detail (lazy-loading)
 function bindDetail(data) {
     const detailData = data.map((d) => d.detail);
-    const imgs = importImgs(require.context("../images/img", false, /\.(jpe?g|png|gif)$/));
+    const imgs = importImgs(require.context("../../images/img", false, /\.(jpe?g|png|gif)$/));
     const lists = document.querySelectorAll(".list");
 
     // 처음 화면에 보여질 리스트 갯수 계산
@@ -212,43 +212,45 @@ function listClickEvent() {
 
         // accordion open
         const open = () => {
-            const tl = gsap.timeline();
-            tl.to(btn, {
-                duration: 0.5,
-                "--width": "100%",
-                ease: "expo.in",
-            }).to(
-                detail,
-                {
-                    force3D: true,
-                    duration: 0.4,
-                    height: detail.scrollHeight + "px",
-                    borderWidth: 2,
-                    ease: "power4.inOut",
-                },
-                "<"
-            );
-            return tl;
+            return gsap
+                .timeline()
+                .to(btn, {
+                    duration: 0.5,
+                    "--width": "100%",
+                    ease: "expo.in",
+                })
+                .to(
+                    detail,
+                    {
+                        force3D: true,
+                        duration: 0.4,
+                        height: detail.scrollHeight + "px",
+                        borderWidth: 2,
+                        ease: "power4.inOut",
+                    },
+                    "<"
+                );
         };
 
         // accordion close
         const close = () => {
-            const tl = gsap.timeline();
-            tl.to(btn, {
-                duration: 0.5,
-                "--width": "0%",
-                ease: "expo.in",
-            }).to(
-                detail,
-                {
-                    duration: 0.4,
-                    height: 0,
-                    borderWidth: 0,
-                    ease: "power4.inOut",
-                },
-                "<"
-            );
-            return tl;
+            return gsap
+                .timeline()
+                .to(btn, {
+                    duration: 0.5,
+                    "--width": "0%",
+                    ease: "expo.in",
+                })
+                .to(
+                    detail,
+                    {
+                        duration: 0.4,
+                        height: 0,
+                        borderWidth: 0,
+                        ease: "power4.inOut",
+                    },
+                    "<"
+                );
         };
 
         // accordion clear(all close)
@@ -259,21 +261,22 @@ function listClickEvent() {
             siblings.forEach((elem) => {
                 const btnAll = elem.querySelector("button");
                 const detailAll = elem.querySelector(".detail");
-                const tl = gsap.timeline();
-                tl.to(btnAll, {
-                    duration: 0.5,
-                    "--width": "0%",
-                    ease: "expo.in",
-                }).to(
-                    detailAll,
-                    {
-                        duration: 0.4,
-                        height: 0,
-                        borderWidth: 0,
-                        ease: "power4.inOut",
-                    },
-                    "<"
-                );
+                gsap.timeline()
+                    .to(btnAll, {
+                        duration: 0.5,
+                        "--width": "0%",
+                        ease: "expo.in",
+                    })
+                    .to(
+                        detailAll,
+                        {
+                            duration: 0.4,
+                            height: 0,
+                            borderWidth: 0,
+                            ease: "power4.inOut",
+                        },
+                        "<"
+                    );
                 detailAll.classList.remove("open");
             });
         };

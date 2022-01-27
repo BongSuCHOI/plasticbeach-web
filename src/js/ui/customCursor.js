@@ -2,7 +2,7 @@
 import { gsap } from "gsap";
 
 // module
-import platformCheck from "./platformCheck";
+import platformCheck from "../utils/platformCheck";
 
 // init cursor
 function init() {
