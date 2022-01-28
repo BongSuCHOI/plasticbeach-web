@@ -1,10 +1,10 @@
 // library import
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Scrollbar from "smooth-scrollbar";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Swiper, { Pagination, Navigation, Lazy } from "swiper";
 import "swiper/css/bundle";
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 // module import
 import platformCheck from "../utils/platformCheck.js";
@@ -128,31 +128,61 @@ function bindDetail(data) {
 
     addDetail();
     ioReStart(io);
-    smoothScroll();
+    smoothScroll(".archive_list");
     listClickEvent();
 }
 
 // smoothScroll
-function smoothScroll() {
-    const scroller = document.querySelector(".scroll_box");
-    const bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1 });
-    bodyScrollBar.track.yAxis.element.remove();
-    bodyScrollBar.track.xAxis.element.remove();
+// https://greensock.com/forums/topic/24923-smooth-scroll-to-whole-page-and-trigger-animations/
+// 시간날때 위 링크에서 'akapowl' 답변 보고 한번 더 공부
+// https://codepen.io/akapowl/pen/02d8f971d453644abcac268ea19ae726
+function smoothScroll(content) {
+    if (!platformCheck()) return;
+    const scrollContainer = document.querySelector(".archive_list");
+    let height;
+    content = gsap.utils.toArray(content)[0];
 
-    // to keep ScrollTrigger and Smooth Scrollbar in sync
-    ScrollTrigger.scrollerProxy(scroller, {
-        scrollTop(value) {
-            if (arguments.length) {
-                bodyScrollBar.scrollTop = value;
-            }
-            return bodyScrollBar.scrollTop;
-        },
+    // set scroll content style
+    gsap.set(content.parentNode, { overflow: "hidden", height: "100%", width: "100%", top: 0, left: 0, right: 0, bottom: 0 });
+    gsap.set(content, { overflow: "visible", width: "100%" });
+
+    // set(resize) height
+    const onResize = () => {
+        height = content.clientHeight;
+        content.style.overflow = "visible";
+        document.body.style.height = height + "px";
+    };
+    onResize();
+
+    // ScrollTrigger 새로고침 시 애니메이션 튕김 방지
+    const killScrub = (trigger) => {
+        let scrub = trigger.getTween ? trigger.getTween() : gsap.getTweensOf(trigger.animation)[0];
+        scrub && scrub.kill();
+        trigger.animation.progress(trigger.progress);
+    };
+
+    // scrollTrigger
+    ScrollTrigger.create({
+        animation: gsap.to(content, {
+            y: () => document.documentElement.clientHeight - height,
+            ease: "none",
+            onUpdate: ScrollTrigger.update,
+        }),
+        invalidateOnRefresh: true,
+        start: 0,
+        end: () => height - document.documentElement.clientHeight,
+        scrub: 0.6,
+        onRefresh: killScrub,
     });
 
-    // update ScrollTrigger when scrollbar updates
-    bodyScrollBar.addListener(ScrollTrigger.update);
+    // scrollContainer height 변경 될 때 마다 ScrollTrigger 새로고침
+    scrollContainer.addEventListener("transitionend", () => {
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 200);
+    });
 
-    return bodyScrollBar;
+    ScrollTrigger.addEventListener("refreshInit", onResize);
 }
 
 // list mouse over event
@@ -193,7 +223,6 @@ function listOverEvent(data) {
 
 // list click event
 function listClickEvent() {
-    const bodyScrollBar = smoothScroll();
     const lists = document.querySelectorAll(".list");
     const tooltip = document.querySelector(".tooltip_box");
     const radios = document.querySelectorAll("[type=radio]");
@@ -225,7 +254,6 @@ function listClickEvent() {
                         force3D: true,
                         duration: 0.4,
                         height: detail.scrollHeight + "px",
-                        // borderWidth: 2,
                         ease: "power4.inOut",
                     },
                     "<"
@@ -246,7 +274,6 @@ function listClickEvent() {
                     {
                         duration: 0.4,
                         height: 0,
-                        // borderWidth: 0,
                         ease: "power4.inOut",
                     },
                     "<"
@@ -272,7 +299,6 @@ function listClickEvent() {
                         {
                             duration: 0.4,
                             height: 0,
-                            // borderWidth: 0,
                             ease: "power4.inOut",
                         },
                         "<"
@@ -284,9 +310,13 @@ function listClickEvent() {
         // event
         btn.addEventListener("click", (e) => {
             e.stopImmediatePropagation();
-            bodyScrollBar.scrollTo(0, scrollToHere, 700);
             clear(e);
             open();
+
+            gsap.to(document.documentElement, {
+                duration: 0.3,
+                scrollTo: scrollToHere,
+            });
 
             gsap.to(tooltip, {
                 duration: 0.3,
@@ -307,7 +337,10 @@ function listClickEvent() {
     // category scroll
     radios.forEach((elem) =>
         elem.addEventListener("click", (e) => {
-            bodyScrollBar.scrollTo(0, 0, 500);
+            gsap.to(document.documentElement, {
+                duration: 0,
+                scrollTo: 0,
+            });
             archiveCategory(e);
         })
     );

@@ -9,6 +9,7 @@ body {
     background-color: var(--background);
 }
 #contents {
+    position: fixed;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
