@@ -225,7 +225,7 @@ function listClickEvent() {
                         force3D: true,
                         duration: 0.4,
                         height: detail.scrollHeight + "px",
-                        borderWidth: 2,
+                        // borderWidth: 2,
                         ease: "power4.inOut",
                     },
                     "<"
@@ -246,7 +246,7 @@ function listClickEvent() {
                     {
                         duration: 0.4,
                         height: 0,
-                        borderWidth: 0,
+                        // borderWidth: 0,
                         ease: "power4.inOut",
                     },
                     "<"
@@ -272,7 +272,7 @@ function listClickEvent() {
                         {
                             duration: 0.4,
                             height: 0,
-                            borderWidth: 0,
+                            // borderWidth: 0,
                             ease: "power4.inOut",
                         },
                         "<"
@@ -283,14 +283,10 @@ function listClickEvent() {
 
         // event
         btn.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
             bodyScrollBar.scrollTo(0, scrollToHere, 700);
             clear(e);
             open();
-
-            if (detail.classList.contains("open")) {
-                close();
-                detail.classList.remove("open");
-            }
 
             gsap.to(tooltip, {
                 duration: 0.3,
@@ -298,8 +294,13 @@ function listClickEvent() {
                 display: "none",
             });
 
+            if (detail.classList.contains("open")) {
+                close();
+                detail.classList.remove("open");
+                return;
+            }
+
             detail.classList.add("open");
-            e.stopImmediatePropagation();
         });
     });
 
