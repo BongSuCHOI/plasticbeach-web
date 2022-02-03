@@ -7,14 +7,16 @@
 }
 
 // archive_box
-.archive_box {
-    position: relative;
+#archive {
+    position: fixed;
+    right: 0;
+    top: 0;
     width: 64.0625vw; // calc(100% - 686px)
     height: 100%;
     .category {
         @include flex_align_center;
         z-index: 2;
-        position: absolute;
+        position: fixed;
         top: max(0.9375vmax, 10px); // 18px
         right: max(2.08vmax, 21px); // 68px
         .radio {
@@ -53,8 +55,11 @@
                 overflow: hidden;
                 position: relative;
                 width: 100%;
-                &:last-child button {
-                    border-bottom: none;
+                &:last-child {
+                    button,
+                    .detail {
+                        border-bottom: none;
+                    }
                 }
                 button {
                     position: relative;
@@ -70,6 +75,7 @@
                     color: var(--color);
                     background: var(--background);
                     border-bottom: 2px solid var(--color);
+                    transition: background 0.1s linear;
                     &::before {
                         content: "";
                         position: absolute;
@@ -203,17 +209,20 @@
 /* media query */
 @media (max-width: 1023px) {
     // archive_box
-    .archive_box {
+    #archive {
+        height: auto;
         width: 100%;
+        right: -100%;
         .category {
             justify-content: space-between;
-            position: relative;
+            position: sticky;
             top: 0;
             right: 0;
             width: 100%;
             height: min(7.1vmax, 60px);
             padding: 0 4.615%;
             border-bottom: 2px solid var(--color);
+            background: var(--background);
             .radio {
                 margin-right: 0;
                 input[type="radio"] {
@@ -248,7 +257,7 @@
                             left: 4.615%;
                         }
                     }
-                } // 까지 작업
+                }
                 .detail {
                     .swiper {
                         border-bottom: 1px solid var(--color);

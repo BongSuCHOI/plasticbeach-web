@@ -171,7 +171,7 @@ function smoothScroll(content) {
         invalidateOnRefresh: true,
         start: 0,
         end: () => height - document.documentElement.clientHeight,
-        scrub: 0.6,
+        scrub: 0.7,
         onRefresh: killScrub,
     });
 
@@ -313,10 +313,18 @@ function listClickEvent() {
             clear(e);
             open();
 
-            gsap.to(document.documentElement, {
-                duration: 0.3,
-                scrollTo: scrollToHere,
-            });
+            if (!platformCheck()) {
+                const scrollOffsetY = document.querySelector(".category").offsetHeight;
+                gsap.to(document.documentElement, {
+                    duration: 0.3,
+                    scrollTo: { y: scrollToHere, offsetY: scrollOffsetY },
+                });
+            } else {
+                gsap.to(document.documentElement, {
+                    duration: 0.1,
+                    scrollTo: scrollToHere,
+                });
+            }
 
             gsap.to(tooltip, {
                 duration: 0.3,
@@ -355,7 +363,7 @@ function archiveCategory(e) {
         const listCategory = elem.getAttribute("category");
         const btn = elem.querySelector("button");
         const detail = elem.querySelector(".detail");
-        const open = Boolean(elem.querySelector(".detail.open"));
+        // const open = Boolean(elem.querySelector(".detail.open"));
         const tl = gsap.timeline();
 
         if (radioId == "all") {
@@ -381,69 +389,123 @@ function archiveCategory(e) {
                 height: "auto",
             });
         } else {
-            // 선택한 카테고리에 맞지 않은 것
-            if (open) {
-                // 상세가(카테고리 상관없이 전체) 열려 있다면
-                if (detail.clientHeight == 0) {
-                    // 선택한 카테고리에 맞지 않은 리스트의 상세가 열려있지 않다면
-                    tl.to(elem, {
-                        duration: 0.3,
-                        height: 0,
-                    }).to(
-                        elem,
-                        {
-                            duration: 0,
-                            display: "none",
-                        },
-                        ">"
-                    );
-                }
-                tl.to(elem, {
-                    duration: 0.3,
-                    height: 0,
-                })
-                    .to(
-                        elem,
-                        {
-                            duration: 0,
-                            display: "none",
-                        },
-                        ">"
-                    )
-                    .to(
-                        btn,
-                        {
-                            duration: 0,
-                            "--width": "0%",
-                        },
-                        ">"
-                    )
-                    .to(
-                        detail,
-                        {
-                            duration: 0,
-                            height: 0,
-                            borderWidth: 0,
-                        },
-                        "<"
-                    );
-
-                detail.classList.remove("open");
-            } else {
-                // 상세가(카테고리 상관없이 전체) 닫혀 있다면
-                tl.to(elem, {
-                    duration: 0.3,
-                    height: 0,
-                }).to(
+            tl.to(elem, {
+                duration: 0.3,
+                height: 0,
+            })
+                .to(
                     elem,
                     {
                         duration: 0,
                         display: "none",
                     },
                     ">"
+                )
+                .to(
+                    btn,
+                    {
+                        duration: 0,
+                        "--width": "0%",
+                    },
+                    "<"
+                )
+                .to(
+                    detail,
+                    {
+                        duration: 0,
+                        height: 0,
+                    },
+                    "<"
                 );
-            }
+
+            detail.classList.remove("open");
         }
+        // if (radioId == "all") {
+        //     // 전체
+        //     tl.to(elem, {
+        //         duration: 0,
+        //         display: "block",
+        //     }).to(
+        //         elem,
+        //         {
+        //             duration: 0.3,
+        //             height: "auto",
+        //         },
+        //         "<"
+        //     );
+        // } else if (listCategory == radioId) {
+        //     // 선택한 카테고리에 맞는 것
+        //     tl.to(elem, {
+        //         duration: 0,
+        //         display: "block",
+        //     }).to(elem, {
+        //         duration: 0.3,
+        //         height: "auto",
+        //     });
+        // } else {
+        //     // 선택한 카테고리에 맞지 않은 것
+        //     if (open) {
+        //         // 상세가(카테고리 상관없이 전체) 열려 있다면
+        //         if (detail.clientHeight == 0) {
+        //             // 선택한 카테고리에 맞지 않은 리스트의 상세가 열려있지 않다면
+        //             tl.to(elem, {
+        //                 duration: 0.3,
+        //                 height: 0,
+        //             }).to(
+        //                 elem,
+        //                 {
+        //                     duration: 0,
+        //                     display: "none",
+        //                 },
+        //                 ">"
+        //             );
+        //         }
+        //         tl.to(elem, {
+        //             duration: 0.3,
+        //             height: 0,
+        //         })
+        //             .to(
+        //                 elem,
+        //                 {
+        //                     duration: 0,
+        //                     display: "none",
+        //                 },
+        //                 ">"
+        //             )
+        //             .to(
+        //                 btn,
+        //                 {
+        //                     duration: 0,
+        //                     "--width": "0%",
+        //                 },
+        //                 ">"
+        //             )
+        //             .to(
+        //                 detail,
+        //                 {
+        //                     duration: 0,
+        //                     height: 0,
+        //                     borderWidth: 0,
+        //                 },
+        //                 "<"
+        //             );
+
+        //         detail.classList.remove("open");
+        //     } else {
+        //         // 상세가(카테고리 상관없이 전체) 닫혀 있다면
+        //         tl.to(elem, {
+        //             duration: 0.3,
+        //             height: 0,
+        //         }).to(
+        //             elem,
+        //             {
+        //                 duration: 0,
+        //                 display: "none",
+        //             },
+        //             ">"
+        //         );
+        //     }
+        // }
     });
 }
 

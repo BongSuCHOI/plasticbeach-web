@@ -2,8 +2,11 @@
 @import "mixin";
 
 // contact
-.contact {
+#contact {
     overflow-y: scroll;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 31.25vw; // 600px
     height: 100%;
     .title {
@@ -221,7 +224,9 @@
 /* media query */
 @media (max-width: 1023px) {
     // contact
-    .contact {
+    #contact {
+        position: relative;
+        overflow-y: auto;
         width: 100%;
         // .title {
         //     height: 24.615vmin;

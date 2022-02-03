@@ -2,11 +2,11 @@
 import { gsap } from "gsap";
 
 // set
-const contactElem = document.querySelector("div.contact");
-const archiveElem = document.querySelector("div.archive_box");
+const contactElem = document.getElementById("contact");
+const archiveElem = document.getElementById("archive");
 const contactMenuBtn = document.querySelector("button.to_contact");
 const archiveMenuBtn = document.querySelector("button.to_archive");
-const tl = gsap.timeline({ duration: 0.2, ease: "power4.inOut", force3D: true });
+const tl = gsap.timeline({ defaults: { duration: 0.4, ease: "power4.inOut", force3D: true } });
 
 // mobile menu convert
 function mobileMenuConvert() {
@@ -16,15 +16,22 @@ function mobileMenuConvert() {
 
 // to contact menu
 function toContactAni() {
-    tl.to(contactElem, {
-        x: 0,
-    }).to(
-        archiveElem,
-        {
-            x: 0,
-        },
-        "<"
-    );
+    tl.to(archiveElem, {
+        position: "fixed",
+        duration: 0,
+    })
+        .to(archiveElem, {
+            x: "0%",
+            display: "none",
+        })
+        .to(
+            contactElem,
+            {
+                x: "0%",
+                display: "block",
+            },
+            "<"
+        );
 
     archiveMenuBtn.classList.remove("on");
     contactMenuBtn.classList.add("on");
@@ -36,13 +43,20 @@ function toContactAni() {
 function toArchiveAni() {
     tl.to(contactElem, {
         x: "-100%",
-    }).to(
-        archiveElem,
-        {
-            x: "-100%",
-        },
-        "<"
-    );
+        display: "none",
+    })
+        .to(
+            archiveElem,
+            {
+                display: "block",
+                x: "-100%",
+            },
+            "<"
+        )
+        .to(archiveElem, {
+            position: "relative",
+            duration: 0,
+        });
 
     contactMenuBtn.classList.remove("on");
     archiveMenuBtn.classList.add("on");
