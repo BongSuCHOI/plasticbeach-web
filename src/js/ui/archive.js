@@ -175,6 +175,9 @@ function smoothScroll(content) {
         onRefresh: killScrub,
     });
 
+    document.getElementById("contact").addEventListener("wheel", (e) => e.preventDefault());
+    document.querySelector(".marquee").addEventListener("wheel", (e) => e.preventDefault());
+
     // scrollContainer height 변경 될 때 마다 ScrollTrigger 새로고침
     scrollContainer.addEventListener("transitionend", () => {
         setTimeout(() => {
@@ -349,6 +352,9 @@ function listClickEvent() {
                 duration: 0,
                 scrollTo: 0,
             });
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 300);
             archiveCategory(e);
         })
     );
