@@ -228,6 +228,8 @@
         position: relative;
         overflow-y: auto;
         width: 100%;
+        height: auto;
+        min-height: 100vh;
         // .title {
         //     height: 24.615vmin;
         //     padding: 0 4.615%;
