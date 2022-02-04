@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 // module import
 import platformCheck from "../utils/platformCheck.js";
+import { _colorStringFilter } from "gsap/gsap-core";
 
 // Prod Data
 function prodData(data) {
@@ -234,12 +235,18 @@ function listClickEvent() {
     lists.forEach((list) => {
         const btn = list.querySelector("button");
         const detail = list.querySelector(".detail");
+        let scrollToHere = list.offsetTop;
 
         // 카테고리 변경 할 때마다 각 리스트 offsetTop 재계산
+        let timer;
         const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => (scrollToHere = mutation.target.offsetTop));
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                mutations.forEach((mutation) => {
+                    scrollToHere = mutation.target.offsetTop;
+                });
+            }, 300);
         });
-        let scrollToHere = list.offsetTop;
         observer.observe(list, { attributeFilter: ["style"] });
 
         // accordion open
@@ -316,6 +323,13 @@ function listClickEvent() {
             clear(e);
             open();
 
+            if (detail.classList.contains("open")) {
+                close();
+                detail.classList.remove("open");
+                return;
+            }
+            detail.classList.add("open");
+
             if (!platformCheck()) {
                 const scrollOffsetY = document.querySelector(".category").offsetHeight;
                 gsap.to(document.documentElement, {
@@ -334,30 +348,25 @@ function listClickEvent() {
                 opacity: 0,
                 display: "none",
             });
-
-            if (detail.classList.contains("open")) {
-                close();
-                detail.classList.remove("open");
-                return;
-            }
-
-            detail.classList.add("open");
         });
     });
 
     // category scroll
-    radios.forEach((elem) =>
+    radios.forEach((elem) => {
         elem.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
+            archiveCategory(e);
+
             gsap.to(document.documentElement, {
                 duration: 0,
                 scrollTo: 0,
             });
+
             setTimeout(() => {
                 ScrollTrigger.refresh();
             }, 300);
-            archiveCategory(e);
-        })
-    );
+        });
+    });
 }
 
 // archive List Category (조건식 리팩토링 할 수 있을거같음)
@@ -365,153 +374,65 @@ function archiveCategory(e) {
     const lists = document.querySelectorAll(".archive_list .list");
     const radioId = e.currentTarget.id;
 
-    lists.forEach((elem) => {
-        const listCategory = elem.getAttribute("category");
-        const btn = elem.querySelector("button");
-        const detail = elem.querySelector(".detail");
-        // const open = Boolean(elem.querySelector(".detail.open"));
+    lists.forEach((list) => {
+        const listCategory = list.getAttribute("category");
+        const btn = list.querySelector("button");
+        const detail = list.querySelector(".detail");
         const tl = gsap.timeline();
 
         if (radioId == "all") {
             // 전체
-            tl.to(elem, {
+            tl.to(list, {
                 duration: 0,
                 display: "block",
-            }).to(
-                elem,
-                {
-                    duration: 0.3,
-                    height: "auto",
-                },
-                "<"
-            );
-        } else if (listCategory == radioId) {
+            }).to(list, {
+                duration: 0.3,
+                height: "auto",
+            });
+        } else if (radioId === listCategory) {
             // 선택한 카테고리에 맞는 것
-            tl.to(elem, {
+            tl.to(list, {
                 duration: 0,
                 display: "block",
-            }).to(elem, {
+            }).to(list, {
                 duration: 0.3,
                 height: "auto",
             });
         } else {
-            tl.to(elem, {
+            // 맞지 않은 것
+            tl.to(list, {
                 duration: 0.3,
                 height: 0,
-            })
-                .to(
-                    elem,
-                    {
-                        duration: 0,
-                        display: "none",
-                    },
-                    ">"
-                )
-                .to(
-                    btn,
-                    {
-                        duration: 0,
-                        "--width": "0%",
-                    },
-                    "<"
-                )
-                .to(
-                    detail,
-                    {
-                        duration: 0,
-                        height: 0,
-                    },
-                    "<"
-                );
+            }).to(
+                list,
+                {
+                    duration: 0,
+                    display: "none",
+                },
+                ">"
+            );
+        }
+
+        // 열려있는 모든 상세를 닫음
+        if (detail.classList.contains("open")) {
+            tl.to(
+                btn,
+                {
+                    duration: 0.3,
+                    "--width": "0%",
+                },
+                "-=0.3"
+            ).to(
+                detail,
+                {
+                    duration: 0.3,
+                    height: 0,
+                },
+                "<"
+            );
 
             detail.classList.remove("open");
         }
-        // if (radioId == "all") {
-        //     // 전체
-        //     tl.to(elem, {
-        //         duration: 0,
-        //         display: "block",
-        //     }).to(
-        //         elem,
-        //         {
-        //             duration: 0.3,
-        //             height: "auto",
-        //         },
-        //         "<"
-        //     );
-        // } else if (listCategory == radioId) {
-        //     // 선택한 카테고리에 맞는 것
-        //     tl.to(elem, {
-        //         duration: 0,
-        //         display: "block",
-        //     }).to(elem, {
-        //         duration: 0.3,
-        //         height: "auto",
-        //     });
-        // } else {
-        //     // 선택한 카테고리에 맞지 않은 것
-        //     if (open) {
-        //         // 상세가(카테고리 상관없이 전체) 열려 있다면
-        //         if (detail.clientHeight == 0) {
-        //             // 선택한 카테고리에 맞지 않은 리스트의 상세가 열려있지 않다면
-        //             tl.to(elem, {
-        //                 duration: 0.3,
-        //                 height: 0,
-        //             }).to(
-        //                 elem,
-        //                 {
-        //                     duration: 0,
-        //                     display: "none",
-        //                 },
-        //                 ">"
-        //             );
-        //         }
-        //         tl.to(elem, {
-        //             duration: 0.3,
-        //             height: 0,
-        //         })
-        //             .to(
-        //                 elem,
-        //                 {
-        //                     duration: 0,
-        //                     display: "none",
-        //                 },
-        //                 ">"
-        //             )
-        //             .to(
-        //                 btn,
-        //                 {
-        //                     duration: 0,
-        //                     "--width": "0%",
-        //                 },
-        //                 ">"
-        //             )
-        //             .to(
-        //                 detail,
-        //                 {
-        //                     duration: 0,
-        //                     height: 0,
-        //                     borderWidth: 0,
-        //                 },
-        //                 "<"
-        //             );
-
-        //         detail.classList.remove("open");
-        //     } else {
-        //         // 상세가(카테고리 상관없이 전체) 닫혀 있다면
-        //         tl.to(elem, {
-        //             duration: 0.3,
-        //             height: 0,
-        //         }).to(
-        //             elem,
-        //             {
-        //                 duration: 0,
-        //                 display: "none",
-        //             },
-        //             ">"
-        //         );
-        //     }
-        // }
     });
 }
 
