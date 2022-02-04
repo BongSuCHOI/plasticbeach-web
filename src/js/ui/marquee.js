@@ -7,6 +7,7 @@ let speed = 0.9;
 
 // set marquee
 function setMarquee() {
+    if (!platformCheck()) return;
     const parentElem = document.querySelector(".marquee");
     const childElem = parentElem.children[0];
     const copyText = childElem.innerText;
@@ -17,7 +18,6 @@ function setMarquee() {
 
 // move marquee
 function moveMarquee() {
-    if (!platformCheck()) return;
     const target = document.querySelector(".marquee_text");
     target.style.marginTop = `${i}px`;
 
