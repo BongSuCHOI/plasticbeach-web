@@ -2,7 +2,7 @@
 import { gsap } from "gsap";
 
 // module
-import platformCheck from "../utils/platformCheck";
+import IsMobile from "../utils/isMobile";
 
 // symbol Animation
 function symbolAnimation() {
@@ -33,7 +33,7 @@ function symbolAnimation() {
         ease: "none",
     });
 
-    if (!platformCheck()) return;
+    if (IsMobile()) return;
     parentBtn.addEventListener("mouseenter", () => tl.play());
     parentBtn.addEventListener("mouseleave", () => tl.reverse());
 }

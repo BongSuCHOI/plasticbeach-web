@@ -7,7 +7,7 @@ import "swiper/css/bundle";
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 // module import
-import platformCheck from "../utils/platformCheck.js";
+import IsMobile from "../utils/isMobile";
 import { _colorStringFilter } from "gsap/gsap-core";
 
 // Prod Data
@@ -138,7 +138,7 @@ function bindDetail(data) {
 // 시간날때 위 링크에서 'akapowl' 답변 보고 한번 더 공부
 // https://codepen.io/akapowl/pen/02d8f971d453644abcac268ea19ae726
 function smoothScroll(content) {
-    if (!platformCheck()) return;
+    if (IsMobile()) return;
     const scrollContainer = document.querySelector(".archive_list");
     let height;
     content = gsap.utils.toArray(content)[0];
@@ -191,7 +191,7 @@ function smoothScroll(content) {
 
 // list mouse over event
 function listOverEvent(data) {
-    if (!platformCheck()) return;
+    if (IsMobile()) return;
     const embedUrl = data.map((d) => d.url);
     const hoverBox = document.querySelectorAll(".archive_list .list button");
     const tooltipBox = document.querySelector(".tooltip_box");
@@ -255,6 +255,7 @@ function listClickEvent() {
                 .timeline()
                 .to(btn, {
                     duration: 0.5,
+                    "--opacity": "1",
                     "--width": "100%",
                     ease: "expo.in",
                 })
@@ -277,6 +278,7 @@ function listClickEvent() {
                 .to(btn, {
                     duration: 0.5,
                     "--width": "0%",
+                    "--opacity": "0",
                     ease: "expo.in",
                 })
                 .to(
@@ -302,6 +304,7 @@ function listClickEvent() {
                     .to(btnAll, {
                         duration: 0.5,
                         "--width": "0%",
+                        "--opacity": "0",
                         ease: "expo.in",
                     })
                     .to(
@@ -330,7 +333,7 @@ function listClickEvent() {
             }
             detail.classList.add("open");
 
-            if (!platformCheck()) {
+            if (IsMobile()) {
                 const scrollOffsetY = document.querySelector(".category").offsetHeight;
                 gsap.to(document.documentElement, {
                     duration: 0.3,
@@ -420,6 +423,7 @@ function archiveCategory(e) {
                 {
                     duration: 0.3,
                     "--width": "0%",
+                    "--opacity": "0",
                 },
                 "-=0.3"
             ).to(

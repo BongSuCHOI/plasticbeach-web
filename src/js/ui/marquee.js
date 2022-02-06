@@ -1,13 +1,13 @@
 // module
-import platformCheck from "../utils/platformCheck";
+import IsMobile from "../utils/isMobile";
 
 // options
-let i = 0;
-let speed = 0.9;
+const speed = 0.9;
+let distance = 0;
 
 // set marquee
 function setMarquee() {
-    if (!platformCheck()) return;
+    if (IsMobile()) return;
     const parentElem = document.querySelector(".marquee");
     const childElem = parentElem.children[0];
     const copyText = childElem.innerText;
@@ -19,10 +19,10 @@ function setMarquee() {
 // move marquee
 function moveMarquee() {
     const target = document.querySelector(".marquee_text");
-    target.style.marginTop = `${i}px`;
+    target.style.marginTop = `${distance}px`;
 
-    if (i > target.clientWidth / 2) i = 0;
-    i += speed;
+    if (distance > target.clientWidth / 2) distance = 0;
+    distance += speed;
 
     requestAnimationFrame(moveMarquee);
 }

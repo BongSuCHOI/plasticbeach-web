@@ -4,6 +4,7 @@
 // click animation variables
 .list {
     --width: 0%;
+    --opacity: 0;
 }
 
 // archive_box
@@ -67,15 +68,32 @@
                     width: 100%;
                     height: 8.7vw;
                     padding: 0 max(1.302vw, 13px); // 3.05vh 25px
-                    white-space: nowrap;
                     text-align: left;
-                    font-size: max(4.895vw, 50px); // 94px
-                    font-weight: normal;
-                    text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
-                    color: var(--color);
                     background: var(--background);
                     border-bottom: 2px solid var(--color);
                     transition: background 0.1s linear;
+                    p {
+                        display: inline-block;
+                        white-space: nowrap;
+                        span {
+                            position: relative;
+                            display: inline-block;
+                            font-size: max(4.895vw, 50px); // 94px
+                            font-weight: normal;
+                            text-shadow: -0.5px 0 var(--color), 0 0.5px var(--color), 0.5px 0 var(--color), 0 -0.5px var(--color);
+                            color: var(--color);
+                            &::after {
+                                content: attr(data-content);
+                                overflow: hidden;
+                                position: absolute;
+                                left: 0;
+                                opacity: var(--opacity);
+                                white-space: nowrap;
+                                text-shadow: -0.5px 0 var(--background), 0 0.5px var(--background), 0.5px 0 var(--background), 0 -0.5px var(--background);
+                                color: var(--background);
+                            }
+                        }
+                    }
                     &::before {
                         content: "";
                         position: absolute;
@@ -84,16 +102,6 @@
                         width: var(--width);
                         height: 100%;
                         background: var(--color);
-                    }
-                    &::after {
-                        content: attr(data-content);
-                        overflow: hidden;
-                        position: absolute;
-                        left: max(1.302vw, 13px); // 25px
-                        width: var(--width);
-                        white-space: nowrap;
-                        text-shadow: -0.5px 0 var(--background), 0 0.5px var(--background), 0.5px 0 var(--background), 0 -0.5px var(--background);
-                        color: var(--background);
                     }
                 }
             }
@@ -238,9 +246,6 @@
             }
         }
         .scroll_box {
-            // 스크롤 박스 버그
-            // 마지막 리스트가 잘려서 노출되지 않고 끝까지 스크롤이 되면 상단 카테고리도 따라 올라감.
-            // archive.js에서 모바일에선 smooth-scroll-bar 라이브러리의 scoll만 비활성화 시키고 scrollTo만 쓰는 방향으로 고쳐봐야 할 듯
             height: 100%;
             margin-bottom: 14.872vmin;
             .archive_list {
@@ -250,11 +255,11 @@
                 .list {
                     button {
                         height: 17.95vmin;
-                        padding: 0 4.615%;
-                        font-size: min(9.23vmin, 60px);
+                        padding: 0;
                         border-bottom: 1px solid var(--color);
-                        &::after {
-                            left: 4.615%;
+                        p span {
+                            margin-right: 5vw;
+                            font-size: min(9.23vmin, 60px);
                         }
                     }
                 }

@@ -66,14 +66,18 @@ function languageConvert() {
     // archive
     archiveData.forEach((data, i) => {
         const lists = document.querySelectorAll(".list");
-        const target = lists[i].querySelector("button");
+        const target = lists[i].querySelectorAll(".subject span");
 
         if (lang === "en") {
-            target.innerHTML = data.title.en;
-            target.setAttribute("data-content", data.title.en);
+            target.forEach((elem) => {
+                elem.innerHTML = data.title.en;
+                elem.setAttribute("data-content", data.title.en);
+            });
         } else {
-            target.innerHTML = data.title.ko;
-            target.setAttribute("data-content", data.title.ko);
+            target.forEach((elem) => {
+                elem.innerHTML = data.title.ko;
+                elem.setAttribute("data-content", data.title.ko);
+            });
         }
     });
 

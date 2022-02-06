@@ -2,11 +2,11 @@
 import { gsap } from "gsap";
 
 // module
-import platformCheck from "../utils/platformCheck";
+import IsMobile from "../utils/isMobile";
 
 // init cursor
 function init() {
-    if (!platformCheck()) return;
+    if (IsMobile()) return;
     const cursor = document.querySelector(".cursor");
     const dot = document.querySelector(".cursor_dot");
     const tooltipBox = document.querySelector(".tooltip_box");

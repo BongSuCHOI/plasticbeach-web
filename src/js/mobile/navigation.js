@@ -1,6 +1,9 @@
 // library import
 import { gsap } from "gsap";
 
+// module
+import IsMobile from "../utils/isMobile";
+
 // set
 const contactElem = document.getElementById("contact");
 const archiveElem = document.getElementById("archive");
