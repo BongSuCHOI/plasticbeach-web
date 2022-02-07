@@ -56,13 +56,9 @@
                 overflow: hidden;
                 position: relative;
                 width: 100%;
-                &:last-child {
-                    button,
-                    .detail {
-                        border-bottom: none;
-                    }
-                }
                 button {
+                    @include flex_align_center;
+                    justify-content: flex-start;
                     position: relative;
                     overflow: hidden;
                     width: 100%;
@@ -257,6 +253,13 @@
                         height: 17.95vmin;
                         padding: 0;
                         border-bottom: 1px solid var(--color);
+                        &.even {
+                            justify-content: flex-end;
+                            p span {
+                                margin-right: auto;
+                                margin-left: 5vw;
+                            }
+                        }
                         p span {
                             margin-right: 5vw;
                             font-size: min(9.23vmin, 60px);
