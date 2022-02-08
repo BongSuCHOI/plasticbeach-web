@@ -42,21 +42,21 @@ function languageConvert() {
 
         if (lang === "en") {
             target.innerHTML = val.en;
-            // marquee text (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+            // marquee text
             if (target.classList.contains("marquee_text")) {
                 target.innerHTML = val.en + val.en;
             }
-            // input placeholder (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+            // input placeholder
             if (target.hasAttribute("placeholder")) {
                 target.setAttribute("placeholder", val.en);
             }
         } else {
             target.innerHTML = val.ko;
-            // marquee text (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+            // marquee text
             if (target.classList.contains("marquee_text")) {
                 target.innerHTML = val.ko + val.ko;
             }
-            // input placeholder (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+            // input placeholder
             if (target.hasAttribute("placeholder")) {
                 target.setAttribute("placeholder", val.ko);
             }

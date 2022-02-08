@@ -56,11 +56,11 @@ async function bindDom() {
         const target = document.querySelector(`[data-name='${key}']`);
         target.innerHTML = val.en;
 
-        // marquee text (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+        // marquee text
         if (target.classList.contains("marquee_text")) {
             target.innerHTML = val.en + val.en;
         }
-        // input placeholder (굳이 이렇게 안써도 될 거 같음 // 리팩토링 필요)
+        // input placeholder
         if (target.hasAttribute("placeholder")) {
             target.innerHTML = "";
             target.setAttribute("placeholder", val.en);
@@ -111,8 +111,6 @@ async function run() {
     MobileNavigation();
     setTimeout(MarqueeArchiveSubject);
     // 왜 setTimeout말고 그냥 실행하면 MarqueeArchiveSubject안에 offsetWidth가 이상하게 나오지?
-    // const t = document.querySelector(".subject span");
-    // console.log(t.clientWidth);
     // MarqueeArchiveSubject();
 }
 run();

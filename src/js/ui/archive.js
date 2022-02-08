@@ -372,7 +372,7 @@ function listClickEvent() {
     });
 }
 
-// archive List Category (조건식 리팩토링 할 수 있을거같음)
+// archive List Category
 function archiveCategory(e) {
     const lists = document.querySelectorAll(".archive_list .list");
     const radioId = e.currentTarget.id;
