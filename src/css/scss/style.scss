@@ -97,10 +97,10 @@ body {
         pointer-events: none;
         user-select: none;
         background: $black;
-        iframe {
-            width: max(29.166vw, 420px);
-            height: max(16.40625vw, 236px);
-        }
+        // iframe { 썸네일로 띄우느라 잠시 주석
+        //     width: max(29.166vw, 420px);
+        //     height: max(16.40625vw, 236px);
+        // }
     }
 }
 

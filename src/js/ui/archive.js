@@ -195,7 +195,13 @@ function listOverEvent(data) {
     const embedUrl = data.map((d) => d.url);
     const hoverBox = document.querySelectorAll(".archive_list .list button");
     const tooltipBox = document.querySelector(".tooltip_box");
-    const iframe = document.querySelector(".video_tooltip");
+    // 썸네일로 띄우느라 잠시 주석
+    // const iframe = document.querySelector(".video_tooltip");
+    const img = document.createElement("img");
+    img.style.display = "block";
+    img.style.width = "max(29.166vw, 420px)";
+    img.style.height = "max(16.40625vw, 236px)";
+    tooltipBox.append(img);
 
     // mouse enter/leave event
     const enterFuc = () => {
@@ -215,13 +221,22 @@ function listOverEvent(data) {
 
     // eventlistener and embed url
     hoverBox.forEach((obj, i) => {
-        // const src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white"`;
+        // 썸네일로 띄우느라 잠시 주석
+        // const src = `https://www.youtube.com/embed/${embedUrl[i]}?rel=0&autoplay=1&mute=1&controls=0&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&color=white`;
+        const imgSrc = `https://img.youtube.com/vi/${embedUrl[i]}/maxresdefault.jpg`;
 
         obj.addEventListener("mouseenter", () => {
             enterFuc();
+            img.src = imgSrc;
+            // 썸네일로 띄우느라 잠시 주석
             // iframe.src = src;
         });
-        obj.addEventListener("mouseleave", leaveFuc);
+        obj.addEventListener("mouseleave", () => {
+            leaveFuc();
+            img.src = "";
+            // 썸네일로 띄우느라 잠시 주석
+            // iframe.src = "";
+        });
     });
 }
 
