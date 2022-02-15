@@ -41,12 +41,13 @@ function init() {
         x: window.innerWidth / 2,
         y: window.innerHeight / 2,
     };
-    const gsapSet = (elem) =>
+    const gsapSet = (elem) => {
         gsap.set(elem, {
             xPercent: -50,
             yPercent: -50,
             opacity: 0,
         });
+    };
 
     gsapSet(cursor);
     gsapSet(dot);
@@ -70,10 +71,13 @@ function run(rest) {
         const cursorDT = DT(speed.cursor);
         const dotDT = DT(speed.dot);
         const tooltipDT = DT(speed.tooltip);
+
         let cPosX = (pos.cursor.x += posXY(pos.cursor.x, mouse.x, cursorDT));
         let cPosY = (pos.cursor.y += posXY(pos.cursor.y, mouse.y, cursorDT));
+
         let dPosX = (pos.dot.x += posXY(pos.dot.x, mouse.x, dotDT));
         let dPosY = (pos.dot.y += posXY(pos.dot.y, mouse.y, dotDT));
+
         let tPosX = (pos.tooltip.x += posXY(pos.tooltip.x, mouse.x, tooltipDT));
         let tPosY = (pos.tooltip.y += posXY(pos.tooltip.y, mouse.y, tooltipDT));
 

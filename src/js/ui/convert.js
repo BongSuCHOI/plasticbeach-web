@@ -39,27 +39,17 @@ function languageConvert() {
         const key = data[0];
         const val = data[1];
         const target = document.querySelector(`[data-name='${key}']`);
+        const isMarquee = target.classList.contains("marquee_text");
+        const isTextInput = target.hasAttribute("placeholder");
 
         if (lang === "en") {
             target.innerHTML = val.en;
-            // marquee text
-            if (target.classList.contains("marquee_text")) {
-                target.innerHTML = val.en + val.en;
-            }
-            // input placeholder
-            if (target.hasAttribute("placeholder")) {
-                target.setAttribute("placeholder", val.en);
-            }
+            if (isMarquee) target.innerHTML = val.en + val.en;
+            if (isTextInput) target.setAttribute("placeholder", val.en);
         } else {
             target.innerHTML = val.ko;
-            // marquee text
-            if (target.classList.contains("marquee_text")) {
-                target.innerHTML = val.ko + val.ko;
-            }
-            // input placeholder
-            if (target.hasAttribute("placeholder")) {
-                target.setAttribute("placeholder", val.ko);
-            }
+            if (isMarquee) target.innerHTML = val.ko + val.ko;
+            if (isTextInput) target.setAttribute("placeholder", val.ko);
         }
     });
 

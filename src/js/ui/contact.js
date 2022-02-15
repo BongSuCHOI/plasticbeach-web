@@ -43,6 +43,7 @@ function setCustomSelect() {
             const li = document.createElement("li");
             const optionValue = select.options[i].value;
             const optionText = document.createTextNode(select.options[i].text);
+
             li.setAttribute("class", "select_list cursor_pointer");
             li.setAttribute("data-value", optionValue);
             li.setAttribute("data-name", `${select.className}_option${i}`);
@@ -59,11 +60,13 @@ function setCustomSelect() {
 function openCSB() {
     const dropdownBtns = document.querySelectorAll("button.dropdown_btn");
     const lis = document.querySelectorAll("li.select_list");
+
     dropdownBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
             displayCBS(this);
         });
     });
+
     lis.forEach((li) => {
         li.addEventListener("click", function () {
             displayCBS(this);
@@ -76,6 +79,7 @@ function closeCSB() {
     document.body.addEventListener("click", (e) => {
         // 클릭한 target이 아래 class를 가진 elements가 아니면 전부 닫음
         const target = e.target;
+
         if (target.classList.contains("dropdown_btn") || target.classList.contains("placeholder") || target.classList.contains("dropdown_list") || target.classList.contains("select_list")) return;
 
         const uls = document.querySelectorAll(".dropdown_list");
@@ -116,6 +120,7 @@ function displayCBS(target) {
 // set value custom select box
 function setValueCBS(className, valueToSelect) {
     const target = document.querySelector(`.${className}`);
+
     target.value = valueToSelect;
     target.setAttribute("selected", "selected");
 }

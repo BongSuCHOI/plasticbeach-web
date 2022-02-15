@@ -198,6 +198,7 @@ function listOverEvent(data) {
     // 썸네일로 띄우느라 잠시 주석
     // const iframe = document.querySelector(".video_tooltip");
     const img = document.createElement("img");
+
     img.style.display = "block";
     img.style.width = "max(29.166vw, 420px)";
     img.style.height = "max(16.40625vw, 236px)";
@@ -315,6 +316,7 @@ function listClickEvent() {
             siblings.forEach((elem) => {
                 const btnAll = elem.querySelector("button");
                 const detailAll = elem.querySelector(".detail");
+
                 gsap.timeline()
                     .to(btnAll, {
                         duration: 0.5,
@@ -350,6 +352,7 @@ function listClickEvent() {
 
             if (IsMobile()) {
                 const scrollOffsetY = document.querySelector(".category").offsetHeight;
+
                 gsap.to(document.documentElement, {
                     duration: 0.3,
                     scrollTo: { y: scrollToHere, offsetY: scrollOffsetY },

@@ -13,6 +13,7 @@ const tl = gsap.timeline({ defaults: { duration: 0.4, ease: "power4.inOut", forc
 
 // mobile menu convert
 function mobileMenuConvert() {
+    if (!IsMobile()) return;
     contactMenuBtn.addEventListener("click", toContactAni);
     archiveMenuBtn.addEventListener("click", toArchiveAni);
 }

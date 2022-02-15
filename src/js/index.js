@@ -24,6 +24,7 @@ async function getData() {
     const archive = await (await fetch(archiveJson)).json();
     const text = await (await fetch(textJson)).json();
     const dataAll = await Promise.all([archive, text]);
+
     return {
         archiveData: dataAll[0],
         textData: dataAll[1],
@@ -44,6 +45,7 @@ async function bindDom() {
             const val = obj[1];
             const parent = document.querySelector(`select.${name}`);
             const html = document.createElement("option");
+
             html.innerHTML = val.en;
             parent.appendChild(html);
         });
@@ -54,14 +56,13 @@ async function bindDom() {
         const key = data[0];
         const val = data[1];
         const target = document.querySelector(`[data-name='${key}']`);
+        const isMarquee = target.classList.contains("marquee_text");
+        const isTextInput = target.hasAttribute("placeholder");
+
         target.innerHTML = val.en;
 
-        // marquee text
-        if (target.classList.contains("marquee_text")) {
-            target.innerHTML = val.en + val.en;
-        }
-        // input placeholder
-        if (target.hasAttribute("placeholder")) {
+        if (isMarquee) target.innerHTML = val.en + val.en;
+        if (isTextInput) {
             target.innerHTML = "";
             target.setAttribute("placeholder", val.en);
         }
@@ -122,4 +123,6 @@ run();
  * 반대로 인트로가 끝났는데 아직도 돔이 로드되고 있으면, 로드가 끝날때까지 인트로 유지 후 로드가 끝나면 감시하던 속성을 변경해서 인트로를 종료
  * 감시하던 속성(attr같은) 제거 후
  * MutationObserver 종료 (일시정지 X)
+ *
+ * 아니면 이터러블이였나 next로 순차적으로 비동기? 처리 가능한... 책에서 봤던거 같은데 그거 찾아보고 괜찮을거 같으면 그거로 데이터 패치, 돔 바인드 끝날때마다 프로그래스 퍼센트로 처리해서 해도 될거같기도 함
  **/
