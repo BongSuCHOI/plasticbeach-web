@@ -256,12 +256,12 @@
                         &.even {
                             justify-content: flex-end;
                             p span {
-                                margin-right: auto;
-                                margin-left: 5vw;
+                                padding-right: 0;
+                                padding-left: 5vw;
                             }
                         }
                         p span {
-                            margin-right: 5vw;
+                            padding-right: 5vw;
                             font-size: min(9.23vmin, 60px);
                         }
                     }

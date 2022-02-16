@@ -26,13 +26,12 @@ function toContactAni() {
     })
         .to(archiveElem, {
             x: "0%",
-            display: "none",
         })
         .to(
             contactElem,
             {
                 x: "0%",
-                display: "block",
+                position: "relative",
             },
             "<"
         );
@@ -47,12 +46,11 @@ function toContactAni() {
 function toArchiveAni() {
     tl.to(contactElem, {
         x: "-100%",
-        display: "none",
+        position: "fixed",
     })
         .to(
             archiveElem,
             {
-                display: "block",
                 x: "-100%",
             },
             "<"
